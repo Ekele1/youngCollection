@@ -1,14 +1,9 @@
 import React from 'react'
 import Header from '../components/header';
-import Footercomp from '../components/footer';
 import WomenCollection from '../components/women';
 import AllCollection from '../components/allCat';
 import MenCollection from '../components/men';
-import DetailPage from '../components/detail';
-import Cart from '../components/cartPage';
-import StartOrderPage from '../components/startOrder';
-import CheckoutPage from '../components/checkout';
-import CategorySort from '../components/sortCategory';
+
 
 const Home = () => {
   return (
@@ -35,22 +30,10 @@ const Home = () => {
         <AllCollection />
     </div>
     <div>
-        <WomenCollection />
-    </div>
-    <div>
         <MenCollection />
     </div>
     <div>
-        <DetailPage />
-    </div>
-    <div>
-        <Cart />
-    </div>
-    <div>
-        <StartOrderPage />
-    </div>
-    <div>
-        <CheckoutPage />
+        <WomenCollection />
     </div>
     </>
   )
