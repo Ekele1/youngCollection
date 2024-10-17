@@ -3,12 +3,14 @@ import Home from "../pages/homepage";
 import Header from "../components/header";
 import Footercomp from "../components/footer";
 import ContactUs from "../pages/contact";
-import MenCollection from "../components/men";
-import WomenCollection from "../components/women";
+import MenCollection from "../components/menHome";
+import WomenCollection from "../components/collection";
 import DetailPage from "../components/detail";
 import Cart from "../components/cartPage";
 import StartOrderPage from "../components/startOrder";
 import CheckoutPage from "../components/checkout";
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 const AppLayout = () =>(
   <div>

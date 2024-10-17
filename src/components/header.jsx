@@ -15,7 +15,7 @@ const Header = () => {
     };
 
     return (
-        <div className='w-full flex flex-col items-center relative bg-[#111828]'>
+        <div className='w-full flex flex-col items-center relative bg-[#111828] mb-[110px]'>
             {
                 show && (
                     <div 

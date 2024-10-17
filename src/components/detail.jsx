@@ -1,25 +1,38 @@
 import React from 'react'
 import { FaNairaSign } from "react-icons/fa6";
 import { FaCartPlus } from "react-icons/fa";
+import { Carousel } from 'react-responsive-carousel';
 
 const DetailPage = () => {
     const otherPictures = [1,2,3,4,5,6,7]
   return (
-    <div className='w-full flex mt-[110px] bg-gray-200 items-center justify-center pt-20 pb-10'>
+    <div className='w-full flex bg-gray-200 justify-center  pt-2 pb-10'>
         <div className='w-[95%] lg:w-[70%]'>
-            <div className='w-full flex lg:flex-row flex-col justify-between h-[400px] '>
-                <div className='lg:w-[70%] w-full h-full  rounded-[30px]'>
-                    <img className='w-full h-full rounded-[30px] object-contain' src="./cloth.jpg" alt="" />
+            <div className='w-full h-[60px] flex items-center justify-center text-[25px] font-semibold'>Product Details</div>
+            {/* <div className='w-full flex lg:flex-row bg-fuchsia-70 flex-col gap-2 justify-between '>
+                <div className='lg:w-[70%] w-full h-[400px]  rounded-[10px] bg-white'>
+                    <img className='w-full h-full rounded-[10px] object-contain' src="./model.jpg" alt="" />
                 </div>
-                <div className='lg:w-[28%] w-full h-full pt-5 pb-5 flex flex-row lg:flex-col gap-3 overflow-scroll bg-[#f2f2f2] rounded-[10px]'>
+                <div className='lg:w-[20%] w-max lg:h-[400px] h-[110px] lg:pt-2 flex flex-row lg:flex-col gap-3 overflow-auto bg-[#f2f2f2] lg:rounded-[10px]'>
                     {
                         otherPictures.map((e,i)=>(
-                        <div className='lg:w-[100%] w-[300px] lg:h-[150px] h-[100px]' key={i}>
+                        <div className='lg:w-[100%] w-[100px] lg:h-[150px] h-[100px]' key={i}>
                             <img className='w-full h-full object-contain' src="./cloth.jpg" alt="" />
                         </div>
                         ))
                     }
                 </div>
+            </div> */}
+            <div className='lg:w-[70%] w-full'>
+                <Carousel showThumbs={false} showStatus={false} infiniteLoop interval={3000}>
+                    {
+                        otherPictures.map((e,i)=>(
+                        <div className='w-[100%] lg:h-[400px] h-[500px] bg-gray-300' key={i}>
+                            <img className='w-full h-full object-contain' src="./cloth.jpg" alt="" />
+                        </div>
+                        ))
+                    }
+                </Carousel>
             </div>
             <div className='w-full flex flex-col lg:flex-row'>
                 <div className='w-full lg:w-[50%] flex flex-col gap-2 mt-10'>
@@ -28,7 +41,7 @@ const DetailPage = () => {
                     </div>
                     <div className='w-full h-[60px] flex border border-gray-400'>
                         <div className='w-[50%] flex items-center pl-2 h-full bg-gray-400 text-[20px] font-semibold'>Name</div>
-                        <div className='w-[50%] flex items-center pl-2 h-full text-[20px] font-semibold'>Quality men round neck</div>
+                        <div className='w-[50%] flex items-center pl-2 h-full text-[15px] font-semibold'>Quality men round neck</div>
                     </div>
                     <div className='w-full h-[60px] flex border border-gray-400'>
                         <div className='w-[50%] flex items-center pl-2 h-full bg-gray-400 text-[20px] font-semibold'>Material</div>
