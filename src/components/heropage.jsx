@@ -7,7 +7,7 @@ const HerorPage = ({title, subtitle, image,bg,color}) => {
           <div 
           style={{backgroundColor: `${bg}`}}
           className='lg:w-[40%] w-fullh-full  pl-5 pr-5 flex flex-col items-center justify-center backdrop-blur-md bg-opacity-30 lg:rounded-s-[30px]'>
-              <h1 className='text-[25px] w-[50%] lg:w-full font-bold'
+              <h1 className='lg:text-[25px] w-[50%] lg:w-full font-bold'
               style={{color:color}}
               >{title}</h1>
               <p className='text-[20px]'

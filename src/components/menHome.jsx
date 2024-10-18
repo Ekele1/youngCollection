@@ -37,13 +37,13 @@ const MenCollectionHome = ({prop}) => {
                         <div className='w-full flex flex-col gap-2'>
                             {
                                 e.items.map((item, id)=>(
-                                    <div className='w-full h-[120px] flex gap-2'>
-                                        <div className='lg:w-[50%] w-[60%]h-full rounded-[20px]'>
+                                    <div className='w-full lg:h-[120px] h-[160px] flex gap-2'>
+                                        <div className='lg:w-[50%] w-[70%]h-full rounded-[20px]'>
                                             <img 
-                                            className='w-full h-full object-contain rounded-[20px]'
+                                            className='w-full h-full object-contain lg:rounded-[20px]'
                                             src={e.img} alt="" />
                                         </div>
-                                        <div className='lg:w-[45%] w-[40%]h-full text-[18px] font-semibold flex flex-col justify-center'>
+                                        <div className='lg:w-[45%] w-[30%]h-full lg:text-[18px] font-semibold flex flex-col justify-center'>
                                             <p>Quality men's Hoodie</p>
                                             <p>$10</p>
                                         </div>
