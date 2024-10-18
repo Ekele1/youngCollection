@@ -36,7 +36,7 @@ const HeroPage = () => {
             <p className='text-[20px] text-[#FFAD60]'>Good fashion is timeless; it doesn't just follow trends, it sets them.</p>
           </div>
         </div>
-        <HeroCarousel slides={slides} />
+        
       </div>
     
     </>
