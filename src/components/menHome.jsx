@@ -32,7 +32,7 @@ const MenCollectionHome = ({prop}) => {
         <div className='w-full flex lg:flex-row flex-col justify-between pb-10'>
             {
                 men.map((e,id)=>(
-                    <div className='lg:w-[30%] w-full lg:p-5 p-0 bg-[#f8f8f8] lg:rounded-[25px] rounded-none'>
+                    <div className='lg:w-[30%] w-full lg:p-5 pb-5 bg-[#f8f8f8] lg:rounded-[25px] rounded-none'>
                         <div className='w-full lg:h-[50px] h-[70px] flex items-center justify-center lg:text-[20px] text-[25px] font-semibold'>{e.name}</div>
                         <div className='w-full flex flex-col gap-2'>
                             {
