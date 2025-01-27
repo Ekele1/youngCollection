@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FaNairaSign } from "react-icons/fa6";
+import { CiEdit } from "react-icons/ci";
 import { GrAdd } from "react-icons/gr";
 import { FaMinus } from "react-icons/fa6";
 import { RiDeleteBin6Line } from "react-icons/ri";
@@ -8,7 +9,13 @@ import { useNavigate } from 'react-router-dom';
 
 const Cart = () => {
     const nav = useNavigate()
-    const cartItems = [1,2,3,4,5,6]
+    const cartItems = [1,2,3,4]
+    const [address, setAdress] = useState("")
+    const [show, setShow] = useState("")
+
+    const handleEdit =()=>{
+        setShow(!show)
+    }
   return (
     <div className='w-full flex justify-center mt-[110px]'>
         <div className='w-[95%] '>
@@ -58,6 +65,21 @@ const Cart = () => {
                                 <div className='flex items-center text-[20px] font-semibold'>
                                     <FaNairaSign />
                                     <p>100,000</p>
+                                </div>
+                            </div>
+                            <div className='w-full h-[60px] flex flex-col gap-[8px] lg:flex-row lg:items-center lg:justify-between'>
+                                <p className='font-bold'>Shipping adress</p>
+                                <div className='flex items-center gap-[15px] text-[15px]'>
+                                    <div className='lg:w-[200px] w-[250px] h-full border border-gray-500'>
+                                        {
+                                            show? <input className='w-full h-full outline-none pl-1' placeholder='Enter adress' value={address} onChange={(e)=>setAdress(e.target.value)} type="text" />:
+                                            <p>{address}</p>
+                                        }
+                                    </div>
+                                    {
+                                        show? <button onClick={()=>setShow(false)} className='flex items-center gap-3 p-2 border hover:text-white bg-blue-500 border-blue-500 rounded-md'>Done</button>:
+                                        <button onClick={()=>setShow(true)} className='flex items-center gap-3 p-2 border hover:text-white bg-blue-500 border-blue-500 rounded-md'>Edit <CiEdit /></button>
+                                    }
                                 </div>
                             </div>
                             <div className='w-full h-[60px] flex items-center justify-between'>
