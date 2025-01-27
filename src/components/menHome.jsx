@@ -4,6 +4,14 @@ import { FaLongArrowAltDown } from "react-icons/fa";
 import CarousellMen from './hero';
 
 const MenCollectionHome = ({prop}) => {
+    const fetchData = ()=>{
+        const url = 'http://localhost:5000/about'
+        fetch(url)
+        .then(res => res.json())
+        .then(data  => console.log(data))
+        .catch(err => console.log(err))
+    }
+    fetchData()
     // const hoodies = [1,2,3,4]
     const men = [
         {

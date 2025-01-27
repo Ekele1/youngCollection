@@ -40,11 +40,11 @@ const Header = () => {
                         <FiSearch className='lg:hidden' size={25} color='white' />
                     </div>
                     <div className='lg:flex hidden h-full items-center gap-5 text-white'>
-                        <p className='cursor-pointer' onClick={()=>nav("/")}>HOME</p>
-                        <p className='cursor-pointer' onClick={()=>nav("/men")}>Men</p>
-                        <p className='cursor-pointer' onClick={()=>nav("/women")}>Women</p>
-                        <p className='cursor-pointer'>Company</p>
-                        <p className='cursor-pointer' onClick={()=>nav("/contact")}>Contact</p>
+                        <p className='cursor-pointer' onClick={()=>nav("/")}>LATEST</p>
+                        <p className='cursor-pointer' onClick={()=>nav("/men")}>MEN</p>
+                        <p className='cursor-pointer' onClick={()=>nav("/women")}>WOMEN</p>
+                        {/* <p className='cursor-pointer'>Company</p> */}
+                        <p className='cursor-pointer' onClick={()=>nav("/contact")}>TRENDING</p>
                     </div>
                     <div className='flex h-full items-center gap-5 text-white'>
                         <p className='cursor-pointer hidden lg:block'>Search</p>

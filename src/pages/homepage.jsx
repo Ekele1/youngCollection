@@ -33,7 +33,7 @@ const Home = () => {
   return (
     <>
      <HeroPage />
-     <Collections prop={"WOMEN'S COLLECTION"}/>
+     <Collections prop={"Our Latest Collection"}/>
      <MenCollectionHome prop={"MEN'S COLLECTION"}/>
      <HeroCarousel slides={slides} />
      {/* <MenCollection prop={"WOMEN'S COLLECTION"}/> */}

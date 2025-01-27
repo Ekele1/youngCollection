@@ -4,6 +4,8 @@ import { FaLongArrowAltDown } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 
 const AllCollection = () => {
+
+  
     const nav = useNavigate()
     const all = [1,2,3,4,5,6,7,8,9,0]
   return (
