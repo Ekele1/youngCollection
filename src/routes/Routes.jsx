@@ -4,13 +4,14 @@ import Header from "../components/header";
 import Footercomp from "../components/footer";
 import ContactUs from "../pages/contact";
 import MenCollection from "../components/menHome";
-import WomenCollection from "../components/collection";
+import Collection from "../components/collection";
 import DetailPage from "../components/detail";
 import Cart from "../components/cartPage";
 import StartOrderPage from "../components/startOrder";
 import CheckoutPage from "../components/checkout";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+import { Products } from "../components/data";
 
 const AppLayout = () =>(
   <div>
@@ -28,9 +29,9 @@ const route = createHashRouter([
     element: <AppLayout />,
     children: [
       {path: '/',element: <Home />},
-      {path: 'men',element: <MenCollection />},
-      {path: 'women',element: <WomenCollection />},
-      {path: 'detail',element: <DetailPage />},
+      {path: 'men',element: <MenCollection items={Products}/>},
+      {path: 'women',element: <Collection items={Products}/>},
+      {path: 'detail/:id',element: <DetailPage items={Products}/>},
       {path: 'cart',element: <Cart />},
       {path: 'order',element: <StartOrderPage />},
       {path: 'contact',element: <ContactUs />},
