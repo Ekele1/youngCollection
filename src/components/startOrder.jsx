@@ -25,26 +25,44 @@ const StartOrderPage = () => {
         setDeliveryDate(formattedDate)
     },[])
 
+    const [address, setAddress] = useState("Lagos Nigeria")
+    const [show, setShow] = useState(false)
+
   return (
     <div className='w-full flex justify-center'>
         <div className='w-[95%] pb-10'>
-            <div className='w-full h-[100px] border-b border-b-gray-400 flex items-center text-[30px] font-semibold'>
+            <div className='w-full h-[50px] lg:h-[100px] border-b border-b-gray-400 flex items-center text-blue-500 justify-center text-[30px] font-semibold'>
                 <p>Start Order</p>
             </div>
             <div className='w-full flex flex-col lg:flex-row'>
                 <div className='w-[100%] lg:w-[60%]'>
                     <div className='w-full pt-10 pb-3 flex flex-col lg:flex-row gap-5 lg:gap-0 justify-between'>
-                        <div className='flex items-center gap-6 text-[25px] font-semibold'>
-                            <IoLocation className='text-blue-400'/>
+                        <div className='flex items-center gap-6 text-[25px] text-blue-500 font-semibold'>
+                            <IoLocation />
                             <p>Shipping address</p>
                         </div>
-                        <button className='w-[40%] lg:w-[20%] h-[40px] rounded-lg hover:bg-blue-500 hover:text-white bg-blue-400'>
-                            Change address
-                        </button>
+                        {
+                            show? <button 
+                            onClick={()=>setShow(false)}
+                            className='w-[40%] lg:w-[20%] h-[40px] rounded-lg hover:bg-blue-500 hover:text-white bg-blue-400'>
+                                Done
+                            </button>:
+                            <button 
+                            onClick={()=>setShow(true)}
+                            className='w-[40%] lg:w-[20%] h-[40px] rounded-lg hover:bg-blue-500 hover:text-white bg-blue-400'>
+                                Change address
+                            </button>
+                        }
                     </div>
                     <div className='w-full pb-5 border-b border-b-gray-400'>
                         <p className='font-bold'>Ekele Jeremiah</p>
-                        <p>Edomioya street, Eti-osa, lagos</p>
+                        {
+                            show? <input
+                            placeholder='enter address'
+                            onChange={(e)=>setAddress(e.target.value)}
+                             className='border border-gray-500 w-[300px] outline-none pl-1 h-[30px] rounded-md' type="text" />:
+                            <p>{address}</p>
+                        }
                         <p>09154382278</p>
                     </div>
                     <div className='w-full pt-10'>
@@ -67,7 +85,7 @@ const StartOrderPage = () => {
                 <div className='w-[100%] lg:w-[40%] flex justify-center'>
                     <div className='w-[100%] lg:w-[90%] pt-10'>
                         <div className='w-full lg:shadow-lg shadow-none pl-5 pr-5 pb-10'>
-                            <p className='text-[20px] font-bold'>Order summary </p>
+                            <p className='text-[20px] font-bold text-blue-500'>Order summary </p>
                             <div className='w-full h-[60px] flex items-center justify-between'>
                                 <p className='font-bold'>Item subtotal</p>
                                 <div className='flex items-center text-[20px] font-semibold'>
@@ -83,7 +101,7 @@ const StartOrderPage = () => {
                                 </div>
                             </div>
                             <div className='w-full h-[60px] flex items-center justify-between'>
-                                <p className='font-bold'>Subtotal</p>
+                                <p className='font-bold'>Total</p>
                                 <div className='flex items-center text-[20px] font-semibold'>
                                     <FaNairaSign />
                                     <p>103,000</p>

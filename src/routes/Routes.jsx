@@ -1,4 +1,4 @@
-import { RouterProvider, createHashRouter,Outlet } from "react-router-dom";
+import { RouterProvider, createHashRouter, Outlet } from "react-router-dom";
 import Home from "../pages/homepage";
 import Header from "../components/header";
 import Footercomp from "../components/footer";
@@ -12,8 +12,10 @@ import CheckoutPage from "../components/checkout";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
 import { Products } from "../components/data";
+import Adminheader from "../admin/admincomponents/adminboard";
+import Adminhome from "../admin/admincomponents/adminhome";
 
-const AppLayout = () =>(
+const AppLayout = () => (
   <div>
     <Header />
     <main>
@@ -21,32 +23,47 @@ const AppLayout = () =>(
     </main>
     <Footercomp />
   </div>
-)
+);
+
+const AdminLayout = () => (
+  <div>
+    {/* <Adminheader /> */}
+    <main>
+      <Outlet />
+    </main>
+  </div>
+);
 
 const route = createHashRouter([
-{
+  {
     path: "/",
     element: <AppLayout />,
     children: [
-      {path: '/',element: <Home />},
-      {path: 'men',element: <MenCollection items={Products}/>},
-      {path: 'women',element: <Collection items={Products}/>},
-      {path: 'detail/:id',element: <DetailPage items={Products}/>},
-      {path: 'cart',element: <Cart />},
-      {path: 'order',element: <StartOrderPage />},
-      {path: 'contact',element: <ContactUs />},
-      {path: 'checkout',element: <CheckoutPage />},
-    ]
-},
-
+      { index: true, element: <Home /> },
+      { path: "men", element: <MenCollection items={Products} /> },
+      { path: "women", element: <Collection items={Products} /> },
+      { path: "detail/:id", element: <DetailPage items={Products} /> },
+      { path: "cart", element: <Cart /> },
+      { path: "order", element: <StartOrderPage /> },
+      { path: "contact", element: <ContactUs /> },
+      { path: "checkout", element: <CheckoutPage /> },
+    ],
+  },
+  {
+    path: "/admin",
+    element: <AdminLayout />,
+    children: [
+      { index: true, element: <Adminhome /> },
+    ],
+  },
+  {
+    path: "*",
+    element: <div>404 - Page Not Found</div>,
+  },
 ]);
 
 function Route() {
-  return (
-    <>
-      <RouterProvider router={route} />
-    </>
-  );
+  return <RouterProvider router={route} />;
 }
 
 export default Route;

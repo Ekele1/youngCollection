@@ -5,7 +5,11 @@ module.exports = {
   ],
   darkMode: 'class',
   theme: {
-    extend: {},
+    extend: {
+      animation: {
+        spin: 'spin 2s linear infinite'
+      }
+    },
   },
   plugins: [],
 }
