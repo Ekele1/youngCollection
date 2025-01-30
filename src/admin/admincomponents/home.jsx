@@ -6,19 +6,19 @@ const Home = () => {
         <div className='w-full h-[50px] flex items-center font-bold text-[25px]'>
             <p>Add Attribute</p>
         </div>
-        <div className='w-full flex gap-4'>
-            <div className='w-[23%] flex flex-col gap-3'>
+        <div className='w-full flex flex-col lg:flex-row gap-4'>
+            <div className='w-[100%] lg:w-[23%] flex flex-col gap-3'>
                 <div className='w-full h-[200px] bg-white shadow-md rounded-md'></div>
                 <div className='w-full h-[200px] bg-white shadow-md rounded-md'></div>
                 <div className='w-full h-[200px] bg-white shadow-md rounded-md'></div>
                 <div className='w-full h-[200px] bg-white shadow-md rounded-md'></div>
             </div>
-            <div className='w-[30%] h-[850px] rounded-md shadow-md bg-white flex flex-col pl-2'>
+            <div className='lg:w-[30%] w-full h-[850px] rounded-md shadow-md bg-white flex flex-col pl-2'>
                 <div className='w-full h-[50px] flex items-center font-bold text-[20px]'>
                     <p>Sale by Category</p>
                 </div>
             </div>
-            <div className='w-[42%] h-[850px] bg-white shadow-md rounded-md pl-2'>
+            <div className='lg:w-[42%] w-full h-[850px] bg-white shadow-md rounded-md pl-2'>
                 <div className='w-full h-[50px] flex items-center font-bold text-[20px]'>
                     <p>Earnings revenue</p>
                 </div>

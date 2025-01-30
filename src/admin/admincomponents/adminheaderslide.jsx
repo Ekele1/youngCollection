@@ -25,7 +25,7 @@ const Adminheaderslide = ({onsend}) => {
             <h1 className='text-[17px]'>Young Collections</h1>
             <RiMenuUnfold3Line onClick={sendData}/>
         </div>
-        <div className='w-full h-[600px] overflow-scroll'>
+        <div className='w-full h-[600px] overflow-scroll shadow-md'>
         <div className='w-full h-[70px] mt-1 cursor-pointer text-blue-600 hover:text-[#0A3981] border-b-4 border-b-white flex items-center justify-center'>
             <div className='w-[90%] h-[80%] rounded-md bg-[#D4EBF8] flex items-center pl-2 gap-2'>
                 <LuLayoutDashboard size={25}/>
