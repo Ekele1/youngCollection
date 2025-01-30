@@ -20,7 +20,7 @@ const AdminBoard = () => {
                 <div className='w-[20%] h-[600px]'></div>: null
         }
       {show && (
-        <div className={`w-[45%] lg:w-[20%] absolute h-screen bg-white transition-all duration-300 ease-in-out transform ${show ? "translate-x-0" : "-translate-x-full"}`}>
+        <div className={`w-[65%] lg:w-[20%] absolute h-screen bg-white transition-all duration-300 ease-in-out transform ${show ? "translate-x-0" : "-translate-x-full"}`}>
           <Adminheaderslide onsend={handleShow} />
         </div>
       )}
@@ -38,9 +38,9 @@ const AdminBoard = () => {
           </div>
         </div>
         <div className="w-[20%] h-full hidden lg:flex items-center justify-around">
-          <div className="w-[50px] h-[50px] bg-[#D4EBF8] rounded-[50px] flex items-center justify-center">
+          {/* <div className="w-[50px] h-[50px] bg-[#D4EBF8] rounded-[50px] flex items-center justify-center">
             <MdOutlineNightlight size={25} />
-          </div>
+          </div> */}
           <div className="w-[50px] h-[50px] bg-[#D4EBF8] rounded-[50px] flex items-center justify-center">
             <IoMdNotificationsOutline size={25} />
           </div>
@@ -61,7 +61,7 @@ const AdminBoard = () => {
           <IoSettingsOutline className="animate-spin" size={25} />
         </div>
       </div>
-      <div className={`w-full h-[600px] bg-green-500`}></div>
+      <div className={`w-full h-[600px] bg-[#3E5879]`}></div>
       </div>
     </div>
   );
