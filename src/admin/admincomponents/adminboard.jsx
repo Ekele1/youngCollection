@@ -6,7 +6,7 @@ import { FiMessageSquare } from "react-icons/fi";
 import { FaRegUser } from "react-icons/fa6";
 import Adminheaderslide from './adminheaderslide';
 
-const AdminBoard = () => {
+const AdminBoard = ({prop}) => {
   const [show, setShow] = useState(true);
 
   const handleShow = (data) => {
@@ -61,7 +61,7 @@ const AdminBoard = () => {
           <IoSettingsOutline className="animate-spin" size={25} />
         </div>
       </div>
-      <div className={`w-full h-[600px] bg-[#3E5879]`}></div>
+      <div className={`w-full h-[600px] bg-[#f2f7fb] p-5`}>{prop}</div>
       </div>
     </div>
   );
