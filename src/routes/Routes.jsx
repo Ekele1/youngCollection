@@ -13,6 +13,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Products } from "../components/data";
 import AdminHome from "../admin/adminPage/adminHomePage";
+import AddProductPage from "../admin/adminPage/addProductPage";
+import ProductlistPage from "../admin/adminPage/productlistPage";
 
 const AppLayout = () => (
   <div>
@@ -53,6 +55,8 @@ const route = createHashRouter([
     element: <AdminLayout />,
     children: [
       { index: true, element: <AdminHome /> },
+      { path: "addproduct", element: <AddProductPage />},
+      { path: "productlist", element: <ProductlistPage />},
     ],
   },
   {

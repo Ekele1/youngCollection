@@ -6,12 +6,14 @@ import { IoIosArrowDown, IoIosArrowUp, IoLogoBuffer } from "react-icons/io";
 import { PiDotOutline } from "react-icons/pi";
 import { FaRegFileAlt, FaDiceD6 } from "react-icons/fa";
 import { FiUser } from "react-icons/fi";
+import { useNavigate } from 'react-router-dom';
 
 
 const Adminheaderslide = ({onsend}) => {
     const sendData =()=>{
         onsend(false)
     }
+    const nav = useNavigate()
 
     const [commerce, setCommerce] = useState(false)
     const [category, setCategory] = useState(false)
@@ -26,7 +28,7 @@ const Adminheaderslide = ({onsend}) => {
             <RiMenuUnfold3Line onClick={sendData}/>
         </div>
         <div className='w-full h-[600px] overflow-scroll shadow-md'>
-        <div className='w-full h-[70px] mt-1 cursor-pointer text-blue-600 hover:text-[#0A3981] border-b-4 border-b-white flex items-center justify-center'>
+        <div onClick={()=>nav("/admin")} className='w-full h-[70px] mt-1 cursor-pointer text-blue-600 hover:text-[#0A3981] border-b-4 border-b-white flex items-center justify-center'>
             <div className='w-[90%] h-[80%] rounded-md bg-[#D4EBF8] flex items-center pl-2 gap-2'>
                 <LuLayoutDashboard size={25}/>
                 <h1 className='text-[15px] lg:text-[22px] font-bold font-'>Home</h1>
@@ -43,11 +45,11 @@ const Adminheaderslide = ({onsend}) => {
            {
             commerce &&(
                 <div className='w-full flex flex-col items-center gap-1'>
-                <div className='w-[70%] font-bold text-[18px] hover:text-blue-500 flex items-center h-[30px]'>
+                <div onClick={()=>nav("/admin/addproduct")} className='w-[70%] font-bold text-[18px] hover:text-blue-500 flex items-center h-[30px]'>
                     <PiDotOutline size={25}/>
                     <p>Add product</p>
                 </div>
-                <div className='w-[70%] font-bold text-[18px] hover:text-blue-500 flex items-center h-[30px]'>
+                <div onClick={()=>nav("/admin/productlist")} className='w-[70%] font-bold text-[18px] hover:text-blue-500 flex items-center h-[30px]'>
                     <PiDotOutline size={25}/>
                     <p>Product list</p>
                 </div>
