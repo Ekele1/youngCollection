@@ -80,12 +80,6 @@ const DetailPage = ({items}) => {
                                 </select>
                             </div>
                         </div>
-                        {/* <div className='w-full  flex border pb-5 pt-5 border-b-gray-400'>
-                            <div className='w-[50%] flex items-center pl-2 h-full text-[20px] font-[400]'>shipping address</div>
-                            <div className='w-[50%] flex items-center pl-2 h-full text-[20px] font-semibold'>
-                                <input type="text" />
-                            </div>
-                        </div> */}
                         <div className='w-full flex items-center justify-center mt-6'>
                             <button className='w-[50%] h-[50px] rounded font-semibold hover:bg-blue-600 hover:text-white flex items-center justify-center gap-2 bg-blue-400'>
                                 Add to cart

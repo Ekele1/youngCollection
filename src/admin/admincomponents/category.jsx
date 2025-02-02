@@ -4,38 +4,31 @@ import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
-const ProductList = () => {
-  const listDetailHeader = [
-    "Image",
-    "Product name",
-    "Price",
-    "Quantity",
-    "Sale",
-    "Stock",
-    "Date listed",
-    "Action",
-  ];
+const Category = () => {
+  const listDetailHeader = ["Image", "Name", "Quantity", "Sale", "Action"];
 
   const [listDetail, setListDetail] = useState([
     {
-      image: "https://i.pinimg.com/474x/f9/3e/ea/f93eeac8630a7e5d41fc495c30867898.jpg",
-      productName: "Polo Shirt",
-      price: 300,
+      image:
+        "https://i.pinimg.com/474x/f9/3e/ea/f93eeac8630a7e5d41fc495c30867898.jpg",
+      productName: "MEN",
       quantity: 40,
       sale: 10,
-      stock: "In Stock",
-      dateListed: "01/01/2025",
     },
     {
-      image: "https://i.pinimg.com/474x/f9/3e/ea/f93eeac8630a7e5d41fc495c30867898.jpg",
-      productName: "Collar Bone",
-      price: 200,
+      image:
+        "https://i.pinimg.com/474x/f9/3e/ea/f93eeac8630a7e5d41fc495c30867898.jpg",
+      productName: "WOMEN",
       quantity: 30,
-      sale: 15,
-      stock: "Out of Stock",
-      dateListed: "01/02/2025",
+      sale: 5,
     },
-    // Add more data for testing...
+    {
+      image:
+        "https://i.pinimg.com/474x/f9/3e/ea/f93eeac8630a7e5d41fc495c30867898.jpg",
+      productName: "LATEST",
+      quantity: 50,
+      sale: 20,
+    },
   ]);
 
   const [searchQuery, setSearchQuery] = useState("");
@@ -43,18 +36,16 @@ const ProductList = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const handleDelete = (index) => {
-    if (window.confirm("Are you sure you want to delete this product?")) {
-      const updatedList = listDetail.filter((_, i) => i !== index);
-      setListDetail(updatedList);
-    }
+    const updatedList = listDetail.filter((_, i) => i !== index);
+    setListDetail(updatedList);
   };
 
   const handleEdit = (index) => {
-    alert(`Edit product at index: ${index}`);
+    alert(`Edit category at index: ${index}`);
   };
 
-  const filteredList = listDetail.filter((product) =>
-    product.productName.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredList = listDetail.filter((category) =>
+    category.productName.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const totalEntries = filteredList.length;
@@ -72,12 +63,13 @@ const ProductList = () => {
   return (
     <div className="w-full h-full overflow-auto">
       <div className="w-full font-bold text-[25px] h-[70px] flex items-center">
-        <p>Product List</p>
+        <p>Category List</p>
       </div>
       <div className="w-full bg-white p-3 rounded-lg shadow-md">
         {/* Top Controls */}
         <div className="w-full lg:h-[70px] flex flex-col gap-3 lg:flex-row items-center justify-between">
-          <div className="text-gray-500 flex items-center w-full">
+          {/* Entries Dropdown */}
+          <div className="text-gray-500 flex items-center">
             <p>Showing</p>
             <select
               className="w-[80px] mx-2 outline-none border-2 border-gray-500 rounded-md"
@@ -93,10 +85,12 @@ const ProductList = () => {
             </select>
             <p>entries</p>
           </div>
+
+          {/* Search Bar */}
           <div className="lg:w-[40%] w-full h-[45px] border-2 border-gray-500 rounded-lg flex items-center">
             <input
               type="text"
-              placeholder="Search by product name"
+              placeholder="Search by category name"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full h-full border-none outline-none bg-inherit pl-3"
@@ -105,81 +99,62 @@ const ProductList = () => {
           </div>
         </div>
 
-        {/* Table */}
+        {/* Responsive Table */}
         <div className="w-full overflow-auto mt-3">
-          <table className="w-full table-auto border-collapse border border-gray-300">
-            <thead>
-              <tr className="bg-[#0D92F4] text-white">
+          <table className="table-auto w-full border-collapse border border-gray-300">
+            {/* Table Header */}
+            <thead className="bg-[#0D92F4] text-white">
+              <tr>
                 {listDetailHeader.map((header, i) => (
                   <th
                     key={i}
-                    className="border border-gray-300 px-3 py-2 text-left font-semibold"
+                    className="border border-gray-300 px-4 py-2 text-left"
                   >
                     {header}
                   </th>
                 ))}
               </tr>
             </thead>
+
+            {/* Table Body */}
             <tbody>
-              {filteredList.length === 0 ? (
-                <tr>
-                  <td
-                    colSpan={listDetailHeader.length}
-                    className="text-center py-4 text-gray-500"
-                  >
-                    No products found
+              {paginatedList.map((category, index) => (
+                <tr
+                  key={index}
+                  className="hover:bg-[#d6e9f3] transition-colors"
+                >
+                  <td className="border border-gray-300 px-4 py-2">
+                    <img
+                      className="object-contain h-12 w-12 rounded-md"
+                      src={category.image}
+                      alt={category.productName}
+                    />
+                  </td>
+                  <td className="border border-gray-300 px-4 py-2">
+                    {category.productName}
+                  </td>
+                  <td className="border border-gray-300 px-4 py-2">
+                    {category.quantity}
+                  </td>
+                  <td className="border border-gray-300 px-4 py-2">
+                    {category.sale}%
+                  </td>
+                  <td className="border border-gray-300 px-4 py-2 flex gap-3">
+                    <CiEdit
+                      size={25}
+                      onClick={() => handleEdit(index)}
+                      className="cursor-pointer"
+                      title="Edit category"
+                    />
+                    <RiDeleteBin6Line
+                      size={25}
+                      onClick={() => handleDelete(index)}
+                      className="cursor-pointer text-red-500"
+                      title="Delete category"
+                    />
                   </td>
                 </tr>
-              ) : (
-                paginatedList.map((product, index) => (
-                  <tr
-                    key={index}
-                    className="hover:bg-gray-100 transition-colors"
-                  >
-                    <td className="border border-gray-300 px-3 py-2">
-                      <img
-                        src={product.image || "https://via.placeholder.com/150"}
-                        alt={product.productName || "Product"}
-                        className="h-[50px] w-[50px] object-cover rounded-md"
-                      />
-                    </td>
-                    <td className="border border-gray-300 px-3 py-2">
-                      {product.productName}
-                    </td>
-                    <td className="border border-gray-300 px-3 py-2">
-                      ${product.price}
-                    </td>
-                    <td className="border border-gray-300 px-3 py-2">
-                      {product.quantity}
-                    </td>
-                    <td className="border border-gray-300 px-3 py-2">
-                      {product.sale}%
-                    </td>
-                    <td className="border border-gray-300 px-3 py-2">
-                      {product.stock}
-                    </td>
-                    <td className="border border-gray-300 px-3 py-2">
-                      {product.dateListed}
-                    </td>
-                    <td className="border border-gray-300 px-3 py-2">
-                      <div className="flex gap-3">
-                        <CiEdit
-                          size={20}
-                          onClick={() => handleEdit(index)}
-                          className="cursor-pointer text-blue-500"
-                          title="Edit product"
-                        />
-                        <RiDeleteBin6Line
-                          size={20}
-                          onClick={() => handleDelete(index)}
-                          className="cursor-pointer text-red-500"
-                          title="Delete product"
-                        />
-                      </div>
-                    </td>
-                  </tr>
-                ))
-              )}
+              ))}
             </tbody>
           </table>
         </div>
@@ -223,4 +198,4 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;
+export default Category;

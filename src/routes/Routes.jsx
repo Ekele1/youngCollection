@@ -15,6 +15,14 @@ import { Products } from "../components/data";
 import AdminHome from "../admin/adminPage/adminHomePage";
 import AddProductPage from "../admin/adminPage/addProductPage";
 import ProductlistPage from "../admin/adminPage/productlistPage";
+import EditProductPage from "../admin/adminPage/editProductPage";
+import CategoryPage from "../admin/adminPage/categoryPage";
+import NewCategoryPage from "../admin/adminPage/newcategoryPage";
+import AllusersPage from "../admin/adminPage/AllusersPage";
+import AdduserPage from "../admin/adminPage/adduserPage";
+import PermissionPage from "../admin/adminPage/permissionPage";
+import OrderListPage from "../admin/adminPage/orderlistPage";
+import OrderDetailPage from "../admin/adminPage/orderdetailPage";
 
 const AppLayout = () => (
   <div>
@@ -57,6 +65,14 @@ const route = createHashRouter([
       { index: true, element: <AdminHome /> },
       { path: "addproduct", element: <AddProductPage />},
       { path: "productlist", element: <ProductlistPage />},
+      { path: "editproduct", element: <EditProductPage />},
+      { path: "categorylist", element: <CategoryPage />},
+      { path: "newcategory", element: <NewCategoryPage />},
+      { path: "allusers", element: <AllusersPage />},
+      { path: "addnewuser", element: <AdduserPage />},
+      { path: "permissionacess", element: <PermissionPage />},
+      { path: "orderlist", element: <OrderListPage />},
+      { path: "orderdetailoo123df", element: <OrderDetailPage />},
     ],
   },
   {

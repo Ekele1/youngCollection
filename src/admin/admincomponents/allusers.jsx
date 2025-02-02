@@ -4,36 +4,23 @@ import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
-const ProductList = () => {
-  const listDetailHeader = [
-    "Image",
-    "Product name",
-    "Price",
-    "Quantity",
-    "Sale",
-    "Stock",
-    "Date listed",
-    "Action",
-  ];
+const AllUsers = () => {
+  const listDetailHeader = ["Image", "User Name", "Email", "Address", "Phone", "Action"];
 
   const [listDetail, setListDetail] = useState([
     {
       image: "https://i.pinimg.com/474x/f9/3e/ea/f93eeac8630a7e5d41fc495c30867898.jpg",
-      productName: "Polo Shirt",
-      price: 300,
-      quantity: 40,
-      sale: 10,
-      stock: "In Stock",
-      dateListed: "01/01/2025",
+      userName: "John Snow",
+      email: "john@gmail.com",
+      address: "Lagos",
+      phone: "09123456789",
     },
     {
       image: "https://i.pinimg.com/474x/f9/3e/ea/f93eeac8630a7e5d41fc495c30867898.jpg",
-      productName: "Collar Bone",
-      price: 200,
-      quantity: 30,
-      sale: 15,
-      stock: "Out of Stock",
-      dateListed: "01/02/2025",
+      userName: "Colar Bone",
+      email: "colar@gmail.com",
+      address: "Lagos",
+      phone: "09123456789",
     },
     // Add more data for testing...
   ]);
@@ -43,18 +30,16 @@ const ProductList = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const handleDelete = (index) => {
-    if (window.confirm("Are you sure you want to delete this product?")) {
-      const updatedList = listDetail.filter((_, i) => i !== index);
-      setListDetail(updatedList);
-    }
+    const updatedList = listDetail.filter((_, i) => i !== index);
+    setListDetail(updatedList);
   };
 
   const handleEdit = (index) => {
-    alert(`Edit product at index: ${index}`);
+    alert(`Edit user at index: ${index}`);
   };
 
-  const filteredList = listDetail.filter((product) =>
-    product.productName.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredList = listDetail.filter((user) =>
+    user.userName.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   const totalEntries = filteredList.length;
@@ -72,12 +57,12 @@ const ProductList = () => {
   return (
     <div className="w-full h-full overflow-auto">
       <div className="w-full font-bold text-[25px] h-[70px] flex items-center">
-        <p>Product List</p>
+        <p>All Users</p>
       </div>
       <div className="w-full bg-white p-3 rounded-lg shadow-md">
-        {/* Top Controls */}
         <div className="w-full lg:h-[70px] flex flex-col gap-3 lg:flex-row items-center justify-between">
-          <div className="text-gray-500 flex items-center w-full">
+          {/* Entries Dropdown */}
+          <div className="text-gray-500 flex items-center">
             <p>Showing</p>
             <select
               className="w-[80px] mx-2 outline-none border-2 border-gray-500 rounded-md"
@@ -93,10 +78,12 @@ const ProductList = () => {
             </select>
             <p>entries</p>
           </div>
+
+          {/* Search Bar */}
           <div className="lg:w-[40%] w-full h-[45px] border-2 border-gray-500 rounded-lg flex items-center">
             <input
               type="text"
-              placeholder="Search by product name"
+              placeholder="Search by user name"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full h-full border-none outline-none bg-inherit pl-3"
@@ -106,14 +93,14 @@ const ProductList = () => {
         </div>
 
         {/* Table */}
-        <div className="w-full overflow-auto mt-3">
-          <table className="w-full table-auto border-collapse border border-gray-300">
+        <div className="overflow-x-auto mt-4">
+          <table className="w-full border-collapse border border-gray-300">
             <thead>
               <tr className="bg-[#0D92F4] text-white">
                 {listDetailHeader.map((header, i) => (
                   <th
                     key={i}
-                    className="border border-gray-300 px-3 py-2 text-left font-semibold"
+                    className="p-3 border border-gray-300 text-left min-w-[150px]"
                   >
                     {header}
                   </th>
@@ -121,64 +108,45 @@ const ProductList = () => {
               </tr>
             </thead>
             <tbody>
-              {filteredList.length === 0 ? (
+              {paginatedList.map((user, index) => (
+                <tr
+                  key={index}
+                  className="hover:bg-gray-100 border border-gray-300"
+                >
+                  <td className="p-3">
+                    <img
+                      className="w-[50px] h-[50px] rounded-md object-cover"
+                      src={user.image}
+                      alt={user.userName}
+                    />
+                  </td>
+                  <td className="p-3">{user.userName}</td>
+                  <td className="p-3">{user.email}</td>
+                  <td className="p-3">{user.address}</td>
+                  <td className="p-3">{user.phone}</td>
+                  <td className="p-3 flex gap-2">
+                    <CiEdit
+                      size={25}
+                      onClick={() => handleEdit(index)}
+                      className="cursor-pointer"
+                    />
+                    <RiDeleteBin6Line
+                      size={25}
+                      onClick={() => handleDelete(index)}
+                      className="cursor-pointer text-red-500"
+                    />
+                  </td>
+                </tr>
+              ))}
+              {paginatedList.length === 0 && (
                 <tr>
                   <td
                     colSpan={listDetailHeader.length}
-                    className="text-center py-4 text-gray-500"
+                    className="text-center p-3 text-gray-500"
                   >
-                    No products found
+                    No users found.
                   </td>
                 </tr>
-              ) : (
-                paginatedList.map((product, index) => (
-                  <tr
-                    key={index}
-                    className="hover:bg-gray-100 transition-colors"
-                  >
-                    <td className="border border-gray-300 px-3 py-2">
-                      <img
-                        src={product.image || "https://via.placeholder.com/150"}
-                        alt={product.productName || "Product"}
-                        className="h-[50px] w-[50px] object-cover rounded-md"
-                      />
-                    </td>
-                    <td className="border border-gray-300 px-3 py-2">
-                      {product.productName}
-                    </td>
-                    <td className="border border-gray-300 px-3 py-2">
-                      ${product.price}
-                    </td>
-                    <td className="border border-gray-300 px-3 py-2">
-                      {product.quantity}
-                    </td>
-                    <td className="border border-gray-300 px-3 py-2">
-                      {product.sale}%
-                    </td>
-                    <td className="border border-gray-300 px-3 py-2">
-                      {product.stock}
-                    </td>
-                    <td className="border border-gray-300 px-3 py-2">
-                      {product.dateListed}
-                    </td>
-                    <td className="border border-gray-300 px-3 py-2">
-                      <div className="flex gap-3">
-                        <CiEdit
-                          size={20}
-                          onClick={() => handleEdit(index)}
-                          className="cursor-pointer text-blue-500"
-                          title="Edit product"
-                        />
-                        <RiDeleteBin6Line
-                          size={20}
-                          onClick={() => handleDelete(index)}
-                          className="cursor-pointer text-red-500"
-                          title="Delete product"
-                        />
-                      </div>
-                    </td>
-                  </tr>
-                ))
               )}
             </tbody>
           </table>
@@ -223,4 +191,4 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;
+export default AllUsers;

@@ -17,10 +17,10 @@ const AdminBoard = ({prop}) => {
     <div className={`w-full relative flex`}>
         {
             show?
-                <div className='w-[20%] h-[600px]'></div>: null
+                <div className='w-[20%] h-[300px]'></div>: null
         }
       {show && (
-        <div className={`w-[65%] lg:w-[20%] absolute h-screen bg-white transition-all duration-300 ease-in-out transform ${show ? "translate-x-0" : "-translate-x-full"}`}>
+        <div className={`w-[65%] lg:w-[20%] absolute transition-all duration-300 ease-in-out transform ${show ? "translate-x-0" : "-translate-x-full"}`}>
           <Adminheaderslide onsend={handleShow} />
         </div>
       )}
@@ -37,23 +37,20 @@ const AdminBoard = ({prop}) => {
             <IoSearchSharp size={25} />
           </div>
         </div>
-        <div className="w-[20%] h-full hidden lg:flex items-center justify-around">
-          {/* <div className="w-[50px] h-[50px] bg-[#D4EBF8] rounded-[50px] flex items-center justify-center">
-            <MdOutlineNightlight size={25} />
-          </div> */}
-          <div className="w-[50px] h-[50px] bg-[#D4EBF8] rounded-[50px] flex items-center justify-center">
+        <div className=" h-full hidden lg:flex items-center gap-2">
+          <div className="w-[40px] h-[40px] bg-[#D4EBF8] rounded-[50px] flex items-center justify-center">
             <IoMdNotificationsOutline size={25} />
           </div>
-          <div className="w-[50px] h-[50px] bg-[#D4EBF8] rounded-[50px] flex items-center justify-center">
+          <div className="w-[40px] h-[40px] bg-[#D4EBF8] rounded-[50px] flex items-center justify-center">
             <FiMessageSquare size={25} />
           </div>
         </div>
-        <div className="w-[15%] h-full hidden lg:flex items-center justify-center gap-1">
-          <div className="w-[50px] h-[50px] bg-[#D4EBF8] rounded-[50px] flex items-center justify-center">
+        <div className="h-full hidden lg:flex items-center justify-center gap-1">
+          <div className="w-[40px] h-[40px] bg-[#D4EBF8] rounded-[50px] flex items-center justify-center">
             <FaRegUser size={25} />
           </div>
           <div className="h-[50px] text-white">
-            <p className="font-bold">Ekele Jeremiah</p>
+            <p className="text-[15px]">Ekele Jeremiah</p>
             <p>Admin</p>
           </div>
         </div>
@@ -61,7 +58,7 @@ const AdminBoard = ({prop}) => {
           <IoSettingsOutline className="animate-spin" size={25} />
         </div>
       </div>
-      <div className={`w-full h-[600px] bg-[#f2f7fb] p-5`}>{prop}</div>
+      <div className={`w-full h-[550px] overflow-auto bg-[#f2f7fb] p-1 lg:p-5`}>{prop}</div>
       </div>
     </div>
   );

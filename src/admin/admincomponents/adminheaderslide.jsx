@@ -6,6 +6,7 @@ import { IoIosArrowDown, IoIosArrowUp, IoLogoBuffer } from "react-icons/io";
 import { PiDotOutline } from "react-icons/pi";
 import { FaRegFileAlt, FaDiceD6 } from "react-icons/fa";
 import { FiUser } from "react-icons/fi";
+import { GrAnalytics } from "react-icons/gr";
 import { useNavigate } from 'react-router-dom';
 
 
@@ -22,22 +23,24 @@ const Adminheaderslide = ({onsend}) => {
     const [report, setReport] = useState(false)
     const [attribute, setAttribute] = useState(false)
   return (
-    <div className='w-full h-full pl-1 pr-1 bg-white'>
-        <div className='w-full h-[70px] flex items-center justify-between p-2 bg-blue-500 text-[25px] text-white font-bold'>
+    <div className='w-full pl-1 pr-1 bg-white'>
+        <div className='w-full h-[70px] flex items-center justify-between p-2 bg-blue-500 text-white font-bold'>
             <h1 className='text-[17px]'>Young Collections</h1>
-            <RiMenuUnfold3Line onClick={sendData}/>
+            <RiMenuUnfold3Line size={20} onClick={sendData}/>
         </div>
-        <div className='w-full h-[600px] overflow-scroll shadow-md'>
-        <div onClick={()=>nav("/admin")} className='w-full h-[70px] mt-1 cursor-pointer text-blue-600 hover:text-[#0A3981] border-b-4 border-b-white flex items-center justify-center'>
-            <div className='w-[90%] h-[80%] rounded-md bg-[#D4EBF8] flex items-center pl-2 gap-2'>
+        <div className='w-full h-[550px] overflow-scroll shadow-md'>
+        <div onClick={()=>nav("/admin")} className='w-full h-[70px] mt-1 hover:text-[#0A3981] border-b-4 border-b-white flex items-center justify-center'>
+            <div className='w-[90%] h-[80%] rounded-md flex items-center cursor-pointer pl-2 gap-2'>
                 <LuLayoutDashboard size={25}/>
-                <h1 className='text-[15px] lg:text-[22px] font-bold font-'>Home</h1>
+                <h1 className='text-[14px] lg:text-[15px] font-bold font-'>Home</h1>
             </div>
         </div>
         <div className='w-full pb-1 mt-1 cursor-pointer border-b-4 border-b-white flex flex-col items-center justify-center'>
-            <div onClick={()=>setCommerce(!commerce)} className='w-[90%] h-[50px] rounded-md text-blue-600 hover:text-[#0A3981] bg-[#D4EBF8] flex items-center pl-2 gap-2'>
-                <BsCart2 size={25}/>
-                <h1 className='text-[15px] lg:text-[22px] font-bold font-'>Ecommerce</h1>
+            <div onClick={()=>setCommerce(!commerce)} className='w-[90%] h-[50px] rounded-md hover:text-[#0A3981] flex items-center pl-2 justify-between'>
+                <div className='flex gap-2'>
+                    <BsCart2 size={20}/>
+                    <h1 className='text-[14px] lg:text-[15px] font-bold font-'>Ecommerce</h1>
+                </div>
                 {
                     commerce? <IoIosArrowUp />: <IoIosArrowDown />
                 }
@@ -45,19 +48,25 @@ const Adminheaderslide = ({onsend}) => {
            {
             commerce &&(
                 <div className='w-full flex flex-col items-center gap-1'>
-                <div onClick={()=>nav("/admin/addproduct")} className='w-[70%] font-bold text-[18px] hover:text-blue-500 flex items-center h-[30px]'>
+                <div onClick={()=>{nav("/admin/addproduct") 
+                    setCommerce(true)
+                    }} className='w-[70%] font-bold text-[12px] lg:text-[15px] hover:text-blue-500 flex items-center h-[30px]'>
                     <PiDotOutline size={25}/>
                     <p>Add product</p>
                 </div>
-                <div onClick={()=>nav("/admin/productlist")} className='w-[70%] font-bold text-[18px] hover:text-blue-500 flex items-center h-[30px]'>
+                <div onClick={()=>{nav("/admin/productlist")
+                    setCommerce(true)
+                }} className='w-[70%] font-bold text-[12px] lg:text-[15px] hover:text-blue-500 flex items-center h-[30px]'>
                     <PiDotOutline size={25}/>
                     <p>Product list</p>
                 </div>
-                <div className='w-[70%] font-bold text-[18px] hover:text-blue-500 flex items-center h-[30px]'>
+                <div onClick={()=>{nav("/admin/editproduct")
+                    setCommerce(true)
+                }} className='w-[70%] font-bold text-[12px] lg:text-[15px] hover:text-blue-500 flex items-center h-[30px]'>
                     <PiDotOutline size={25}/>
                     <p>Edit product</p>
                 </div>
-                <div className='w-[70%] font-bold text-[18px] hover:text-blue-500 flex items-center h-[30px]'>
+                <div className='w-[70%] font-bold text-[12px] lg:text-[15px] hover:text-blue-500 flex items-center h-[30px]'>
                     <PiDotOutline size={25}/>
                     <p>Delete product</p>
                 </div>
@@ -66,9 +75,11 @@ const Adminheaderslide = ({onsend}) => {
            }
         </div>
         <div className='w-full pb-1 mt-1 cursor-pointer border-b-4 border-b-white flex flex-col items-center justify-center'>
-            <div onClick={()=>setCategory(!category)} className='w-[90%] h-[50px] rounded-md text-blue-600 hover:text-[#0A3981] bg-[#D4EBF8] flex items-center pl-2 gap-2'>
-                <IoLogoBuffer size={25}/>
-                <h1 className='text-[15px] lg:text-[22px] font-bold font-'>Category</h1>
+            <div onClick={()=>setCategory(!category)} className='w-[90%] h-[50px] rounded-md hover:text-[#0A3981] flex items-center pl-2 justify-between'>
+                <div className='flex gap-2'>
+                    <IoLogoBuffer size={20}/>
+                    <h1 className='text-[14px] lg:text-[15px] font-bold font-'>Category</h1>
+                </div>
                 {
                     category? <IoIosArrowUp />: <IoIosArrowDown />
                 }
@@ -76,11 +87,11 @@ const Adminheaderslide = ({onsend}) => {
            {
             category &&(
                 <div className='w-full flex flex-col items-center gap-1'>
-                <div className='w-[70%] font-bold text-[18px] hover:text-blue-500 flex items-center h-[30px]'>
+                <div onClick={()=>nav("/admin/categorylist")} className='w-[70%] font-bold text-[12px] lg:text-[15px] hover:text-blue-500 flex items-center h-[30px]'>
                     <PiDotOutline size={25}/>
                     <p>Category list</p>
                 </div>
-                <div className='w-[70%] font-bold text-[18px] hover:text-blue-500 flex items-center h-[30px]'>
+                <div onClick={()=>nav("/admin/newcategory")} className='w-[70%] font-bold text-[12px] lg:text-[15px] hover:text-blue-500 flex items-center h-[30px]'>
                     <PiDotOutline size={25}/>
                     <p>New category</p>
                 </div>
@@ -89,9 +100,11 @@ const Adminheaderslide = ({onsend}) => {
            }
         </div>
         <div className='w-full pb-1 mt-1 cursor-pointer border-b-4 border-b-white flex flex-col items-center justify-center'>
-            <div onClick={()=>setAttribute(!attribute)} className='w-[90%] h-[50px] rounded-md text-blue-600 hover:text-[#0A3981] bg-[#D4EBF8] flex items-center pl-2 gap-2'>
-                <FaDiceD6 size={25}/>
-                <h1 className='text-[15px] lg:text-[22px] font-bold font-'>Attributes</h1>
+            <div onClick={()=>setAttribute(!attribute)} className='w-[90%] h-[50px] rounded-md hover:text-[#0A3981] flex items-center pl-2 justify-between'>
+                <div className='flex gap-2'>
+                    <FaDiceD6 size={20}/>
+                    <h1 className='text-[14px] lg:text-[15px] font-bold font-'>Attributes</h1>
+                </div>
                 {
                     attribute? <IoIosArrowUp />: <IoIosArrowDown />
                 }
@@ -99,11 +112,11 @@ const Adminheaderslide = ({onsend}) => {
            {
             attribute &&(
                 <div className='w-full flex flex-col items-center gap-1'>
-                <div className='w-[70%] font-bold text-[18px] hover:text-blue-500 flex items-center h-[30px]'>
+                <div className='w-[70%] font-bold text-[12px] lg:text-[15px] hover:text-blue-500 flex items-center h-[30px]'>
                     <PiDotOutline size={25}/>
                     <p>Attributes</p>
                 </div>
-                <div className='w-[70%] font-bold text-[18px] hover:text-blue-500 flex items-center h-[30px]'>
+                <div className='w-[70%] font-bold text-[12px] lg:text-[15px] hover:text-blue-500 flex items-center h-[30px]'>
                     <PiDotOutline size={25}/>
                     <p>Add attribute</p>
                 </div>
@@ -112,9 +125,11 @@ const Adminheaderslide = ({onsend}) => {
            }
         </div>
         <div className='w-full pb-1 mt-1 cursor-pointer border-b-4 border-b-white flex flex-col items-center justify-center'>
-            <div onClick={()=>setOrder(!order)} className='w-[90%] h-[50px] rounded-md text-blue-600 hover:text-[#0A3981] bg-[#D4EBF8] flex items-center pl-2 gap-2'>
-                <FaRegFileAlt size={25}/>
-                <h1 className='text-[15px] lg:text-[22px] font-bold font-'>Order</h1>
+            <div onClick={()=>setOrder(!order)} className='w-[90%] h-[50px] rounded-md hover:text-[#0A3981] flex items-center pl-2 justify-between'>
+                <div className='flex gap-2'>
+                    <FaRegFileAlt size={20}/>
+                    <h1 className='text-[14px] lg:text-[15px] font-bold font-'>Order</h1>
+                </div>
                 {
                     order? <IoIosArrowUp />: <IoIosArrowDown />
                 }
@@ -122,11 +137,15 @@ const Adminheaderslide = ({onsend}) => {
            {
             order &&(
                 <div className='w-full flex flex-col items-center gap-1'>
-                <div className='w-[70%] font-bold text-[18px] hover:text-blue-500 flex items-center h-[30px]'>
+                <div onClick={()=>nav("/admin/orderlist")} className='w-[70%] font-bold text-[12px] lg:text-[15px] hover:text-blue-500 flex items-center h-[30px]'>
                     <PiDotOutline size={25}/>
                     <p>Order list</p>
                 </div>
-                <div className='w-[70%] font-bold text-[18px] hover:text-blue-500 flex items-center h-[30px]'>
+                <div onClick={()=>nav("/admin/orderdetailoo123df")} className='w-[70%] font-bold text-[12px] lg:text-[15px] hover:text-blue-500 flex items-center h-[30px]'>
+                    <PiDotOutline size={25}/>
+                    <p>Order detail</p>
+                </div>
+                <div className='w-[70%] font-bold text-[12px] lg:text-[15px] hover:text-blue-500 flex items-center h-[30px]'>
                     <PiDotOutline size={25}/>
                     <p>Order tracking</p>
                 </div>
@@ -135,9 +154,11 @@ const Adminheaderslide = ({onsend}) => {
            }
         </div>
         <div className='w-full pb-1 mt-1 cursor-pointer border-b-4 border-b-white flex flex-col items-center justify-center'>
-            <div onClick={()=>setUser(!user)} className='w-[90%] h-[50px] rounded-md text-blue-600 hover:text-[#0A3981] bg-[#D4EBF8] flex items-center pl-1 gap-2'>
-                <FiUser size={25}/>
-                <h1 className='text-[15px] lg:text-[22px] font-bold font-'>User</h1>
+            <div onClick={()=>setUser(!user)} className='w-[90%] h-[50px] rounded-md hover:text-[#0A3981] flex items-center pl-1 justify-between'>
+                <div className='flex gap-2'>
+                    <FiUser size={20}/>
+                    <h1 className='text-[14px] lg:text-[15px] font-bold font-'>User</h1>
+                </div>
                 {
                     user? <IoIosArrowUp />: <IoIosArrowDown />
                 }
@@ -145,15 +166,15 @@ const Adminheaderslide = ({onsend}) => {
            {
             user &&(
                 <div className='w-full flex flex-col items-center gap-1'>
-                <div className='w-[70%] font-bold text-[18px] hover:text-blue-500 flex items-center h-[30px]'>
+                <div onClick={()=>nav("/admin/allusers")} className='w-[70%] font-bold text-[12px] lg:text-[15px] hover:text-blue-500 flex items-center h-[30px]'>
                     <PiDotOutline size={25}/>
                     <p>All user</p>
                 </div>
-                <div className='w-[70%] font-bold text-[18px] hover:text-blue-500 flex items-center h-[30px]'>
+                <div onClick={()=>nav("/admin/addnewuser")} className='w-[70%] font-bold text-[12px] lg:text-[15px] hover:text-blue-500 flex items-center h-[30px]'>
                     <PiDotOutline size={25}/>
                     <p>Add new user</p>
                 </div>
-                <div className='w-[70%] font-bold text-[18px] hover:text-blue-500 flex items-center h-[30px]'>
+                <div onClick={()=>nav("/admin/permissionacess")} className='w-[70%] font-bold text-[12px] lg:text-[15px] hover:text-blue-500 flex items-center h-[30px]'>
                     <PiDotOutline size={25}/>
                     <p>Permission</p>
                 </div>
@@ -162,9 +183,9 @@ const Adminheaderslide = ({onsend}) => {
            }
         </div>
         <div className='w-full pb-1 mt-1 cursor-pointer border-b-4 border-b-white flex flex-col items-center justify-center'>
-            <div onClick={()=>setReport(!report)} className='w-[90%] h-[50px] rounded-md text-blue-600 hover:text-[#0A3981] bg-[#D4EBF8] flex items-center pl-1 gap-2'>
-                <FiUser size={25}/>
-                <h1 className='text-[15px] lg:text-[22px] font-bold font-'>Report</h1>
+            <div onClick={()=>setReport(!report)} className='w-[90%] h-[50px] rounded-md hover:text-[#0A3981] flex items-center pl-1 gap-2'>
+                <GrAnalytics size={20}/>
+                <h1 className='text-[14px] lg:text-[15px] font-bold font-'>Report</h1>
             </div>
         </div>
         </div>
