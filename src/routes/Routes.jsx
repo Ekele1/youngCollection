@@ -23,7 +23,20 @@ import AdduserPage from "../admin/adminPage/adduserPage";
 import PermissionPage from "../admin/adminPage/permissionPage";
 import OrderListPage from "../admin/adminPage/orderlistPage";
 import OrderDetailPage from "../admin/adminPage/orderdetailPage";
+import LoginPage from "../pages/loginpage";
+import SignupPage from "../pages/signuppage";
+import ForgetPasswordPage from "../onboarding/forgetpassword";
+import ResetPasswordPage from "../onboarding/resetpassword";
 
+const Onboarding = () => (
+  <div>
+    {/* <Header /> */}
+    <main>
+      <Outlet />
+    </main>
+    {/* <Footercomp /> */}
+  </div>
+);
 const AppLayout = () => (
   <div>
     <Header />
@@ -44,6 +57,16 @@ const AdminLayout = () => (
 );
 
 const route = createHashRouter([
+  {
+    path: "/onboarding",
+    element: <Onboarding />,
+    children: [
+      { path: "login", element: <LoginPage />},
+      { path: "signup", element: <SignupPage />},
+      { path: "forgetpassword", element: <ForgetPasswordPage />},
+      { path: "resetpassword", element: <ResetPasswordPage />},
+    ]
+  },
   {
     path: "/",
     element: <AppLayout />,
