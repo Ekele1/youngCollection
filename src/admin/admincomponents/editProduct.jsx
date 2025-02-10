@@ -19,20 +19,20 @@ const EditProduct = () => {
   };
 
   return (
-    <div className="w-full h-full overflow-y-auto">
+    <div className="w-full h-full overflow-y-auto dark:text-gray-500">
       <div className="w-full h-[70px] font-bold text-[25px] flex items-center">
         <p>Edit Product</p>
       </div>
       <form>
         <div className="w-full flex flex-col lg:flex-row justify-around">
           {/* Product Details Section */}
-          <div className="lg:w-[48%] w-full flex flex-col gap-3 p-5 bg-white shadow-md rounded-lg">
+          <div className="lg:w-[48%] w-full flex flex-col gap-3 p-5  dark:bg-[#1d283a] bg-white shadow-md rounded-lg">
             <div className="w-full flex flex-col gap-2">
               <p className="font-bold">Product name</p>
               <input
                 required
                 placeholder="Enter product name"
-                className="w-full h-[45px] outline-none border-2 border-gray-300 rounded-lg pl-3"
+                className="w-full h-[45px] outline-none dark:bg-[#1d283a] border-2 border-gray-300 rounded-lg pl-3"
                 type="text"
               />
               <p className="text-[13px] text-gray-500">
@@ -40,11 +40,11 @@ const EditProduct = () => {
               </p>
             </div>
             <div className="w-full flex justify-between">
-              <div className="w-[47%] h-[80px] flex flex-col gap-2">
+              <div className="w-[47%]  h-[80px] flex flex-col gap-2">
                 <p className="font-bold">Category</p>
                 <select
                   required
-                  className="w-full h-[45px] outline-none border-2 border-gray-300 rounded-lg"
+                  className="w-full dark:bg-[#1d283a] h-[45px] outline-none border-2 border-gray-300 rounded-lg"
                 >
                   <option value="">Choose category</option>
                   <option value="shop">Shop</option>
@@ -55,7 +55,7 @@ const EditProduct = () => {
                 <p className="font-bold">Gender</p>
                 <select
                   required
-                  className="w-full h-[45px] outline-none border-2 border-gray-300 rounded-lg"
+                  className="w-full dark:bg-[#1d283a] h-[45px] outline-none border-2 border-gray-300 rounded-lg"
                 >
                   <option value="men">Men</option>
                   <option value="women">Women</option>
@@ -75,7 +75,7 @@ const EditProduct = () => {
           </div>
 
           {/* Image Upload Section */}
-          <div className="lg:w-[48%] w-full bg-white p-5 shadow-md rounded-lg">
+          <div className="lg:w-[48%] w-full dark:bg-[#1d283a] bg-white p-5 shadow-md rounded-lg">
             <div className="w-full flex flex-col gap-2">
               <p className="font-bold">Upload images</p>
               <div className="w-full flex gap-2 flex-wrap">
@@ -116,7 +116,7 @@ const EditProduct = () => {
                     <p className="font-bold">Add size</p>
                     <select
                     required
-                    className="w-full h-[45px] outline-none border-2 border-gray-300 rounded-lg"
+                    className="w-full dark:bg-[#1d283a] h-[45px] outline-none border-2 border-gray-300 rounded-lg"
                     >
                     <option value="">Choose category</option>
                     <option value="shop">Shop</option>
@@ -127,7 +127,7 @@ const EditProduct = () => {
                     <p className="font-bold">Color</p>
                     <select
                     required
-                    className="w-full h-[45px] outline-none border-2 border-gray-300 rounded-lg"
+                    className="w-full dark:bg-[#1d283a] h-[45px] outline-none border-2 border-gray-300 rounded-lg"
                     >
                     <option value="men">Men</option>
                     <option value="women">Women</option>

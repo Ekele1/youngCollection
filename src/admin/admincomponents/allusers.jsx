@@ -55,11 +55,11 @@ const AllUsers = () => {
   };
 
   return (
-    <div className="w-full h-full overflow-auto">
+    <div className="w-full h-full overflow-auto dark:text-gray-500">
       <div className="w-full font-bold text-[25px] h-[70px] flex items-center">
         <p>All Users</p>
       </div>
-      <div className="w-full bg-white p-3 rounded-lg shadow-md">
+      <div className="w-full bg-white dark:bg-[#1d283a] p-3 rounded-lg lg:shadow-md">
         <div className="w-full lg:h-[70px] flex flex-col gap-3 lg:flex-row items-center justify-between">
           {/* Entries Dropdown */}
           <div className="text-gray-500 flex items-center">

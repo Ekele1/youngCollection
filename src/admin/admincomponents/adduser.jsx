@@ -67,10 +67,10 @@ const AddUser = () => {
   };
 
   return (
-    <div className="w-full p-5 bg-gray-100 min-h-screen flex justify-center items-center">
-      <div className="w-full max-w-3xl bg-white shadow-lg rounded-lg p-8">
+    <div className="w-full lg:p-5 bg-gray-100 min-h-screen lg:mt-5 dark:bg-[#0f172a] flex justify-center items-center">
+      <div className="w-full max-w-3xl bg-white dark:bg-[#1d283a] dark:text-gray-500 shadow-lg rounded-lg p-8">
         <div className="mb-8">
-          <h1 className="text-2xl font-bold text-gray-800">Add New User</h1>
+          <h1 className="text-2xl font-bold text-gray-500">Add New User</h1>
           <p className="text-sm text-gray-500">
             Fill in the form below to add a new user and set permissions.
           </p>
@@ -80,7 +80,7 @@ const AddUser = () => {
           <div>
             <label
               htmlFor="name"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-500"
             >
               Name
             </label>
@@ -91,7 +91,7 @@ const AddUser = () => {
               value={formData.name}
               onChange={handleChange}
               placeholder="Enter user's name"
-              className={`w-full mt-1 p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none ${
+              className={`w-full mt-1 p-3 dark:bg-[#1d283a] border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none ${
                 errors.name ? "border-red-500" : "border-gray-300"
               }`}
             />
@@ -103,7 +103,7 @@ const AddUser = () => {
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-500"
             >
               Email
             </label>
@@ -114,7 +114,7 @@ const AddUser = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="Enter user's email"
-              className={`w-full mt-1 p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none ${
+              className={`w-full mt-1 p-3 border dark:bg-[#1d283a] rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none ${
                 errors.email ? "border-red-500" : "border-gray-300"
               }`}
             />
@@ -126,7 +126,7 @@ const AddUser = () => {
           <div>
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-500"
             >
               Password
             </label>
@@ -137,7 +137,7 @@ const AddUser = () => {
               value={formData.password}
               onChange={handleChange}
               placeholder="Enter user's password"
-              className={`w-full mt-1 p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none ${
+              className={`w-full mt-1 dark:bg-[#1d283a] p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none ${
                 errors.password ? "border-red-500" : "border-gray-300"
               }`}
             />
@@ -149,7 +149,7 @@ const AddUser = () => {
           <div>
             <label
               htmlFor="confirmPassword"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-medium text-gray-500"
             >
               Confirm Password
             </label>
@@ -160,7 +160,7 @@ const AddUser = () => {
               value={formData.confirmPassword}
               onChange={handleChange}
               placeholder="Confirm user's password"
-              className={`w-full mt-1 p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none ${
+              className={`w-full mt-1 p-3 dark:bg-[#1d283a] border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none ${
                 errors.confirmPassword ? "border-red-500" : "border-gray-300"
               }`}
             />

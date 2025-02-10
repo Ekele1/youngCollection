@@ -8,12 +8,24 @@ module.exports = {
   theme: {
     extend: {
       animation: {
-        spin: 'spin 2s linear infinite'
+        spin: 'spin 2s linear infinite',
       },
       fontFamily: {
-        sans: ['Poppins', 'ui-sans-serif', 'system-ui']
-      }
+        sans: ['Poppins', 'ui-sans-serif', 'system-ui'],
+      },
     },
   },
-  plugins: [],
-}
+  plugins: [
+    function ({ addUtilities }) {
+      addUtilities({
+        '.scrollbar-none': {
+          '&::-webkit-scrollbar': {
+            display: 'none',
+          },
+          '-ms-overflow-style': 'none', // IE and Edge
+          'scrollbar-width': 'none', // Firefox
+        },
+      });
+    },
+  ],
+};

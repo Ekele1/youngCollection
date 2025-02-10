@@ -15,17 +15,17 @@ const OrderDetail = () => {
     const total = (subtotal + shipping + tax).toFixed(2);
 
     return (
-        <div className='w-full p-4'>
+        <div className='w-full h-[100%] dark:text-gray-500'>
             <div className='w-full h-[70px] flex items-center'>
                 <p className='text-[20px] font-bold'>Order Detail</p>
             </div>
             <div className='w-full flex flex-col lg:flex-row justify-between gap-5'>
                 {/* Items Section */}
                 <div className='w-full lg:w-[62%] flex flex-col gap-5'>
-                    <div className='w-full p-3 flex flex-col gap-2 bg-white rounded-md shadow-md'>
+                    <div className='w-full p-3 flex flex-col gap-2 lg:bg-white dark:bg-[#1d283a] rounded-md lg:shadow-md'>
                         <div className='w-full h-[50px] font-bold'>All items</div>
                         {allitems.map((e, i) => (
-                            <div key={i} className='w-full h-[70px] flex bg-blue-100 p-2 rounded-lg'>
+                            <div key={i} className='w-full h-[70px] flex bg-blue-100 dark:bg-[#1d283a] dark:border-[1px] dark:border-white p-2 rounded-lg'>
                                 <div className='w-[10%] h-full'>
                                     <img className='w-full h-full object-contain rounded-md' src={e.image} alt={e.productName} />
                                 </div>
@@ -46,8 +46,8 @@ const OrderDetail = () => {
                     </div>
 
                     {/* Cart Totals Section */}
-                    <div className='w-full bg-white rounded-md shadow-md p-3'>
-                        <div className='w-full bg-gray-100 rounded-md p-2'>
+                    <div className='w-full bg-white dark:bg-[#1d283a] rounded-md shadow-md p-3'>
+                        <div className='w-full bg-gray-100 dark:bg-[#1d283a] rounded-md p-2'>
                             <div className='w-full flex items-center justify-between'>
                                 <p className='text-[15px] font-bold'>Cart totals</p>
                                 <p className='text-[15px] font-bold'>Price</p>
@@ -81,8 +81,8 @@ const OrderDetail = () => {
                 </div>
 
                 {/* Summary and Delivery Section */}
-                <div className='w-full lg:w-[35%] flex flex-col gap-3'>
-                    <div className='w-full h-[150px] text-[13px] p-3 bg-white rounded-md shadow-md'>
+                <div className='w-full lg:w-[35%] flex flex-col gap-3 dark:text-gray-500 dark:bg-[#1d283a]'>
+                    <div className='w-full h-[150px] text-[13px] p-3 bg-white dark:bg-[#1d283a] rounded-md shadow-md'>
                         <div className='w-full h-[40px] flex items-center'>
                             <p className='font-bold'>Summary</p>
                         </div>
@@ -99,15 +99,15 @@ const OrderDetail = () => {
                             <div className='w-[60%] font-bold text-orange-500'>${total}</div>
                         </div>
                     </div>
-                    <div className='w-full h-[90px] text-[13px] bg-white rounded-md shadow-md p-3'>
+                    <div className='w-full h-[90px] dark:bg-[#1d283a] text-[13px] bg-white rounded-md shadow-md p-3'>
                         <p className='font-bold'>Shipping Address</p>
                         <p>1313 Karimu Kotun VI Lagos</p>
                         <p>091234567890</p>
                     </div>
-                    <div className='w-full h-[120px] text-[13px] bg-white rounded-md shadow-md p-3'>
+                    <div className='w-full h-[120px] text-[13px] dark:bg-[#1d283a] bg-white rounded-md shadow-md p-3'>
                         <p className='font-bold'>Expected date of delivery</p>
                         <p className='text-green-500'>20 March 2025</p>
-                        <button className='mt-2 w-full h-[40px] bg-blue-500 text-white py-1 rounded-md'>Track Delivery</button>
+                        <button className='mt-2 w-full h-[50px] bg-blue-500 text-white py-1 rounded-md'>Track Delivery</button>
                     </div>
                 </div>
             </div>

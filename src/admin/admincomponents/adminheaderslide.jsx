@@ -23,20 +23,20 @@ const Adminheaderslide = ({onsend}) => {
     const [report, setReport] = useState(false)
     const [attribute, setAttribute] = useState(false)
   return (
-    <div className='w-full pl-1 pr-1 bg-white'>
-        <div className='w-full h-[70px] flex items-center justify-between p-2 bg-blue-500 text-white font-bold'>
+    <div className='w-full pl-1 pr-1 dark:bg-[#1d283a] bg-white mt-[71px] lg:mt-0'>
+        <div className='w-full h-[70px] flex items-center justify-between p-2 dark:bg-[#1d283a] bg-blue-500 text-white font-bold'>
             <h1 className='text-[17px]'>Young Collections</h1>
             <RiMenuUnfold3Line size={20} onClick={sendData}/>
         </div>
-        <div className='w-full h-[550px] overflow-scroll shadow-md'>
-        <div onClick={()=>nav("/admin")} className='w-full h-[70px] mt-1 hover:text-[#0A3981] border-b-4 border-b-white flex items-center justify-center'>
+        <div className='w-full h-[550px] overflow-scroll scrollbar-none shadow-md dark:text-white'>
+        <div onClick={()=>{nav("/admin"),sendData()}} className='w-full h-[70px] mt-1 hover:text-[#0A3981] dark:hover:text-blue-400 flex items-center justify-center'>
             <div className='w-[90%] h-[80%] rounded-md flex items-center cursor-pointer pl-2 gap-2'>
                 <LuLayoutDashboard size={25}/>
                 <h1 className='text-[14px] lg:text-[15px] font-bold font-'>Home</h1>
             </div>
         </div>
-        <div className='w-full pb-1 mt-1 cursor-pointer border-b-4 border-b-white flex flex-col items-center justify-center'>
-            <div onClick={()=>setCommerce(!commerce)} className='w-[90%] h-[50px] rounded-md hover:text-[#0A3981] flex items-center pl-2 justify-between'>
+        <div className='w-full pb-1 mt-1 cursor-pointer flex flex-col items-center justify-center'>
+            <div onClick={()=>setCommerce(!commerce)} className='w-[90%] h-[50px] rounded-md hover:text-[#0A3981] dark:hover:text-blue-400 cursor-pointer flex items-center pl-2 justify-between'>
                 <div className='flex gap-2'>
                     <BsCart2 size={20}/>
                     <h1 className='text-[14px] lg:text-[15px] font-bold font-'>Ecommerce</h1>
@@ -74,8 +74,8 @@ const Adminheaderslide = ({onsend}) => {
             )
            }
         </div>
-        <div className='w-full pb-1 mt-1 cursor-pointer border-b-4 border-b-white flex flex-col items-center justify-center'>
-            <div onClick={()=>setCategory(!category)} className='w-[90%] h-[50px] rounded-md hover:text-[#0A3981] flex items-center pl-2 justify-between'>
+        <div className='w-full pb-1 mt-1 cursor-pointer flex flex-col items-center justify-center'>
+            <div onClick={()=>setCategory(!category)} className='w-[90%] h-[50px] rounded-md hover:text-[#0A3981] dark:hover:text-blue-400 flex items-center pl-2 justify-between'>
                 <div className='flex gap-2'>
                     <IoLogoBuffer size={20}/>
                     <h1 className='text-[14px] lg:text-[15px] font-bold font-'>Category</h1>
@@ -99,8 +99,8 @@ const Adminheaderslide = ({onsend}) => {
             )
            }
         </div>
-        <div className='w-full pb-1 mt-1 cursor-pointer border-b-4 border-b-white flex flex-col items-center justify-center'>
-            <div onClick={()=>setAttribute(!attribute)} className='w-[90%] h-[50px] rounded-md hover:text-[#0A3981] flex items-center pl-2 justify-between'>
+        <div className='w-full pb-1 mt-1 cursor-pointe flex flex-col items-center justify-center'>
+            <div onClick={()=>setAttribute(!attribute)} className='w-[90%] h-[50px] rounded-md hover:text-[#0A3981] dark:hover:text-blue-400 flex items-center pl-2 justify-between'>
                 <div className='flex gap-2'>
                     <FaDiceD6 size={20}/>
                     <h1 className='text-[14px] lg:text-[15px] font-bold font-'>Attributes</h1>
@@ -124,8 +124,8 @@ const Adminheaderslide = ({onsend}) => {
             )
            }
         </div>
-        <div className='w-full pb-1 mt-1 cursor-pointer border-b-4 border-b-white flex flex-col items-center justify-center'>
-            <div onClick={()=>setOrder(!order)} className='w-[90%] h-[50px] rounded-md hover:text-[#0A3981] flex items-center pl-2 justify-between'>
+        <div className='w-full pb-1 mt-1 cursor-pointer flex flex-col items-center justify-center'>
+            <div onClick={()=>setOrder(!order)} className='w-[90%] h-[50px] rounded-md dark:hover:text-blue-400 hover:text-[#0A3981] flex items-center pl-2 justify-between'>
                 <div className='flex gap-2'>
                     <FaRegFileAlt size={20}/>
                     <h1 className='text-[14px] lg:text-[15px] font-bold font-'>Order</h1>
@@ -153,8 +153,8 @@ const Adminheaderslide = ({onsend}) => {
             )
            }
         </div>
-        <div className='w-full pb-1 mt-1 cursor-pointer border-b-4 border-b-white flex flex-col items-center justify-center'>
-            <div onClick={()=>setUser(!user)} className='w-[90%] h-[50px] rounded-md hover:text-[#0A3981] flex items-center pl-1 justify-between'>
+        <div className='w-full pb-1 mt-1 cursor-pointer flex flex-col items-center justify-center'>
+            <div onClick={()=>setUser(!user)} className='w-[90%] h-[50px] rounded-md dark:hover:text-blue-400 hover:text-[#0A3981] flex items-center pl-1 justify-between'>
                 <div className='flex gap-2'>
                     <FiUser size={20}/>
                     <h1 className='text-[14px] lg:text-[15px] font-bold font-'>User</h1>
@@ -182,8 +182,8 @@ const Adminheaderslide = ({onsend}) => {
             )
            }
         </div>
-        <div className='w-full pb-1 mt-1 cursor-pointer border-b-4 border-b-white flex flex-col items-center justify-center'>
-            <div onClick={()=>setReport(!report)} className='w-[90%] h-[50px] rounded-md hover:text-[#0A3981] flex items-center pl-1 gap-2'>
+        <div className='w-full pb-1 mt-1 cursor-pointer flex flex-col items-center justify-center'>
+            <div onClick={()=>setReport(!report)} className='w-[90%] h-[50px] rounded-md dark:hover:text-blue-400 hover:text-[#0A3981] flex items-center pl-1 gap-2'>
                 <GrAnalytics size={20}/>
                 <h1 className='text-[14px] lg:text-[15px] font-bold font-'>Report</h1>
             </div>

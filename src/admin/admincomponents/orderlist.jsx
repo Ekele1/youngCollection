@@ -57,13 +57,13 @@ const OrderList = () => {
   };
 
   return (
-    <div className="w-full h-full overflow-auto bg-gray-50 p-5">
-      <div className="w-full font-bold text-2xl text-gray-700 h-[70px] flex items-center">
+    <div className="w-full h-full overflow-auto bg-gray-50 lg:p-5 dark:bg-[#1d283a]">
+      <div className="w-full font-bold text-2xl text-gray-500 h-[70px] flex items-center">
         <p>Order List</p>
       </div>
-      <div className="w-full bg-white p-5 rounded-lg shadow-lg">
+      <div className="w-full min-h-screen bg-white dark:bg-[#1d283a] p-5 rounded-lg lg:shadow-lg">
         {/* Controls */}
-        <div className="w-full lg:h-[70px] flex flex-col gap-3 lg:flex-row items-center justify-between">
+        <div className="w-full  lg:h-[70px] flex flex-col gap-3 lg:flex-row items-center justify-between">
           <div className="text-gray-500 flex items-center w-full">
             <p>Show</p>
             <select
@@ -105,11 +105,11 @@ const OrderList = () => {
                   ))}
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="dark:bg-[#1d283a]">
                 {paginatedList.map((product, index) => (
                   <tr
                     key={index}
-                    className="bg-white hover:bg-gray-100 transition-colors border-b text-sm text-gray-700"
+                    className="bg-white dark:bg-[#1d283a] hover:bg-gray-100 transition-colors border-b text-sm text-gray-500"
                   >
                     <td className="px-4 py-2">{product.Product}</td>
                     <td className="px-4 py-2">${product.price}</td>

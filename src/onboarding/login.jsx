@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { FaLock, FaUser, FaEye, FaEyeSlash } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
+    const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
@@ -36,7 +38,7 @@ const LoginPage = () => {
                 type="email"
                 id="email"
                 placeholder="Enter your email"
-                className="w-full px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg"
+                className="w-full px-3 py-2 focus:outline-none rounded-lg"
                 required
               />
             </div>
@@ -58,7 +60,7 @@ const LoginPage = () => {
                 type={showPassword ? "text" : "password"}
                 id="password"
                 placeholder="Enter your password"
-                className="w-full px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-lg"
+                className="w-full px-3 py-2 focus:outline-none rounded-lg"
                 required
               />
               <button
@@ -81,8 +83,8 @@ const LoginPage = () => {
               <span className="ml-2">Remember me</span>
             </label>
             <a
-              href="#"
-              className="text-sm text-blue-500 hover:underline focus:underline"
+                onClick={()=>navigate("/onboarding/forgetpassword")}
+              className="text-sm text-blue-500 cursor-pointer hover:underline focus:underline"
             >
               Forgot Password?
             </a>
@@ -131,7 +133,7 @@ const LoginPage = () => {
         {/* Sign Up */}
         <p className="mt-6 text-center text-gray-600">
           Don't have an account?{" "}
-          <a href="/onboarding/signup" className="text-blue-500 hover:underline">
+          <a onClick={()=>navigate("/onboarding/signup")} className="text-blue-500 cursor-pointer hover:underline">
             Sign up
           </a>
         </p>

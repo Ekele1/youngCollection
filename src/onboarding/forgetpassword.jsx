@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { FaEnvelope } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const ForgetPasswordPage = () => {
+    const navigate = useNavigate()
   const [email, setEmail] = useState("");
 
   const handleSubmit = (e) => {
@@ -40,7 +42,7 @@ const ForgetPasswordPage = () => {
                 placeholder="Enter your email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500 rounded-lg"
+                className="w-full px-3 py-2 focus:outline-none rounded-lg"
                 required
               />
             </div>
@@ -65,7 +67,7 @@ const ForgetPasswordPage = () => {
         {/* Back to Login */}
         <p className="text-center text-gray-600">
           Remembered your password?{" "}
-          <a href="#" className="text-purple-500 hover:underline">
+          <a onClick={()=>navigate("/onboarding/login")} className="text-purple-500 cursor-pointer hover:underline">
             Log in
           </a>
         </p>

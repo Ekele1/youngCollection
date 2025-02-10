@@ -61,11 +61,11 @@ const Category = () => {
   };
 
   return (
-    <div className="w-full h-full overflow-auto">
+    <div className="w-full h-full overflow-auto dark:text-gray-500">
       <div className="w-full font-bold text-[25px] h-[70px] flex items-center">
         <p>Category List</p>
       </div>
-      <div className="w-full bg-white p-3 rounded-lg shadow-md">
+      <div className="w-full lg:bg-white dark:bg-[#1d283a] p-3 rounded-lg lg:shadow-md">
         {/* Top Controls */}
         <div className="w-full lg:h-[70px] flex flex-col gap-3 lg:flex-row items-center justify-between">
           {/* Entries Dropdown */}
@@ -117,7 +117,7 @@ const Category = () => {
             </thead>
 
             {/* Table Body */}
-            <tbody>
+            <tbody className="dark:bg-[#1d283a]">
               {paginatedList.map((category, index) => (
                 <tr
                   key={index}
