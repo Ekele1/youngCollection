@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { RiUser3Line } from "react-icons/ri";
 import { MdMailOutline } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 import { MdOutlineLogout } from "react-icons/md";
+import { AuthContext } from "../../onboarding/authContext";
+import { useNavigate } from 'react-router-dom';
 
 const AdminSlide = () => {
+  const { adminLogout } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+
   return (
     <div className='w-full h-full dark:text-gray-500'>
         <div className='w-full h-[40px] flex items-center gap-3 hover:text-blue-500 cursor-pointer'>
@@ -19,7 +25,7 @@ const AdminSlide = () => {
             <IoSettingsOutline size={20}/>
             <p className='font-bold text-[14px]'>Settings</p>
         </div>
-        <div className='w-full h-[40px] flex items-center gap-3 hover:text-blue-500 cursor-pointer'>
+        <div onClick={() => adminLogout(navigate)} className='w-full h-[40px] flex items-center gap-3 hover:text-blue-500 cursor-pointer'>
             <MdOutlineLogout size={20}/>
             <p className='font-bold text-[14px]'>Logout</p>
         </div>

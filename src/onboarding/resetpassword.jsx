@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import { FaLock } from "react-icons/fa";
 import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 
@@ -8,14 +11,22 @@ const ResetPasswordPage = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
+    const { token } = useParams();
+    const navigate = useNavigate();
     e.preventDefault();
     if (password !== confirmPassword) {
-      alert("Passwords do not match!");
+      toast.error("Passwords do not match!");
       return;
     }
-    // Handle password reset logic here
-    alert("Password reset successfully!");
+
+    try {
+      await axios.post(`http://localhost:5000/reset-password/${token}`, { password });
+      toast.success("Password reset successfully!");
+      navigate("/onboarding/login");
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Failed to reset password.");
+    }
   };
 
   return (

@@ -14,7 +14,7 @@ const HeroCarousel = ({ slides }) => {
 
     >
       {slides.map((slide, index) => (
-        <div key={index} className='w-full flex items-center justify-center'>
+        <div key={index} className='w-full dark:bg-[#111828] flex items-center justify-center'>
           <HerorPage title={slide.title} subtitle={slide.subtitle} image={slide.image} bg={slide.bg} color={slide.color}/>
         </div>
       ))}

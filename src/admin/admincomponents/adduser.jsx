@@ -1,36 +1,30 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const AddUser = () => {
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
-    name: "",
+    fullName: "",
     email: "",
     password: "",
     confirmPassword: "",
-    permissions: {
-      addProduct: false,
-      updateProduct: false,
-      deleteProduct: false,
-      applyDiscount: false,
-    },
+    role: "",
   });
   const [errors, setErrors] = useState({});
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handlePermissionChange = (e) => {
-    const { name, checked } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      permissions: { ...prev.permissions, [name]: checked },
-    }));
-  };
-
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = "Name is required.";
+    if (!formData.fullName.trim()) newErrors.fullName = "Full name is required.";
     if (!formData.email.trim()) {
       newErrors.email = "Email is required.";
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
@@ -42,27 +36,48 @@ const AddUser = () => {
     } else if (formData.password !== formData.confirmPassword) {
       newErrors.confirmPassword = "Passwords do not match.";
     }
+    if (!formData.role) newErrors.role = "Role is required.";
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      alert("User added successfully with permissions:");
-      console.log(formData);
+    if (!validateForm()) return;
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      toast.error("Unauthorized. Please log in.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/admin/addNewUser",
+        formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      toast.success(response.data.message);
       setFormData({
-        name: "",
+        fullName: "",
         email: "",
         password: "",
         confirmPassword: "",
-        permissions: {
-          addProduct: false,
-          updateProduct: false,
-          deleteProduct: false,
-          applyDiscount: false,
-        },
+        role: "",
       });
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Failed to add user");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -76,170 +91,109 @@ const AddUser = () => {
           </p>
         </div>
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* User Info Section */}
           <div>
-            <label
-              htmlFor="name"
-              className="block text-sm font-medium text-gray-500"
-            >
-              Name
-            </label>
+            <label className="block text-sm font-medium text-gray-500">Full Name</label>
             <input
               type="text"
-              name="name"
-              id="name"
-              value={formData.name}
+              name="fullName"
+              value={formData.fullName}
               onChange={handleChange}
-              placeholder="Enter user's name"
-              className={`w-full mt-1 p-3 dark:bg-[#1d283a] border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none ${
-                errors.name ? "border-red-500" : "border-gray-300"
+              placeholder="Enter user's full name"
+              className={`w-full mt-1 p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none ${
+                errors.fullName ? "border-red-500" : "border-gray-300"
               }`}
             />
-            {errors.name && (
-              <p className="mt-1 text-sm text-red-500">{errors.name}</p>
-            )}
+            {errors.fullName && <p className="mt-1 text-sm text-red-500">{errors.fullName}</p>}
           </div>
 
           <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-500"
-            >
-              Email
-            </label>
+            <label className="block text-sm font-medium text-gray-500">Email</label>
             <input
               type="email"
               name="email"
-              id="email"
               value={formData.email}
               onChange={handleChange}
               placeholder="Enter user's email"
-              className={`w-full mt-1 p-3 border dark:bg-[#1d283a] rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none ${
+              className={`w-full mt-1 p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none ${
                 errors.email ? "border-red-500" : "border-gray-300"
               }`}
             />
-            {errors.email && (
-              <p className="mt-1 text-sm text-red-500">{errors.email}</p>
-            )}
+            {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
           </div>
 
           <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-500"
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              value={formData.password}
-              onChange={handleChange}
-              placeholder="Enter user's password"
-              className={`w-full mt-1 dark:bg-[#1d283a] p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none ${
-                errors.password ? "border-red-500" : "border-gray-300"
-              }`}
-            />
-            {errors.password && (
-              <p className="mt-1 text-sm text-red-500">{errors.password}</p>
-            )}
-          </div>
-
-          <div>
-            <label
-              htmlFor="confirmPassword"
-              className="block text-sm font-medium text-gray-500"
-            >
-              Confirm Password
-            </label>
-            <input
-              type="password"
-              name="confirmPassword"
-              id="confirmPassword"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              placeholder="Confirm user's password"
-              className={`w-full mt-1 p-3 dark:bg-[#1d283a] border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none ${
-                errors.confirmPassword ? "border-red-500" : "border-gray-300"
-              }`}
-            />
-            {errors.confirmPassword && (
-              <p className="mt-1 text-sm text-red-500">
-                {errors.confirmPassword}
-              </p>
-            )}
-          </div>
-
-          {/* Permissions Section */}
-          <div>
-            <h2 className="text-lg font-bold text-gray-800">Permissions</h2>
-            <p className="text-sm text-gray-500 mb-4">
-              Select the permissions to assign to this user.
-            </p>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="flex items-center space-x-3">
-                  <input
-                    type="checkbox"
-                    name="addProduct"
-                    checked={formData.permissions.addProduct}
-                    onChange={handlePermissionChange}
-                    className="h-5 w-5 text-blue-500 focus:ring-blue-500 border-gray-300 rounded"
-                  />
-                  <span className="text-gray-700">Add Product</span>
-                </label>
-              </div>
-
-              <div>
-                <label className="flex items-center space-x-3">
-                  <input
-                    type="checkbox"
-                    name="updateProduct"
-                    checked={formData.permissions.updateProduct}
-                    onChange={handlePermissionChange}
-                    className="h-5 w-5 text-blue-500 focus:ring-blue-500 border-gray-300 rounded"
-                  />
-                  <span className="text-gray-700">Update Product</span>
-                </label>
-              </div>
-
-              <div>
-                <label className="flex items-center space-x-3">
-                  <input
-                    type="checkbox"
-                    name="deleteProduct"
-                    checked={formData.permissions.deleteProduct}
-                    onChange={handlePermissionChange}
-                    className="h-5 w-5 text-blue-500 focus:ring-blue-500 border-gray-300 rounded"
-                  />
-                  <span className="text-gray-700">Delete Product</span>
-                </label>
-              </div>
-
-              <div>
-                <label className="flex items-center space-x-3">
-                  <input
-                    type="checkbox"
-                    name="applyDiscount"
-                    checked={formData.permissions.applyDiscount}
-                    onChange={handlePermissionChange}
-                    className="h-5 w-5 text-blue-500 focus:ring-blue-500 border-gray-300 rounded"
-                  />
-                  <span className="text-gray-700">Apply Discount</span>
-                </label>
-              </div>
+            <label className="block text-sm font-medium text-gray-500">Password</label>
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Enter user's password"
+                className={`w-full mt-1 p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none ${
+                  errors.password ? "border-red-500" : "border-gray-300"
+                }`}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((prev) => !prev)}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+              >
+                {showPassword ? <AiOutlineEyeInvisible size={20} /> : <AiOutlineEye size={20} />}
+              </button>
             </div>
+            {errors.password && <p className="mt-1 text-sm text-red-500">{errors.password}</p>}
           </div>
 
-          {/* Submit Button */}
+          <div>
+            <label className="block text-sm font-medium text-gray-500">Confirm Password</label>
+            <div className="relative">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                placeholder="Confirm user's password"
+                className={`w-full mt-1 p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none ${
+                  errors.confirmPassword ? "border-red-500" : "border-gray-300"
+                }`}
+              />
+              <button
+                type="button"
+                onClick={() => setShowConfirmPassword((prev) => !prev)}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+              >
+                {showConfirmPassword ? <AiOutlineEyeInvisible size={20} /> : <AiOutlineEye size={20} />}
+              </button>
+            </div>
+            {errors.confirmPassword && <p className="mt-1 text-sm text-red-500">{errors.confirmPassword}</p>}
+          </div>
+
+          <div>
+            <label className="text-lg font-medium text-gray-500">Role</label>
+            <select
+              name="role"
+              value={formData.role}
+              onChange={handleChange}
+              className={`w-full mt-1 p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none ${
+                errors.role ? "border-red-500" : "border-gray-300"
+              }`}
+            >
+              <option value="">Select a role</option>
+              <option value="user">User</option>
+              {/* <option value="moderator">Moderator</option> */}
+              <option value="admin">Admin</option>
+            </select>
+            {errors.role && <p className="mt-1 text-sm text-red-500">{errors.role}</p>}
+          </div>
+
           <div>
             <button
               type="submit"
+              disabled={loading}
               className="w-full bg-blue-500 text-white py-3 rounded-lg shadow-md hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none transition"
             >
-              Add User
+              {loading ? "Adding User..." : "Add User"}
             </button>
           </div>
         </form>

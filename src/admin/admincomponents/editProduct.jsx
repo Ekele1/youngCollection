@@ -1,21 +1,70 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { AuthContext } from "../../onboarding/authContext";
+import { toast } from "react-toastify";
 
 const EditProduct = () => {
-  const [images, setImages] = useState([]);
+  const { categories } = useContext(AuthContext);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const product = location.state; // Get product data from the previous page
 
-  const handleImageUpload = (event) => {
-    const files = Array.from(event.target.files);
-    if (images.length + files.length > 10) {
-      alert("You can upload a maximum of 10 images.");
+  // Initialize state with product details
+  const [productDetails, setProductDetails] = useState({
+    name: product?.name || "",
+    category: product?.category?._id || "",
+    price: product?.price || "",
+    description: product?.description || "",
+    discount: product?.discount || "",
+    brand: product?.brand || "",
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  // Handle input changes
+  const handleChange = (e) => {
+    setProductDetails({
+      ...productDetails,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    const token = localStorage.getItem("token");
+    if (!token) {
+      console.log("No token found, redirecting to login.");
+      // navigate("/admin");
+      setLoading(false);
       return;
     }
 
-    const newImages = files.map((file) => URL.createObjectURL(file));
-    setImages((prev) => [...prev, ...newImages]);
-  };
+    try {
+      const response = await axios.put(
+        `http://localhost:5000/admin/editProduct/${product._id}`,
+        productDetails,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-  const removeImage = (index) => {
-    setImages((prev) => prev.filter((_, i) => i !== index));
+      // console.log(response.data);
+      toast.success("Product updated successfully!");
+      setLoading(false)
+      navigate("/admin/productlist");
+    } catch (error) {
+      console.error("Error updating product:", error.response?.data || error);
+      toast.error("Failed to update product.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -23,15 +72,16 @@ const EditProduct = () => {
       <div className="w-full h-[70px] font-bold text-[25px] flex items-center">
         <p>Edit Product</p>
       </div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="w-full flex flex-col lg:flex-row justify-around">
           {/* Product Details Section */}
-          <div className="lg:w-[48%] w-full flex flex-col gap-3 p-5  dark:bg-[#1d283a] bg-white shadow-md rounded-lg">
+          <div className="lg:w-[48%] w-full flex flex-col gap-3 p-5 dark:bg-[#1d283a] bg-white shadow-md rounded-lg">
             <div className="w-full flex flex-col gap-2">
-              <p className="font-bold">Product name</p>
+              <p className="font-bold">Product Name</p>
               <input
-                required
-                placeholder="Enter product name"
+                name="name"
+                value={productDetails.name}
+                onChange={handleChange}
                 className="w-full h-[45px] outline-none dark:bg-[#1d283a] border-2 border-gray-300 rounded-lg pl-3"
                 type="text"
               />
@@ -40,105 +90,85 @@ const EditProduct = () => {
               </p>
             </div>
             <div className="w-full flex justify-between">
-              <div className="w-[47%]  h-[80px] flex flex-col gap-2">
+              <div className="w-[47%] h-[80px] flex flex-col gap-2">
                 <p className="font-bold">Category</p>
                 <select
-                  required
+                  name="category"
+                  value={productDetails.category}
+                  onChange={handleChange}
                   className="w-full dark:bg-[#1d283a] h-[45px] outline-none border-2 border-gray-300 rounded-lg"
                 >
                   <option value="">Choose category</option>
-                  <option value="shop">Shop</option>
-                  <option value="product">Product</option>
+                  {categories?.length > 0 &&
+                    categories.map((e) => (
+                      <option key={e._id} value={e._id}>
+                        {e.name}
+                      </option>
+                    ))}
                 </select>
               </div>
               <div className="w-[47%] h-[80px] flex flex-col gap-2">
-                <p className="font-bold">Gender</p>
-                <select
-                  required
-                  className="w-full dark:bg-[#1d283a] h-[45px] outline-none border-2 border-gray-300 rounded-lg"
-                >
-                  <option value="men">Men</option>
-                  <option value="women">Women</option>
-                </select>
+                <p className="font-bold">Price</p>
+                <input
+                  name="price"
+                  value={productDetails.price}
+                  onChange={handleChange}
+                  className="w-full pl-2 dark:bg-[#1d283a] h-[45px] outline-none border-2 border-gray-300 rounded-lg"
+                  type="number"
+                />
               </div>
             </div>
             <div className="w-full">
               <p className="font-bold">Description</p>
-              <div
-                contentEditable={true}
-                className="w-full h-[200px] outline-none p-3 rounded-lg border-2 border-gray-400"
-              ></div>
+              <textarea
+                name="description"
+                value={productDetails.description}
+                onChange={handleChange}
+                className="w-full h-[200px] outline-none p-3 rounded-lg border-2 border-gray-400 dark:bg-[#1d283a]"
+              ></textarea>
               <p className="text-[13px] text-gray-500">
                 Do not exceed 100 characters for the product description
               </p>
             </div>
           </div>
 
-          {/* Image Upload Section */}
+          {/* Additional Details */}
           <div className="lg:w-[48%] w-full dark:bg-[#1d283a] bg-white p-5 shadow-md rounded-lg">
-            <div className="w-full flex flex-col gap-2">
-              <p className="font-bold">Upload images</p>
-              <div className="w-full flex gap-2 flex-wrap">
-                {images.map((image, index) => (
-                  <div
-                    key={index}
-                    className="w-[100px] h-[120px] relative bg-gray-100 rounded-lg overflow-hidden"
-                  >
-                    <img
-                      src={image}
-                      alt={`Preview ${index + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => removeImage(index)}
-                      className="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center"
-                    >
-                      &times;
-                    </button>
-                  </div>
-                ))}
-              </div>
-              <p className="text-[13px] text-gray-500">
-                You can add a maximum of 10 pictures.
-              </p>
-              <input
-                type="file"
-                multiple
-                accept="image/*"
-                onChange={handleImageUpload}
-                className="mt-2"
-              />
-            </div>
             <div className="w-full pt-3">
-                <div className="w-full flex justify-between">
+              <div className="w-full flex justify-between">
                 <div className="w-[47%] h-[80px] flex flex-col gap-2">
-                    <p className="font-bold">Add size</p>
-                    <select
-                    required
-                    className="w-full dark:bg-[#1d283a] h-[45px] outline-none border-2 border-gray-300 rounded-lg"
-                    >
-                    <option value="">Choose category</option>
-                    <option value="shop">Shop</option>
-                    <option value="product">Product</option>
-                    </select>
+                  <p className="font-bold">Sale</p>
+                  <input
+                    name="discount"
+                    value={productDetails.discount}
+                    onChange={handleChange}
+                    className="w-full pl-2 dark:bg-[#1d283a] h-[45px] outline-none border-2 border-gray-300 rounded-lg"
+                    type="number"
+                  />
                 </div>
                 <div className="w-[47%] h-[80px] flex flex-col gap-2">
-                    <p className="font-bold">Color</p>
-                    <select
-                    required
-                    className="w-full dark:bg-[#1d283a] h-[45px] outline-none border-2 border-gray-300 rounded-lg"
-                    >
-                    <option value="men">Men</option>
-                    <option value="women">Women</option>
-                    </select>
+                  <p className="font-bold">Brand</p>
+                  <input
+                    name="brand"
+                    value={productDetails.brand}
+                    onChange={handleChange}
+                    className="w-full pl-2 dark:bg-[#1d283a] h-[45px] outline-none border-2 border-gray-300 rounded-lg"
+                    type="text"
+                  />
                 </div>
-                </div>
+              </div>
             </div>
+
             <div className="w-full pt-5">
-                <button className="w-[50%] h-[50px] border-2 border-blue-500 hover:bg-white hover:text-blue-500 bg-blue-500 rounded-lg text-white">
-                    Done
-                </button>
+            <button
+              type="submit"
+              disabled={loading}
+              className={`w-[50%] h-[50px] border-2 border-blue-500 
+                ${loading ? "bg-gray-400 cursor-not-allowed" : "hover:bg-white hover:text-blue-500 bg-blue-500"} 
+                rounded-lg text-white`}
+            >
+              {loading ? "Updating..." : "Update Product"}
+            </button>
             </div>
           </div>
         </div>

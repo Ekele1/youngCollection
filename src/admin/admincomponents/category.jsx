@@ -1,63 +1,53 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import axios from "axios"; // Import axios
 import { IoSearchOutline } from "react-icons/io5";
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { AuthContext } from "../../onboarding/authContext";
+
 
 const Category = () => {
   const listDetailHeader = ["Image", "Name", "Quantity", "Sale", "Action"];
-
-  const [listDetail, setListDetail] = useState([
-    {
-      image:
-        "https://i.pinimg.com/474x/f9/3e/ea/f93eeac8630a7e5d41fc495c30867898.jpg",
-      productName: "MEN",
-      quantity: 40,
-      sale: 10,
-    },
-    {
-      image:
-        "https://i.pinimg.com/474x/f9/3e/ea/f93eeac8630a7e5d41fc495c30867898.jpg",
-      productName: "WOMEN",
-      quantity: 30,
-      sale: 5,
-    },
-    {
-      image:
-        "https://i.pinimg.com/474x/f9/3e/ea/f93eeac8630a7e5d41fc495c30867898.jpg",
-      productName: "LATEST",
-      quantity: 50,
-      sale: 20,
-    },
-  ]);
-
+  const { categories } = useContext(AuthContext);
+  
+  const [listDetail, setListDetail] = useState([]); // Initialize as an empty array
   const [searchQuery, setSearchQuery] = useState("");
   const [entriesPerPage, setEntriesPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const handleDelete = (index) => {
-    const updatedList = listDetail.filter((_, i) => i !== index);
-    setListDetail(updatedList);
-  };
-
-  const handleEdit = (index) => {
-    alert(`Edit category at index: ${index}`);
-  };
-
+  // Filter categories based on search query
   const filteredList = listDetail.filter((category) =>
-    category.productName.toLowerCase().includes(searchQuery.toLowerCase())
+    category.name.toLowerCase().includes(searchQuery.toLowerCase()) // Use `category.name`
   );
 
+  useEffect(() => {
+    setListDetail(categories); // Update listDetail when categories change
+  }, [categories]);
+
+  // Pagination
   const totalEntries = filteredList.length;
   const totalPages = Math.ceil(totalEntries / entriesPerPage);
   const startIndex = (currentPage - 1) * entriesPerPage;
   const endIndex = startIndex + entriesPerPage;
   const paginatedList = filteredList.slice(startIndex, endIndex);
 
+  // Handle Page Change
   const handlePageChange = (newPage) => {
     if (newPage > 0 && newPage <= totalPages) {
       setCurrentPage(newPage);
     }
+  };
+
+  // Handle Delete Category
+  const handleDelete = (index) => {
+    const updatedList = listDetail.filter((_, i) => i !== index);
+    setListDetail(updatedList);
+  };
+
+  // Handle Edit Placeholder
+  const handleEdit = (index) => {
+    console.log("Edit category at index:", index);
   };
 
   return (
@@ -76,7 +66,7 @@ const Category = () => {
               value={entriesPerPage}
               onChange={(e) => {
                 setEntriesPerPage(Number(e.target.value));
-                setCurrentPage(1); // Reset to the first page
+                setCurrentPage(1); // Reset to first page
               }}
             >
               <option value="10">10</option>
@@ -106,10 +96,7 @@ const Category = () => {
             <thead className="bg-[#0D92F4] text-white">
               <tr>
                 {listDetailHeader.map((header, i) => (
-                  <th
-                    key={i}
-                    className="border border-gray-300 px-4 py-2 text-left"
-                  >
+                  <th key={i} className="border border-gray-300 px-4 py-2 text-left">
                     {header}
                   </th>
                 ))}
@@ -119,19 +106,16 @@ const Category = () => {
             {/* Table Body */}
             <tbody className="dark:bg-[#1d283a]">
               {paginatedList.map((category, index) => (
-                <tr
-                  key={index}
-                  className="hover:bg-[#d6e9f3] transition-colors"
-                >
+                <tr key={index} className="hover:bg-[#d6e9f3] transition-colors">
                   <td className="border border-gray-300 px-4 py-2">
                     <img
                       className="object-contain h-12 w-12 rounded-md"
                       src={category.image}
-                      alt={category.productName}
+                      alt={category.name}
                     />
                   </td>
                   <td className="border border-gray-300 px-4 py-2">
-                    {category.productName}
+                    {category.name}
                   </td>
                   <td className="border border-gray-300 px-4 py-2">
                     {category.quantity}
@@ -140,18 +124,8 @@ const Category = () => {
                     {category.sale}%
                   </td>
                   <td className="border border-gray-300 px-4 py-2 flex gap-3">
-                    <CiEdit
-                      size={25}
-                      onClick={() => handleEdit(index)}
-                      className="cursor-pointer"
-                      title="Edit category"
-                    />
-                    <RiDeleteBin6Line
-                      size={25}
-                      onClick={() => handleDelete(index)}
-                      className="cursor-pointer text-red-500"
-                      title="Delete category"
-                    />
+                    <CiEdit size={25} onClick={() => handleEdit(index)} className="cursor-pointer" title="Edit category" />
+                    <RiDeleteBin6Line size={25} onClick={() => handleDelete(index)} className="cursor-pointer text-red-500" title="Delete category" />
                   </td>
                 </tr>
               ))}
@@ -162,33 +136,18 @@ const Category = () => {
         {/* Pagination */}
         <div className="w-full mt-3 lg:h-[100px] flex flex-col lg:flex-row items-center justify-between">
           <p className="text-[12px] text-gray-400">
-            Showing {startIndex + 1} to {Math.min(endIndex, totalEntries)} of{" "}
-            {totalEntries} entries
+            Showing {startIndex + 1} to {Math.min(endIndex, totalEntries)} of {totalEntries} entries
           </p>
           <div className="h-[50px] flex gap-3">
-            <div
-              className="w-[40px] h-[40px] rounded-[50%] hover:bg-blue-500 hover:text-white border-2 border-gray-400 flex items-center justify-center cursor-pointer"
-              onClick={() => handlePageChange(currentPage - 1)}
-            >
+            <div className="pagination-btn" onClick={() => handlePageChange(currentPage - 1)}>
               <IoIosArrowBack />
             </div>
             {[...Array(totalPages)].map((_, pageIndex) => (
-              <div
-                key={pageIndex}
-                className={`w-[40px] h-[40px] ${
-                  currentPage === pageIndex + 1
-                    ? "bg-blue-500 text-white"
-                    : "hover:bg-blue-500 hover:text-white"
-                } rounded-[50%] flex items-center justify-center cursor-pointer`}
-                onClick={() => handlePageChange(pageIndex + 1)}
-              >
-                <p>{pageIndex + 1}</p>
+              <div key={pageIndex} className={`pagination-btn ${currentPage === pageIndex + 1 ? "active" : ""}`} onClick={() => handlePageChange(pageIndex + 1)}>
+                {pageIndex + 1}
               </div>
             ))}
-            <div
-              className="w-[40px] h-[40px] rounded-[50%] hover:bg-blue-500 hover:text-white border-2 border-gray-400 flex items-center justify-center cursor-pointer"
-              onClick={() => handlePageChange(currentPage + 1)}
-            >
+            <div className="pagination-btn" onClick={() => handlePageChange(currentPage + 1)}>
               <IoIosArrowForward />
             </div>
           </div>

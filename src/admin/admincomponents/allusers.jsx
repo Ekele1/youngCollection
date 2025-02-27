@@ -1,52 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { AuthContext } from "../../onboarding/authContext";
 
 const AllUsers = () => {
+  const { allUsers } = useContext(AuthContext);
   const listDetailHeader = ["Image", "User Name", "Email", "Address", "Phone", "Action"];
 
-  const [listDetail, setListDetail] = useState([
-    {
-      image: "https://i.pinimg.com/474x/f9/3e/ea/f93eeac8630a7e5d41fc495c30867898.jpg",
-      userName: "John Snow",
-      email: "john@gmail.com",
-      address: "Lagos",
-      phone: "09123456789",
-    },
-    {
-      image: "https://i.pinimg.com/474x/f9/3e/ea/f93eeac8630a7e5d41fc495c30867898.jpg",
-      userName: "Colar Bone",
-      email: "colar@gmail.com",
-      address: "Lagos",
-      phone: "09123456789",
-    },
-    // Add more data for testing...
-  ]);
+  const [listDetail, setListDetail] = useState([]);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [entriesPerPage, setEntriesPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
+  const [filteredUsers, setFilteredUsers] = useState([]);
+
+  useEffect(() => {
+    if (allUsers) {
+      setListDetail(allUsers);
+    }
+  }, [allUsers]);
+
+  // console.log(listDetail)
 
   const handleDelete = (index) => {
-    const updatedList = listDetail.filter((_, i) => i !== index);
-    setListDetail(updatedList);
+
   };
 
   const handleEdit = (index) => {
     alert(`Edit user at index: ${index}`);
   };
 
-  const filteredList = listDetail.filter((user) =>
-    user.userName.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  useEffect(() => {
+    // Filter users based on search query
+    const filtered = allUsers?.filter((user) =>
+      user.fullName.toLowerCase().includes(searchQuery.toLowerCase())
+    ) || [];
+    
+    setFilteredUsers(filtered);
+    setCurrentPage(1); // Reset to first page when search query changes
+  }, [searchQuery, allUsers]);
 
-  const totalEntries = filteredList.length;
+
+  const totalEntries = filteredUsers.length;
   const totalPages = Math.ceil(totalEntries / entriesPerPage);
   const startIndex = (currentPage - 1) * entriesPerPage;
   const endIndex = startIndex + entriesPerPage;
-  const paginatedList = filteredList.slice(startIndex, endIndex);
+  const paginatedList = filteredUsers?.slice(startIndex, endIndex);
 
   const handlePageChange = (newPage) => {
     if (newPage > 0 && newPage <= totalPages) {
@@ -116,14 +117,14 @@ const AllUsers = () => {
                   <td className="p-3">
                     <img
                       className="w-[50px] h-[50px] rounded-md object-cover"
-                      src={user.image}
-                      alt={user.userName}
+                      src={user.profilePicture}
+                      alt={user.name}
                     />
                   </td>
-                  <td className="p-3">{user.userName}</td>
+                  <td className="p-3">{user.fullName}</td>
                   <td className="p-3">{user.email}</td>
                   <td className="p-3">{user.address}</td>
-                  <td className="p-3">{user.phone}</td>
+                  <td className="p-3">{user.phoneNumber}</td>
                   <td className="p-3 flex gap-2">
                     <CiEdit
                       size={25}

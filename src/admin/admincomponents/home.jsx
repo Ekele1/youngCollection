@@ -5,6 +5,7 @@ import LineChart from './lineChart'
 import TotalIncome from './totalincome'
 import WebVisitors from './webvisitor'
 import RecentOrder from './recentorder'
+import axios from 'axios'
 
 const Home = () => {
     useEffect(() => {

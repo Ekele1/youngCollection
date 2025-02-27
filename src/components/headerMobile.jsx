@@ -29,10 +29,10 @@ const MobileHeader = ({prop}) => {
         <div onClick={()=>handleNav("/contact")} className='w-full h-[50px] pl-3 text-[18px] font-medium flex items-center'>TRENDING</div>
         <div className='w-full h-[50px] pl-3 text-[18px] font-medium flex items-center border-b-2'></div>
         <div className='w-ful pt-4 pl-3 text-[18px] font-medium flex items-center'>
-            <button className='w-full h-[40px] text-white rounded bg-blue-500'>Sign up</button>
+            <button onClick={()=>handleNav("/onboarding/signup")} className='w-full h-[40px] text-white rounded bg-blue-500'>Sign up</button>
         </div>
         <div className='w-ful pt-4 pl-3 text-[18px] font-medium flex items-center'>
-            <button className='w-full h-[40px] rounded border-2 border-blue-300'>Log in</button>
+            <button onClick={()=>handleNav("/onboarding/login")} className='w-full h-[40px] rounded border-2 border-blue-300'>Log in</button>
         </div>
     </div>
   )

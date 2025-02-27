@@ -29,7 +29,7 @@ const Adminheaderslide = ({onsend}) => {
             <RiMenuUnfold3Line size={20} onClick={sendData}/>
         </div>
         <div className='w-full h-[550px] overflow-scroll scrollbar-none shadow-md dark:text-white'>
-        <div onClick={()=>{nav("/admin"),sendData()}} className='w-full h-[70px] mt-1 hover:text-[#0A3981] dark:hover:text-blue-400 flex items-center justify-center'>
+        <div onClick={()=>{nav("/admin/adminDashboard"),sendData()}} className='w-full h-[70px] mt-1 hover:text-[#0A3981] dark:hover:text-blue-400 flex items-center justify-center'>
             <div className='w-[90%] h-[80%] rounded-md flex items-center cursor-pointer pl-2 gap-2'>
                 <LuLayoutDashboard size={25}/>
                 <h1 className='text-[14px] lg:text-[15px] font-bold font-'>Home</h1>
@@ -60,7 +60,7 @@ const Adminheaderslide = ({onsend}) => {
                     <PiDotOutline size={25}/>
                     <p>Product list</p>
                 </div>
-                <div onClick={()=>{nav("/admin/editproduct")
+                {/* <div onClick={()=>{nav("/admin/editproduct")
                     setCommerce(true)
                 }} className='w-[70%] font-bold text-[12px] lg:text-[15px] hover:text-blue-500 flex items-center h-[30px]'>
                     <PiDotOutline size={25}/>
@@ -69,7 +69,7 @@ const Adminheaderslide = ({onsend}) => {
                 <div className='w-[70%] font-bold text-[12px] lg:text-[15px] hover:text-blue-500 flex items-center h-[30px]'>
                     <PiDotOutline size={25}/>
                     <p>Delete product</p>
-                </div>
+                </div> */}
             </div>
             )
            }
@@ -157,7 +157,7 @@ const Adminheaderslide = ({onsend}) => {
             <div onClick={()=>setUser(!user)} className='w-[90%] h-[50px] rounded-md dark:hover:text-blue-400 hover:text-[#0A3981] flex items-center pl-1 justify-between'>
                 <div className='flex gap-2'>
                     <FiUser size={20}/>
-                    <h1 className='text-[14px] lg:text-[15px] font-bold font-'>User</h1>
+                    <h1 className='text-[14px] lg:text-[15px] font-bold font-'>Users</h1>
                 </div>
                 {
                     user? <IoIosArrowUp />: <IoIosArrowDown />
@@ -168,7 +168,7 @@ const Adminheaderslide = ({onsend}) => {
                 <div className='w-full flex flex-col items-center gap-1'>
                 <div onClick={()=>nav("/admin/allusers")} className='w-[70%] font-bold text-[12px] lg:text-[15px] hover:text-blue-500 flex items-center h-[30px]'>
                     <PiDotOutline size={25}/>
-                    <p>All user</p>
+                    <p>All users</p>
                 </div>
                 <div onClick={()=>nav("/admin/addnewuser")} className='w-[70%] font-bold text-[12px] lg:text-[15px] hover:text-blue-500 flex items-center h-[30px]'>
                     <PiDotOutline size={25}/>

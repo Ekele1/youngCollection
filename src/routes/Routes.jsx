@@ -27,6 +27,9 @@ import LoginPage from "../pages/loginpage";
 import SignupPage from "../pages/signuppage";
 import ForgetPasswordPage from "../onboarding/forgetpassword";
 import ResetPasswordPage from "../onboarding/resetpassword";
+import OtpVerification from "../onboarding/otp";
+import ResendOTP from "../onboarding/resendOtp";
+import AdminLogin from "../admin/admincomponents/adminLogin";
 
 const Onboarding = () => (
   <div>
@@ -63,6 +66,8 @@ const route = createHashRouter([
     children: [
       { path: "login", element: <LoginPage />},
       { path: "signup", element: <SignupPage />},
+      { path: "otpVerify", element: <OtpVerification />},
+      { path: "resendotp", element: <ResendOTP />},
       { path: "forgetpassword", element: <ForgetPasswordPage />},
       { path: "resetpassword", element: <ResetPasswordPage />},
     ]
@@ -85,7 +90,8 @@ const route = createHashRouter([
     path: "/admin",
     element: <AdminLayout />,
     children: [
-      { index: true, element: <AdminHome /> },
+      { index: true, element: <AdminLogin /> },
+      { path: "adminDashboard", element: <AdminHome /> },
       { path: "addproduct", element: <AddProductPage />},
       { path: "productlist", element: <ProductlistPage />},
       { path: "editproduct", element: <EditProductPage />},
@@ -100,7 +106,7 @@ const route = createHashRouter([
   },
   {
     path: "*",
-    element: <div>404 - Page Not Found</div>,
+    element: <div>404 - Page Not Found</div>
   },
 ]);
 

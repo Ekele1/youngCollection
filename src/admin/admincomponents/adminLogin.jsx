@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
 import { FaLock, FaUser, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../onboarding/authContext";
+import { AuthContext } from "../../onboarding/authContext";
 import { toast } from "react-toastify";
 
-const LoginPage = () => {
-  const { userLogin } = useContext(AuthContext);
+const AdminLogin = () => {
+  const { adminLogin } = useContext(AuthContext);
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
@@ -16,13 +16,15 @@ const LoginPage = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async(e) => {
     setLoading(true)
     e.preventDefault();
     try {
-      const response = await userLogin(email, password);
+      await adminLogin(email, password);
       // console.log(response);
-      navigate("/");
+      const token = localStorage.getItem("token");
+    //   console.log("Token:", token);
+      navigate("/admin/adminDashboard");
     } catch (err) {
       toast.error(err.message || "Login failed. Please try again.");
       setLoading(false)
@@ -33,7 +35,7 @@ const LoginPage = () => {
     <div className="min-h-screen pt-4 pb-4 flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600">
       <div className="bg-white rounded-lg shadow-lg w-[90%] max-w-md p-8">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-4">
-          Welcome Back
+          Welcome Back ADMIN
         </h2>
         <p className="text-center text-gray-600 mb-8">
           Log in to access your account
@@ -116,35 +118,9 @@ const LoginPage = () => {
           </button>
         </form>
 
-        {/* Divider */}
-        <div className="my-6 flex items-center justify-center">
-          <div className="w-full h-[1px] bg-gray-300"></div>
-          <span className="text-sm text-gray-400 px-4">OR</span>
-          <div className="w-full h-[1px] bg-gray-300"></div>
-        </div>
-
-        {/* Social Buttons */}
-        <div className="flex flex-col gap-4">
-          <button className="w-full flex items-center justify-center gap-2 py-2 border border-gray-300 rounded-lg hover:bg-gray-100 transition duration-200">
-            <img src="https://img.icons8.com/color/48/null/google-logo.png" alt="Google Logo" className="w-5 h-5" />
-            Log in with Google
-          </button>
-          <button className="w-full flex items-center justify-center gap-2 py-2 border border-gray-300 rounded-lg hover:bg-gray-100 transition duration-200">
-            <img src="https://img.icons8.com/ios-filled/50/null/facebook-new.png" alt="Facebook Logo" className="w-5 h-5 text-blue-600" />
-            Log in with Facebook
-          </button>
-        </div>
-
-        {/* Sign Up */}
-        <p className="mt-6 text-center text-gray-600">
-          Don't have an account?{" "}
-          <a onClick={() => navigate("/onboarding/signup")} className="text-blue-500 cursor-pointer hover:underline">
-            Sign up
-          </a>
-        </p>
       </div>
     </div>
   );
 };
 
-export default LoginPage;
+export default AdminLogin;
