@@ -5,13 +5,15 @@ import { toast } from "react-toastify";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null); // Initialize as null
   const [admin, setAdmin] = useState(null);
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
+  const [cart, setCart] = useState([]);
 
+  // Fetch initial data
   useEffect(() => {
     const fetchData = async () => {
       const token = localStorage.getItem("token");
@@ -20,15 +22,28 @@ export const AuthProvider = ({ children }) => {
         return;
       }
 
-      await fetchUser();
-      await fetchAllUsers();
-      await fetchAdmin();
-      await getCategories();
-      await getAllProducts()
+      try {
+        await fetchUser(); // Fetch user first
+        await fetchAllUsers();
+        await fetchAdmin();
+        await getCategories();
+        await getAllProducts();
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchData();
   }, []);
+
+  // Fetch cart when user is updated
+  useEffect(() => {
+    if (user?._id) {
+      getCart(); // Fetch cart only when user._id is available
+    }
+  }, [user]); // Dependency on user
 
   const fetchUser = async () => {
     const token = localStorage.getItem("token");
@@ -41,14 +56,14 @@ export const AuthProvider = ({ children }) => {
       const response = await axios.get("http://localhost:5000/auth/me", {
         headers: { Authorization: `Bearer ${token}` },
       });
-      setUser(response.data.user);
+      if (response.data.user && response.data.user._id !== user?._id) {
+        setUser(response.data.user); // Update user state
+      }
     } catch (error) {
       console.error("Error fetching user:", error);
       if (error.response && error.response.status === 401) {
         logout();
       }
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -69,12 +84,8 @@ export const AuthProvider = ({ children }) => {
       if (error.response && error.response.status === 401) {
         logout();
       }
-    } finally {
-      setLoading(false);
     }
   };
-
-  // console.log(allUsers)
 
   const fetchAdmin = async () => {
     const token = localStorage.getItem("token");
@@ -94,8 +105,6 @@ export const AuthProvider = ({ children }) => {
         toast.error("Session expired. Please log in again.");
         adminLogout();
       }
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -107,35 +116,61 @@ export const AuthProvider = ({ children }) => {
       console.error("Error fetching categories:", error);
     }
   };
+
+  const getCart = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setLoading(false);
+      return;
+    }
+
+    if (!user || !user._id) {
+      console.error("User is not defined or does not have an ID.");
+      return;
+    }
+
+    try {
+      const response = await axios.get(`http://localhost:5000/cart/viewCart/${user._id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setCart(response.data.data.cart.items);
+      // console.log(response);
+    } catch (error) {
+      console.error("Error fetching cart:", error);
+    }
+  };
+
+  // console.log("all cart",cart)
+
   const getAllProducts = async () => {
     try {
       const response = await axios.get("http://localhost:5000/getAllProducts");
       setProducts(response.data.products);
-      // console.log(response)
     } catch (error) {
       console.error("Error fetching products:", error);
     }
   };
-  // console.log(products)
+
   const adminLogin = async (email, password) => {
     try {
       const response = await axios.post("http://localhost:5000/auth/adminLogin", { email, password });
       const { token, admin } = response.data;
       localStorage.setItem("token", token);
       setAdmin(admin);
-      await fetchAdmin(); // Fetch admin details immediately after login
+      await fetchAdmin();
     } catch (error) {
       console.error("Admin login error:", error);
       throw new Error(error.response?.data?.message || "Admin login failed");
     }
   };
+
   const userLogin = async (email, password) => {
     try {
       const response = await axios.post("http://localhost:5000/auth/userLogin", { email, password });
       const { token, user } = response.data;
       localStorage.setItem("token", token);
       setUser(user);
-      await fetchUser(); // Fetch user details immediately after login
+      await fetchUser();
     } catch (error) {
       console.error("login error:", error);
       throw new Error(error.response?.data?.message || "user login failed");
@@ -150,7 +185,7 @@ export const AuthProvider = ({ children }) => {
   const adminLogout = (navigate) => {
     localStorage.removeItem("token");
     setAdmin(null);
-    navigate("/admin")
+    navigate("/admin");
   };
 
   return (
@@ -165,7 +200,8 @@ export const AuthProvider = ({ children }) => {
         adminLogin,
         userLogin,
         products,
-        allUsers
+        allUsers,
+        cart,
       }}
     >
       {children}

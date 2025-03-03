@@ -14,7 +14,7 @@ const ProductList = () => {
   const { products } = useContext(AuthContext);
 
   const headers = [
-    "Image", "Name", "Description", "Brand", "Price", "Quantity", "Sale", "Stock", "Date Listed", "Action"
+    "Image", "Name", "Description", "Brand", "Price", "material", "Sale", "Stock", "Date Listed", "Action"
   ];
 
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -121,8 +121,8 @@ const ProductList = () => {
                     <td className="border border-gray-300 px-3 py-2">
                       {product.images?.[0] && (
                         <img
-                          src={product.images[0].url}
-                          alt={product.images[0].altText || "product image"}
+                          src={product.images[0]}
+                          // alt={product.images[0].altText || "product image"}
                           className="h-[50px] w-[50px] object-cover rounded-md"
                         />
                       )}
@@ -131,12 +131,12 @@ const ProductList = () => {
                     <td className="border border-gray-300 px-3 py-2">{product.description}</td>
                     <td className="border border-gray-300 px-3 py-2">{product.brand}</td>
                     <td className="border border-gray-300 px-3 py-2">${product.price}</td>
-                    <td className="border border-gray-300 px-3 py-2">{product.quantity}</td>
+                    <td className="border border-gray-300 px-3 py-2">{product.material}</td>
                     <td className="border border-gray-300 px-3 py-2">{product.sale}%</td>
                     <td className="border border-gray-300 px-3 py-2">{product.stock}</td>
                     <td className="border border-gray-300 px-3 py-2">{new Date(product.createdAt).toLocaleDateString()}</td>
                     <td className="border border-gray-300 px-3 py-2 flex gap-3">
-                      <CiEdit size={20} onClick={() => navigate(`/admin/editproduct`, { state: product })} className="cursor-pointer text-blue-500" title="Edit product" />
+                      <CiEdit size={20} onClick={() => navigate(`/admin/editproduct/${product._id}`, { state: product })} className="cursor-pointer text-blue-500" title="Edit product" />
                       <RiDeleteBin6Line size={20} onClick={() => { setSelectedProduct(product); setShowModal(true); }} className="cursor-pointer text-red-500" title="Delete product" />
                     </td>
                   </tr>

@@ -18,6 +18,7 @@ const EditProduct = () => {
     description: product?.description || "",
     discount: product?.discount || "",
     brand: product?.brand || "",
+    material:product?.material || ""
   });
 
   const [loading, setLoading] = useState(false);
@@ -156,6 +157,28 @@ const EditProduct = () => {
                     type="text"
                   />
                 </div>
+              </div>
+              <div className="w-full flex justify-between">
+                <div className="w-[47%] h-[80px] flex flex-col gap-2">
+                  <p className="font-bold">Material</p>
+                  <input
+                    name="material"
+                    value={productDetails.material}
+                    onChange={handleChange}
+                    className="w-full pl-2 dark:bg-[#1d283a] h-[45px] outline-none border-2 border-gray-300 rounded-lg"
+                    type="text"
+                  />
+                </div>
+                {/* <div className="w-[47%] h-[80px] flex flex-col gap-2">
+                  <p className="font-bold">Brand</p>
+                  <input
+                    name="brand"
+                    value={productDetails.brand}
+                    onChange={handleChange}
+                    className="w-full pl-2 dark:bg-[#1d283a] h-[45px] outline-none border-2 border-gray-300 rounded-lg"
+                    type="text"
+                  />
+                </div> */}
               </div>
             </div>
 

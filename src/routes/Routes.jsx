@@ -1,9 +1,11 @@
 import { RouterProvider, createHashRouter, Outlet } from "react-router-dom";
+import React, { useContext } from "react";
+import { AuthContext } from "../onboarding/authContext";
 import Home from "../pages/homepage";
 import Header from "../components/header";
 import Footercomp from "../components/footer";
 import ContactUs from "../pages/contact";
-import MenCollection from "../components/menHome";
+// import MenCollection from "../components/menHome";
 import Collection from "../components/collection";
 import DetailPage from "../components/detail";
 import Cart from "../components/cartPage";
@@ -30,29 +32,35 @@ import ResetPasswordPage from "../onboarding/resetpassword";
 import OtpVerification from "../onboarding/otp";
 import ResendOTP from "../onboarding/resendOtp";
 import AdminLogin from "../admin/admincomponents/adminLogin";
+import UserProfile from "../components/userProfile";
+import MenCollections from "../pages/men";
+import WomenCollections from "../pages/women";
+// import MenCollectionHome from "../components/menHome";
 
 const Onboarding = () => (
   <div>
-    {/* <Header /> */}
     <main>
       <Outlet />
     </main>
-    {/* <Footercomp /> */}
-  </div>
-);
-const AppLayout = () => (
-  <div>
-    <Header />
-    <main>
-      <Outlet />
-    </main>
-    <Footercomp />
   </div>
 );
 
+const AppLayout = () => {
+  // const { Products } = useContext(AuthContext); // ✅ Correct use of useContext inside a component
+
+  return (
+    <div>
+      <Header />
+      <main>
+        <Outlet />
+      </main>
+      <Footercomp />
+    </div>
+  );
+};
+
 const AdminLayout = () => (
   <div>
-    {/* <Adminheader /> */}
     <main>
       <Outlet />
     </main>
@@ -64,26 +72,39 @@ const route = createHashRouter([
     path: "/onboarding",
     element: <Onboarding />,
     children: [
-      { path: "login", element: <LoginPage />},
-      { path: "signup", element: <SignupPage />},
-      { path: "otpVerify", element: <OtpVerification />},
-      { path: "resendotp", element: <ResendOTP />},
-      { path: "forgetpassword", element: <ForgetPasswordPage />},
-      { path: "resetpassword", element: <ResetPasswordPage />},
-    ]
+      { path: "login", element: <LoginPage /> },
+      { path: "signup", element: <SignupPage /> },
+      { path: "otpVerify", element: <OtpVerification /> },
+      { path: "resendotp", element: <ResendOTP /> },
+      { path: "forgetpassword", element: <ForgetPasswordPage /> },
+      { path: "resetpassword", element: <ResetPasswordPage /> },
+    ],
   },
   {
     path: "/",
     element: <AppLayout />,
     children: [
       { index: true, element: <Home /> },
-      { path: "men", element: <MenCollection items={Products} /> },
-      { path: "women", element: <Collection items={Products} /> },
-      { path: "detail/:id", element: <DetailPage items={Products} /> },
+      {
+        path: "men",
+        element: <MenCollections />
+        // loader: ({ context }) => ({ items: context.Products }), // ✅ Correctly passing Products
+      },
+      {
+        path: "women",
+        element: <WomenCollections />
+        // loader: ({ context }) => ({ items: context.Products }),
+      },
+      {
+        path: "detail/:id",
+        element: <DetailPage />,
+        // loader: ({ context }) => ({ items: context.Products }),
+      },
       { path: "cart", element: <Cart /> },
       { path: "order", element: <StartOrderPage /> },
       { path: "contact", element: <ContactUs /> },
       { path: "checkout", element: <CheckoutPage /> },
+      { path: "userprofile", element: <UserProfile /> },
     ],
   },
   {
@@ -92,21 +113,21 @@ const route = createHashRouter([
     children: [
       { index: true, element: <AdminLogin /> },
       { path: "adminDashboard", element: <AdminHome /> },
-      { path: "addproduct", element: <AddProductPage />},
-      { path: "productlist", element: <ProductlistPage />},
-      { path: "editproduct", element: <EditProductPage />},
-      { path: "categorylist", element: <CategoryPage />},
-      { path: "newcategory", element: <NewCategoryPage />},
-      { path: "allusers", element: <AllusersPage />},
-      { path: "addnewuser", element: <AdduserPage />},
-      { path: "permissionacess", element: <PermissionPage />},
-      { path: "orderlist", element: <OrderListPage />},
-      { path: "orderdetailoo123df", element: <OrderDetailPage />},
+      { path: "addproduct", element: <AddProductPage /> },
+      { path: "productlist", element: <ProductlistPage /> },
+      { path: "editproduct/:id", element: <EditProductPage /> },
+      { path: "categorylist", element: <CategoryPage /> },
+      { path: "newcategory", element: <NewCategoryPage /> },
+      { path: "allusers", element: <AllusersPage /> },
+      { path: "addnewuser", element: <AdduserPage /> },
+      { path: "permissionacess", element: <PermissionPage /> },
+      { path: "orderlist", element: <OrderListPage /> },
+      { path: "orderdetail", element: <OrderDetailPage /> },
     ],
   },
   {
     path: "*",
-    element: <div>404 - Page Not Found</div>
+    element: <div>404 - Page Not Found</div>,
   },
 ]);
 

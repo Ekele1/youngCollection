@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { MdOutlineNightlight, MdOutlineLightMode } from "react-icons/md";
 
 const Header = () => {
-    const { user, logout } = useContext(AuthContext);
+    const { user, logout, cart } = useContext(AuthContext);
     const navigate = useNavigate();
     const [showMobileMenu, setShowMobileMenu] = useState(false);
     const [cartCount, setCartCount] = useState(0);
@@ -57,7 +57,7 @@ const Header = () => {
                 <div className="w-full pl-7 pr-7 h-[40px] bg-[#111828] text-white flex items-center justify-end gap-5">
                     {user ? (
                         <>
-                            <p className="cursor-pointer hover:underline">{user.fullName}</p>
+                            <p onClick={()=> navigate("/userprofile")} className="cursor-pointer hover:underline">{user.fullName}</p>
                             <p
                                 className="cursor-pointer hover:underline"
                                 onClick={() => logout()}
@@ -142,10 +142,11 @@ const Header = () => {
                         </button>
                         <div
                             onClick={() => navigate("/cart")}
-                            className="flex items-center gap-2 cursor-pointer"
+                            className="flex items-center gap-1 bg-blue-500 p-2 rounded-lg cursor-pointer"
                         >
+                            <p>cart</p>
                             <BsCart4 size={25} />
-                            <p>{cartCount}</p>
+                            <p className="text-orange-300">{cart.length}</p>
                         </div>
                         <div onClick={toggleTheme} className="w-[40px] cursor-pointer h-[40px] bg-gray-500 rounded-[50px] flex items-center justify-center">
                         {isDarkMode ? <MdOutlineLightMode /> : <MdOutlineNightlight size={25} />}
