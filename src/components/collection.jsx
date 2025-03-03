@@ -35,7 +35,7 @@ const Collections = ({ name, items }) => {
     );
 
     return (
-        <div className="w-full px-4 py-4 bg-gray-50 dark:bg-[#111828] dark:text-gray-500">
+        <div className="w-full lg:px-4 lg:py-2 bg-gray-50 dark:bg-[#111828] dark:text-gray-500">
             {/* Section Title */}
             <div className="w-full text-center lg:mb-10 mb-5">
                 <h1 className="text-3xl dark:text-blue-600 lg:text-4xl font-bold">
