@@ -142,19 +142,19 @@ const DetailPage = ({ items }) => {
                     <div className="w-full lg:w-[40%]">
                         <h2 className="text-2xl font-bold text-gray-500 mb-4">Key Attributes</h2>
                         <div className="space-y-4">
-                            <div className="flex justify-between items-center p-4 dark:text-gray-500 bg-gray-50 rounded-lg">
+                            <div className="flex justify-between items-center dark:bg-[#1e2b47] p-4 dark:text-gray-500 bg-gray-50 rounded-lg">
                                 <span className="text-lg font-semibold text-gray-500 dark:text-gray-300">Name</span>
                                 <span className="text-lg">{product.name}</span>
                             </div>
-                            <div className="flex flex-col justify-between p-4 dark:text-gray-500 bg-gray-50 rounded-lg">
+                            <div className="flex flex-col justify-between p-4 dark:bg-[#1e2b47] dark:text-gray-500 bg-gray-50 rounded-lg">
                                 <span className="text-lg font-semibold text-gray-500 dark:text-gray-300">Description</span>
                                 <span className="text-lg">{product.description}</span>
                             </div>
-                            <div className="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+                            <div className="flex justify-between items-center dark:bg-[#1e2b47] p-4 bg-gray-50 rounded-lg">
                                 <span className="text-lg font-semibold text-gray-700 dark:text-gray-300">Material</span>
                                 <span className="text-lg text-gray-900 dark:text-gray-400">{product.material}</span>
                             </div>
-                            <div className="flex justify-between items-center p-4 bg-gray-50 rounded-lg">
+                            <div className="flex justify-between items-center p-4 dark:bg-[#1e2b47] bg-gray-50 rounded-lg">
                                 <span className="text-lg font-semibold text-gray-700 dark:text-gray-300">Price</span>
                                 <span className="text-lg text-gray-900 dark:text-gray-400 flex items-center">
                                     <FaNairaSign className="mr-1" />

@@ -192,6 +192,7 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         user,
+        setUser,
         admin,
         logout,
         adminLogout,
@@ -202,6 +203,7 @@ export const AuthProvider = ({ children }) => {
         products,
         allUsers,
         cart,
+        setCart
       }}
     >
       {children}

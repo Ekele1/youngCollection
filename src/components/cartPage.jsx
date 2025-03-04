@@ -14,25 +14,27 @@ const Cart = () => {
   const [loading, setLoading] = useState({}); // Track loading state for each item
   const { cart, user, setCart } = useContext(AuthContext);
 
-  console.log("cart", cart);
-
   // Calculate subtotal dynamically
   const subtotal = cart?.reduce((total, item) => total + item.product?.price * item.quantity, 0) || 0;
-  const tax = 300;
-  const total = subtotal 
+
+  // Calculate tax as 3% of the subtotal
+  const tax = subtotal * 0.03;
+
+  // Calculate total
+  const total = subtotal + tax;
 
   const handleDeleteItem = async (itemId) => {
     if (!itemId || !user?._id) return;
-  
+
     setLoading((prev) => ({ ...prev, [itemId]: true })); // Set loading state for this item
     const token = localStorage.getItem("token");
-  
+
     if (!token) {
       toast.error("Please log in to manage your cart.");
       setLoading((prev) => ({ ...prev, [itemId]: false }));
       return;
     }
-  
+
     try {
       const response = await axios.delete(
         `http://localhost:5000/cart/removeProduct`,
@@ -41,7 +43,7 @@ const Cart = () => {
           data: { userId: user._id, itemId }, // Pass data in the `data` property
         }
       );
-  
+
       if (response.data.cart) {
         setCart(response.data.cart); // Update the cart state
         toast.success("Product removed successfully.");
@@ -145,13 +147,13 @@ const Cart = () => {
                   </div>
                 </div>
 
-                {/* Shipping Fee */}
+                {/* Tax */}
                 <div className="flex justify-between items-center mb-4">
-                  {/* <p className="text-gray-500 font-semibold">Tax</p>
+                  <p className="text-gray-500 font-semibold">Tax (3%)</p>
                   <div className="flex items-center text-lg font-semibold">
                     <FaNairaSign className="inline-block" />
                     <span>{tax.toLocaleString()}</span>
-                  </div> */}
+                  </div>
                 </div>
 
                 {/* Total */}

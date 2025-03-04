@@ -146,7 +146,7 @@ const Header = () => {
                         >
                             <p>cart</p>
                             <BsCart4 size={25} />
-                            <p className="text-orange-300">{cart.length}</p>
+                            <p className="text-orange-300">{cart?.length}</p>
                         </div>
                         <div onClick={toggleTheme} className="w-[40px] cursor-pointer h-[40px] bg-gray-500 rounded-[50px] flex items-center justify-center">
                         {isDarkMode ? <MdOutlineLightMode /> : <MdOutlineNightlight size={25} />}
