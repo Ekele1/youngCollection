@@ -57,8 +57,8 @@ const OrderList = () => {
   };
 
   return (
-    <div className="w-full h-full overflow-auto bg-gray-50 lg:p-5 dark:bg-[#1d283a]">
-      <div className="w-full font-bold text-2xl text-gray-500 h-[70px] flex items-center">
+    <div className="w-full mt-10 overflow-auto bg-gray-50 lg:p-5 dark:bg-[#1d283a]">
+      <div className="w-full font-bold text-2xl text-gray-500 h-[30px] flex items-center">
         <p>Order List</p>
       </div>
       <div className="w-full min-h-screen bg-white dark:bg-[#1d283a] p-5 rounded-lg lg:shadow-lg">
@@ -120,12 +120,12 @@ const OrderList = () => {
                     </td>
                     <td className="px-4 py-2">{product.date}</td>
                     <td className="px-4 py-2 flex items-center gap-3">
-                      <CiEdit
+                      {/* <CiEdit
                         size={20}
                         onClick={() => handleEdit(index)}
                         className="cursor-pointer text-blue-500 hover:text-blue-700"
                         title="Edit"
-                      />
+                      /> */}
                       <RiDeleteBin6Line
                         size={20}
                         onClick={() => handleDelete(index)}

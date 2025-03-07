@@ -8,6 +8,7 @@ import { FaRegFileAlt, FaDiceD6 } from "react-icons/fa";
 import { FiUser } from "react-icons/fi";
 import { GrAnalytics } from "react-icons/gr";
 import { useNavigate } from 'react-router-dom';
+import { IoMdNotificationsOutline } from "react-icons/io";
 
 
 const Adminheaderslide = ({onsend}) => {
@@ -60,16 +61,6 @@ const Adminheaderslide = ({onsend}) => {
                     <PiDotOutline size={25}/>
                     <p>Product list</p>
                 </div>
-                {/* <div onClick={()=>{nav("/admin/editproduct")
-                    setCommerce(true)
-                }} className='w-[70%] font-bold text-[12px] lg:text-[15px] hover:text-blue-500 flex items-center h-[30px]'>
-                    <PiDotOutline size={25}/>
-                    <p>Edit product</p>
-                </div>
-                <div className='w-[70%] font-bold text-[12px] lg:text-[15px] hover:text-blue-500 flex items-center h-[30px]'>
-                    <PiDotOutline size={25}/>
-                    <p>Delete product</p>
-                </div> */}
             </div>
             )
            }
@@ -99,30 +90,13 @@ const Adminheaderslide = ({onsend}) => {
             )
            }
         </div>
-        <div className='w-full pb-1 mt-1 cursor-pointe flex flex-col items-center justify-center'>
-            <div onClick={()=>setAttribute(!attribute)} className='w-[90%] h-[50px] rounded-md hover:text-[#0A3981] dark:hover:text-blue-400 flex items-center pl-2 justify-between'>
+        <div className='w-full pb-1 mt-1 cursor-pointer flex flex-col items-center justify-center'>
+            <div onClick={()=>nav("/admin/notification")} className='w-[90%] h-[50px] rounded-md hover:text-[#0A3981] dark:hover:text-blue-400 flex items-center pl-2 justify-between'>
                 <div className='flex gap-2'>
-                    <FaDiceD6 size={20}/>
-                    <h1 className='text-[14px] lg:text-[15px] font-bold font-'>Attributes</h1>
-                </div>
-                {
-                    attribute? <IoIosArrowUp />: <IoIosArrowDown />
-                }
-            </div>
-           {
-            attribute &&(
-                <div className='w-full flex flex-col items-center gap-1'>
-                <div className='w-[70%] font-bold text-[12px] lg:text-[15px] hover:text-blue-500 flex items-center h-[30px]'>
-                    <PiDotOutline size={25}/>
-                    <p>Attributes</p>
-                </div>
-                <div className='w-[70%] font-bold text-[12px] lg:text-[15px] hover:text-blue-500 flex items-center h-[30px]'>
-                    <PiDotOutline size={25}/>
-                    <p>Add attribute</p>
+                    <IoMdNotificationsOutline size={20}/>
+                    <h1 className='text-[14px] lg:text-[15px] font-bold font-'>Notifications</h1>
                 </div>
             </div>
-            )
-           }
         </div>
         <div className='w-full pb-1 mt-1 cursor-pointer flex flex-col items-center justify-center'>
             <div onClick={()=>setOrder(!order)} className='w-[90%] h-[50px] rounded-md dark:hover:text-blue-400 hover:text-[#0A3981] flex items-center pl-2 justify-between'>

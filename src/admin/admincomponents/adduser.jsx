@@ -82,12 +82,12 @@ const AddUser = () => {
   };
 
   return (
-    <div className="w-full lg:p-5 bg-gray-100 min-h-screen lg:mt-5 dark:bg-[#0f172a] flex justify-center items-center">
+    <div className="w-full lg:p-3 bg-gray-100 min-h-screen lg:mt-5 dark:bg-[#0f172a] flex justify-center items-center">
       <div className="w-full max-w-3xl bg-white dark:bg-[#1d283a] dark:text-gray-500 shadow-lg rounded-lg p-8">
         <div className="mb-8">
           <h1 className="text-2xl font-bold text-gray-500">Add New User</h1>
           <p className="text-sm text-gray-500">
-            Fill in the form below to add a new user and set permissions.
+            Fill in the form below to add a new user.
           </p>
         </div>
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -99,7 +99,7 @@ const AddUser = () => {
               value={formData.fullName}
               onChange={handleChange}
               placeholder="Enter user's full name"
-              className={`w-full mt-1 p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none ${
+              className={`w-full mt-1 p-3 border dark:bg-gray-800 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none ${
                 errors.fullName ? "border-red-500" : "border-gray-300"
               }`}
             />
@@ -114,7 +114,7 @@ const AddUser = () => {
               value={formData.email}
               onChange={handleChange}
               placeholder="Enter user's email"
-              className={`w-full mt-1 p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none ${
+              className={`w-full mt-1 p-3 border dark:bg-gray-800 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none ${
                 errors.email ? "border-red-500" : "border-gray-300"
               }`}
             />
@@ -130,7 +130,7 @@ const AddUser = () => {
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="Enter user's password"
-                className={`w-full mt-1 p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none ${
+                className={`w-full mt-1 p-3 border dark:bg-gray-800 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none ${
                   errors.password ? "border-red-500" : "border-gray-300"
                 }`}
               />
@@ -154,7 +154,7 @@ const AddUser = () => {
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 placeholder="Confirm user's password"
-                className={`w-full mt-1 p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none ${
+                className={`w-full mt-1 p-3 border dark:bg-gray-800 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none ${
                   errors.confirmPassword ? "border-red-500" : "border-gray-300"
                 }`}
               />
@@ -175,7 +175,7 @@ const AddUser = () => {
               name="role"
               value={formData.role}
               onChange={handleChange}
-              className={`w-full mt-1 p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none ${
+              className={`w-full mt-1 p-3 border dark:bg-gray-800 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none ${
                 errors.role ? "border-red-500" : "border-gray-300"
               }`}
             >

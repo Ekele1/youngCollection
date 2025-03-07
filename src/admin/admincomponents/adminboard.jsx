@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext, } from "react";
 import { AuthContext } from "../../onboarding/authContext";
 import { MdOutlineMenuOpen, MdOutlineNightlight, MdOutlineLightMode } from "react-icons/md";
 import { IoSearchSharp, IoSettingsOutline } from "react-icons/io5";
@@ -8,50 +8,18 @@ import { FaRegUser } from "react-icons/fa6";
 import Adminheaderslide from "./adminheaderslide";
 import AdminSlide from "./adminslide";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { toast } from "react-toastify";
 
 const AdminBoard = ({ prop }) => {
+  const { admin, loading } = useContext(AuthContext);
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [slide, setSlide] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [adminProfile, setAdminProfile] = useState(null);
-  const [loading, setLoading] = useState(true);
+
 
   const handleShow = (data) => {
     setShow(data);
   };
-
-  const fetchAdmin = async () => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      console.log("No token found, redirecting to login.");
-      navigate("/admin")
-      setLoading(false);
-      return;
-    }
-
-    try {
-      const response = await axios.get("http://localhost:5000/auth/adminProfile", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      setAdminProfile(response.data.admin);
-      // console.log("Admin profile:", response.data);
-    } catch (error) {
-      // console.error("Error fetching admin profile:", error.response?.data || error.message);
-      toast.error("Session expired. Please log in again.");
-      localStorage.removeItem("token");
-      navigate("/admin") // Redirect to login
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchAdmin();
-  }, []);
 
   useEffect(() => {
     if (localStorage.theme === "dark") {
@@ -78,12 +46,12 @@ const AdminBoard = ({ prop }) => {
   if (loading) return <div>Loading...</div>;
 
   return (
-    <div className={`w-full flex`}>
+    <div className="w-full flex">
       {show ? <div className="w-[20%] h-[300px]"></div> : null}
 
       {show && (
         <div
-          className={`w-[65%] lg:w-[20%] transition-all fixed duration-300 ease-in-out transform ${
+          className={`w-[65%] lg:w-[20%] transition-all fixed z-40 duration-300 ease-in-out transform ${
             show ? "translate-x-0" : "-translate-x-full"
           }`}
         >
@@ -93,7 +61,7 @@ const AdminBoard = ({ prop }) => {
 
       {slide && (
         <div
-          className={`w-[150px] h-[200px] dark:bg-[#1d283a] bg-white shadow-xl p-3 rounded-lg fixed top-[3px] mt-[70px] ${
+          className={`w-[150px] h-[200px] dark:bg-[#1d283a] bg-white shadow-xl p-3 rounded-lg fixed top-[2%] mt-[70px] ${
             show ? "left-[79%]" : "left-[75%]"
           }`}
         >
@@ -116,11 +84,11 @@ const AdminBoard = ({ prop }) => {
             </div>
           </div>
 
-          <div className="h-full hidden lg:flex items-center gap-2">
-            <div className="w-[40px] h-[40px] bg-[#D4EBF8] rounded-[50px] flex items-center justify-center">
+          <div className="h-full flex items-center gap-2">
+            <div onClick={() => navigate("/admin/notification")} className="w-[40px] h-[40px] bg-[#D4EBF8] rounded-[50px] flex items-center justify-center">
               <IoMdNotificationsOutline size={25} />
             </div>
-            <div className="w-[40px] h-[40px] bg-[#D4EBF8] rounded-[50px] flex items-center justify-center">
+            <div onClick={()=>navigate("/admin/chatmessage")} className="w-[40px] h-[40px] bg-[#D4EBF8] rounded-[50px] flex items-center justify-center">
               <FiMessageSquare size={25} />
             </div>
             <div onClick={toggleTheme} className="w-[40px] cursor-pointer h-[40px] bg-[#D4EBF8] rounded-[50px] flex items-center justify-center">
@@ -128,13 +96,13 @@ const AdminBoard = ({ prop }) => {
             </div>
           </div>
 
-          <div onClick={() => setSlide(!slide)} className="h-full hidden cursor-pointer lg:flex items-center justify-center gap-1">
+          <div onClick={() => setSlide(!slide)} className="h-full cursor-pointer flex items-center justify-center gap-1">
             <div className="w-[40px] h-[40px] bg-[#D4EBF8] rounded-[50px] flex items-center justify-center">
               <FaRegUser size={25} />
             </div>
             <div className="h-[50px] text-white text-[13px]">
-              <p>{adminProfile?.fullName}</p>
-              <p>{adminProfile?.role}</p>
+              <p>{admin?.fullName}</p>
+              <p>{admin?.role}</p>
             </div>
           </div>
 

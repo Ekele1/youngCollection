@@ -1,11 +1,8 @@
 import { RouterProvider, createHashRouter, Outlet } from "react-router-dom";
-import React, { useContext } from "react";
-import { AuthContext } from "../onboarding/authContext";
 import Home from "../pages/homepage";
 import Header from "../components/header";
 import Footercomp from "../components/footer";
 import ContactUs from "../pages/contact";
-// import MenCollection from "../components/menHome";
 import Collection from "../components/collection";
 import DetailPage from "../components/detail";
 import Cart from "../components/cartPage";
@@ -13,7 +10,6 @@ import StartOrderPage from "../components/startOrder";
 import CheckoutPage from "../components/checkout";
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
-import { Products } from "../components/data";
 import AdminHome from "../admin/adminPage/adminHomePage";
 import AddProductPage from "../admin/adminPage/addProductPage";
 import ProductlistPage from "../admin/adminPage/productlistPage";
@@ -35,6 +31,10 @@ import AdminLogin from "../admin/admincomponents/adminLogin";
 import UserProfile from "../components/userProfile";
 import MenCollections from "../pages/men";
 import WomenCollections from "../pages/women";
+import ProductDetailPage from "../pages/productdetailPage";
+import NotificationPage from "../admin/adminPage/notificationPage";
+import ChatPagess from "../admin/adminPage/chat";
+import UserNotification from "../components/userNotification";
 // import MenCollectionHome from "../components/menHome";
 
 const Onboarding = () => (
@@ -105,6 +105,7 @@ const route = createHashRouter([
       { path: "contact", element: <ContactUs /> },
       { path: "checkout", element: <CheckoutPage /> },
       { path: "userprofile", element: <UserProfile /> },
+      { path: "usernotification", element: <UserNotification /> },
     ],
   },
   {
@@ -113,8 +114,11 @@ const route = createHashRouter([
     children: [
       { index: true, element: <AdminLogin /> },
       { path: "adminDashboard", element: <AdminHome /> },
+      { path: "notification", element: <NotificationPage /> },
+      { path: "chatmessage", element: <ChatPagess /> },
       { path: "addproduct", element: <AddProductPage /> },
       { path: "productlist", element: <ProductlistPage /> },
+      { path: "productdetail/:id", element: <ProductDetailPage /> },
       { path: "editproduct/:id", element: <EditProductPage /> },
       { path: "categorylist", element: <CategoryPage /> },
       { path: "newcategory", element: <NewCategoryPage /> },

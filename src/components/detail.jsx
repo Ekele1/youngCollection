@@ -6,7 +6,7 @@ import LazyLoad from "react-lazyload";
 import { toast } from "react-toastify";
 import axios from "axios";
 
-const DetailPage = ({ items }) => {
+const DetailPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const product = location.state; 
