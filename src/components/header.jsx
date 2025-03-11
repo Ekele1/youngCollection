@@ -96,7 +96,7 @@ const Header = () => {
                     <div className="flex items-center gap-5">
                         <img
                             className="hidden lg:block w-12 cursor-pointer"
-                            src="./vite.svg"
+                            src="./model.jpg"
                             alt="Company Logo"
                             onClick={() => navigate("/")}
                         />

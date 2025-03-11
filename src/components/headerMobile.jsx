@@ -17,11 +17,11 @@ const MobileHeader = ({prop}) => {
         prop(!data)
     }
   return (
-    <div className='w-full p-4'>
-        <div className='w-full flex items-center justify-between pt-3 pb-3'>
+    <div className='w-full p-4 mt-24'>
+        {/* <div className='w-full flex items-center justify-end p-3'>
             <img src="./vite.svg" alt="" />
             <MdOutlineCancel onClick={handleClick} size={30}/>
-        </div>
+        </div> */}
         <div onClick={()=>handleNav("/")} className='w-full h-[50px] pl-3 text-[18px] font-medium flex items-center'>LATEST</div>
         <div onClick={()=>handleNav("/men")} className='w-full h-[50px] pl-3 text-[18px] font-medium flex items-center'> MEN</div>
         <div onClick={()=>handleNav("/women")} className='w-full h-[50px] pl-3 text-[18px] font-medium flex items-center'> WOMEN</div>
