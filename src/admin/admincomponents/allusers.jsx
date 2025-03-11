@@ -64,7 +64,7 @@ const AllUsers = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/admin/blockUser/${userId}`, {
+      const response = await fetch(`https://youngcollection-server.onrender.com/admin/blockUser/${userId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

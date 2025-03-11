@@ -115,10 +115,10 @@ const Adminheaderslide = ({onsend}) => {
                     <PiDotOutline size={25}/>
                     <p>Order list</p>
                 </div>
-                <div onClick={()=>nav("/admin/orderdetailoo123df")} className='w-[70%] font-bold text-[12px] lg:text-[15px] hover:text-blue-500 flex items-center h-[30px]'>
+                {/* <div onClick={()=>nav("/admin/orderdetail")} className='w-[70%] font-bold text-[12px] lg:text-[15px] hover:text-blue-500 flex items-center h-[30px]'>
                     <PiDotOutline size={25}/>
                     <p>Order detail</p>
-                </div>
+                </div> */}
                 <div className='w-[70%] font-bold text-[12px] lg:text-[15px] hover:text-blue-500 flex items-center h-[30px]'>
                     <PiDotOutline size={25}/>
                     <p>Order tracking</p>

@@ -41,7 +41,7 @@ const OTPVerification = () => {
 
     try {
       const data = {otp: enteredOtp, email: user.email}
-      const url = "http://localhost:5000/auth/verifyOtp";
+      const url = "https://youngcollection-server.onrender.com/auth/verifyOtp";
       const response = await axios.post(url, data);
     //   console.log(response);
 

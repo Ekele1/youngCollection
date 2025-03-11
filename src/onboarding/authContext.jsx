@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
   // Fetch initial data
-  useEffect(() => {
+  useEffect((navigate) => {
     const fetchData = async () => {
       const token = localStorage.getItem("token");
       if (!token) {
@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
       try {
         await fetchUser(); // Fetch user first
         await fetchAllUsers();
-        await fetchAdmin();
+        await fetchAdmin(navigate);
         await getCategories();
         await getAllProducts();
       } catch (error) {
@@ -53,7 +53,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     try {
-      const response = await axios.get("http://localhost:5000/auth/me", {
+      const response = await axios.get("https://youngcollection-server.onrender.com/auth/me", {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (response.data.user && response.data.user._id !== user?._id) {
@@ -75,7 +75,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     try {
-      const response = await axios.get("http://localhost:5000/auth/getAllUsers", {
+      const response = await axios.get("https://youngcollection-server.onrender.com/auth/getAllUsers", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAllUsers(response.data.users);
@@ -87,7 +87,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const fetchAdmin = async () => {
+  const fetchAdmin = async (navigate) => {
     const token = localStorage.getItem("token");
     if (!token) {
       setLoading(false);
@@ -95,7 +95,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     try {
-      const response = await axios.get("http://localhost:5000/auth/adminProfile", {
+      const response = await axios.get("https://youngcollection-server.onrender.com/auth/adminProfile", {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAdmin(response.data.admin);
@@ -103,14 +103,14 @@ export const AuthProvider = ({ children }) => {
       console.error("Error fetching admin profile:", error);
       if (error.response && error.response.status === 401) {
         toast.error("Session expired. Please log in again.");
-        adminLogout();
+        adminLogout(navigate);
       }
     }
   };
 
   const getCategories = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/get-all-categories");
+      const response = await axios.get("https://youngcollection-server.onrender.com/get-all-categories");
       setCategories(response.data.categories);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -130,7 +130,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     try {
-      const response = await axios.get(`http://localhost:5000/cart/viewCart/${user._id}`, {
+      const response = await axios.get(`https://youngcollection-server.onrender.com/cart/viewCart/${user._id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCart(response.data.data.cart.items);
@@ -144,7 +144,7 @@ export const AuthProvider = ({ children }) => {
 
   const getAllProducts = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/getAllProducts");
+      const response = await axios.get("https://youngcollection-server.onrender.com/getAllProducts");
       setProducts(response.data.products);
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -153,7 +153,7 @@ export const AuthProvider = ({ children }) => {
 
   const adminLogin = async (email, password) => {
     try {
-      const response = await axios.post("http://localhost:5000/auth/adminLogin", { email, password });
+      const response = await axios.post("https://youngcollection-server.onrender.com/auth/adminLogin", { email, password });
       const { token, admin } = response.data;
       localStorage.setItem("token", token);
       setAdmin(admin);
@@ -166,7 +166,7 @@ export const AuthProvider = ({ children }) => {
 
   const userLogin = async (email, password) => {
     try {
-      const response = await axios.post("http://localhost:5000/auth/userLogin", { email, password });
+      const response = await axios.post("https://youngcollection-server.onrender.com/auth/userLogin", { email, password });
       const { token, user } = response.data;
       localStorage.setItem("token", token);
       setUser(user);
@@ -185,8 +185,10 @@ export const AuthProvider = ({ children }) => {
   const adminLogout = (navigate) => {
     localStorage.removeItem("token");
     setAdmin(null);
-    navigate("/admin");
-  };
+    if (navigate) {
+      navigate("/admin"); // Redirect to /admin
+    }
+  }; 
 
   return (
     <AuthContext.Provider

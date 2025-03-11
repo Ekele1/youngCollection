@@ -7,14 +7,14 @@ const MenCollections = () => {
     const { products } = useContext(AuthContext);
     const [men, setMen] = useState([]);
     const [videoUrl, setVideoUrl] = useState([
-        "./001.mp4", "./002.mp4", "./003.mp4", "./010.mp4", "./005.mp4"
+        "./002.mp4", "./003.mp4", "./010.mp4", "./005.mp4"
     ]);
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
     const videoRef = useRef(null); // Reference to the video element
 
     const getProductByCategory = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/product/category/men`);
+            const response = await axios.get(`https://youngcollection-server.onrender.com/product/category/men`);
             setMen(response.data?.products);
             console.log(response);
         } catch (error) {

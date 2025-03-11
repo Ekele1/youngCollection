@@ -56,7 +56,7 @@ const AddUser = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/admin/addNewUser",
+        "https://youngcollection-server.onrender.com/admin/addNewUser",
         formData,
         {
           headers: {

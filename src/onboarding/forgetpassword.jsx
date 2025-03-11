@@ -22,7 +22,7 @@ const ForgetPasswordPage = () => {
 
     setLoading(true);
     try {
-      const url = "http://localhost:5000/forgot-password/request-otp";
+      const url = "https://youngcollection-server.onrender.com/forgot-password/request-otp";
       await axios.post(url, { email });
       toast.success("OTP sent to your email!");
       setStep(2); // Move to OTP verification step

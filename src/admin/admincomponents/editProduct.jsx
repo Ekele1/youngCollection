@@ -46,7 +46,7 @@ const EditProduct = () => {
 
     try {
       const response = await axios.put(
-        `http://localhost:5000/admin/editProduct/${product._id}`,
+        `https://youngcollection-server.onrender.com/admin/editProduct/${product._id}`,
         productDetails,
         {
           headers: {

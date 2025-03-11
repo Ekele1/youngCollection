@@ -134,7 +134,7 @@ const Header = () => {
                         </p>
                         <p
                             className="cursor-pointer hover:underline"
-                            onClick={() => navigate("/trending")}
+                            // onClick={() => navigate("/trending")}
                         >
                             TRENDING
                         </p>

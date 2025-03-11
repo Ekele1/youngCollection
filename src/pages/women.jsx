@@ -14,7 +14,7 @@ const WomenCollections = () => {
 
     const getProductByCategory = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/product/category/women`);
+            const response = await axios.get(`https://youngcollection-server.onrender.com/product/category/women`);
             setWomen(response.data?.products);
             console.log(response);
         } catch (error) {

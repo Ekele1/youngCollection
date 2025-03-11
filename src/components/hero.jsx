@@ -6,6 +6,7 @@ const HeroPage = () => {
     <div className="relative h-screen overflow-hidden">
       {/* Video Background */}
       <iframe
+      // src='./hoodies.mp4'
         src="https://www.youtube.com/embed/c1JKmJ8PQj4?autoplay=1&mute=1&loop=1&playlist=c1JKmJ8PQj4&controls=0&modestbranding=1&showinfo=0"
         className="absolute top-0 left-0 w-full h-full object-cover z-0"
         frameBorder="0"

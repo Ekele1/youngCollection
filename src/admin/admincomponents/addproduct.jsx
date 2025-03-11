@@ -78,7 +78,7 @@ const AddProduct = () => {
       });
   
       const response = await axios.post(
-        "http://localhost:5000/admin/createNewProduct",
+        "https://youngcollection-server.onrender.com/admin/createNewProduct",
         formData,
         {
           headers: {

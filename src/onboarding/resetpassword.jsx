@@ -21,7 +21,7 @@ const ResetPasswordPage = () => {
     }
 
     try {
-      await axios.post(`http://localhost:5000/reset-password/${token}`, { password });
+      await axios.post(`https://youngcollection-server.onrender.com/reset-password/${token}`, { password });
       toast.success("Password reset successfully!");
       navigate("/onboarding/login");
     } catch (error) {

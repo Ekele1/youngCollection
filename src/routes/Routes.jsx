@@ -126,7 +126,7 @@ const route = createHashRouter([
       { path: "addnewuser", element: <AdduserPage /> },
       { path: "permissionacess", element: <PermissionPage /> },
       { path: "orderlist", element: <OrderListPage /> },
-      { path: "orderdetail", element: <OrderDetailPage /> },
+      { path: "orderdetail/:id", element: <OrderDetailPage /> },
     ],
   },
   {

@@ -8,9 +8,10 @@ import { FaRegUser } from "react-icons/fa6";
 import Adminheaderslide from "./adminheaderslide";
 import AdminSlide from "./adminslide";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AdminBoard = ({ prop }) => {
-  const { admin, loading } = useContext(AuthContext);
+  const { admin, loading, adminLogout } = useContext(AuthContext);
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [slide, setSlide] = useState(false);
@@ -20,6 +21,15 @@ const AdminBoard = ({ prop }) => {
   const handleShow = (data) => {
     setShow(data);
   };
+
+  // useEffect(()=>{
+  //   if (!admin){
+  //     toast.error("Session expired. Please log in again.");
+  //     setTimeout(()=>{
+  //       adminLogout(navigate)
+  //     },7000)
+  //   }
+  // },[admin])
 
   useEffect(() => {
     if (localStorage.theme === "dark") {
@@ -101,7 +111,7 @@ const AdminBoard = ({ prop }) => {
               <FaRegUser size={25} />
             </div>
             <div className="h-[50px] text-white text-[13px]">
-              <p>{admin?.fullName}</p>
+              <p>{admin? `${admin.fullName}` : "pls login" }</p>
               <p>{admin?.role}</p>
             </div>
           </div>

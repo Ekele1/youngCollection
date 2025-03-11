@@ -55,7 +55,7 @@ const Category = () => {
     }
 
     try {
-      await axios.delete(`http://localhost:5000/admin/delete-category/${id}`, {
+      await axios.delete(`https://youngcollection-server.onrender.com/admin/delete-category/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setListDetail((prev) => prev.filter((category) => category._id !== id));

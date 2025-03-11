@@ -37,7 +37,7 @@ const Cart = () => {
 
     try {
       const response = await axios.delete(
-        `http://localhost:5000/cart/removeProduct`,
+        `https://youngcollection-server.onrender.com/cart/removeProduct`,
         {
           headers: { Authorization: `Bearer ${token}` },
           data: { userId: user._id, itemId }, // Pass data in the `data` property

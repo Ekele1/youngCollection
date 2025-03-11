@@ -22,7 +22,7 @@ const ResendOTP = ({ email }) => {
     setTimer(30);
 
     try {
-      const url = "http://localhost:5000/auth/resendOtp";
+      const url = "https://youngcollection-server.onrender.com/auth/resendOtp";
       await axios.post(url, { email });
       toast.success("New OTP sent successfully!");
     } catch (error) {

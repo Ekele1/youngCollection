@@ -64,7 +64,7 @@ const UserProfile = () => {
       }
 
       const response = await axios.patch(
-        "http://localhost:5000/user/updateProfile",
+        "https://youngcollection-server.onrender.com/user/updateProfile",
         formData,
         {
           headers: {

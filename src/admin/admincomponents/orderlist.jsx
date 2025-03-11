@@ -3,6 +3,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import { CiEdit } from "react-icons/ci";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
 
 const OrderList = () => {
   const listDetailHeader = [
@@ -16,18 +17,22 @@ const OrderList = () => {
   ];
 
   const [listDetail, setListDetail] = useState([
-    { Product: "Polo Shirt", price: 300, quantity: 40, Payment: 10, status: "success", date: "01/01/2025" },
-    { Product: "Collar Bone", price: 300, quantity: 40, Payment: 10, status: "pending", date: "01/01/2025" },
-    { Product: "T-Shirt", price: 300, quantity: 40, Payment: 10, status: "failed", date: "01/01/2025" },
+    { Product: "Polo Shirt", _id: "asvjn12ysdfnbbj3457dvn", price: 300, quantity: 40, Payment: 10, status: "success", date: "01/01/2025", image: "outfit.jpg", address: "Lagos Nigeria", phone: "091234567890" },
+    { Product: "Collar Bone", _id: "asvjn12ysdfnbbj3457dvn2", price: 300, quantity: 40, Payment: 10, status: "pending", date: "01/01/2025", image: "outfit.jpg", address: "Lagos Nigeria", phone: "091234567890" },
+    { Product: "T-Shirt", _id: "asvjn12ysdfnbbj3457dvn3", price: 300, quantity: 40, Payment: 10, status: "failed", date: "01/01/2025", image: "outfit.jpg", address: "Lagos Nigeria", phone: "091234567890" },
   ]);
 
   const [searchQuery, setSearchQuery] = useState("");
   const [entriesPerPage, setEntriesPerPage] = useState(10);
   const [currentPage, setCurrentPage] = useState(1);
+  const navigate = useNavigate();
 
   const handleDelete = (index) => {
-    const updatedList = listDetail.filter((_, i) => i !== index);
-    setListDetail(updatedList);
+    const confirmDelete = window.confirm("Are you sure you want to delete this product?");
+    if (confirmDelete) {
+      const updatedList = listDetail.filter((_, i) => i !== index);
+      setListDetail(updatedList);
+    }
   };
 
   const handleEdit = (index) => {
@@ -63,7 +68,7 @@ const OrderList = () => {
       </div>
       <div className="w-full min-h-screen bg-white dark:bg-[#1d283a] p-5 rounded-lg lg:shadow-lg">
         {/* Controls */}
-        <div className="w-full  lg:h-[70px] flex flex-col gap-3 lg:flex-row items-center justify-between">
+        <div className="w-full lg:h-[70px] flex flex-col gap-3 lg:flex-row items-center justify-between">
           <div className="text-gray-500 flex items-center w-full">
             <p>Show</p>
             <select
@@ -109,7 +114,8 @@ const OrderList = () => {
                 {paginatedList.map((product, index) => (
                   <tr
                     key={index}
-                    className="bg-white dark:bg-[#1d283a] hover:bg-gray-100 transition-colors border-b text-sm text-gray-500"
+                    onClick={() => navigate(`/admin/orderdetail/${product._id}`, { state: product })}
+                    className="bg-white dark:bg-[#1d283a] cursor-pointer hover:bg-gray-300 transition-colors border-b text-sm text-gray-500"
                   >
                     <td className="px-4 py-2">{product.Product}</td>
                     <td className="px-4 py-2">${product.price}</td>
@@ -120,17 +126,23 @@ const OrderList = () => {
                     </td>
                     <td className="px-4 py-2">{product.date}</td>
                     <td className="px-4 py-2 flex items-center gap-3">
-                      {/* <CiEdit
-                        size={20}
-                        onClick={() => handleEdit(index)}
-                        className="cursor-pointer text-blue-500 hover:text-blue-700"
-                        title="Edit"
-                      /> */}
                       <RiDeleteBin6Line
                         size={20}
-                        onClick={() => handleDelete(index)}
+                        onClick={(e) => {
+                          e.stopPropagation(); // Prevent row click event
+                          handleDelete(index);
+                        }}
                         className="cursor-pointer text-red-500 hover:text-red-700"
                         title="Delete"
+                      />
+                      <CiEdit
+                        size={20}
+                        onClick={(e) => {
+                          e.stopPropagation(); // Prevent row click event
+                          handleEdit(index);
+                        }}
+                        className="cursor-pointer text-blue-500 hover:text-blue-700"
+                        title="Edit"
                       />
                     </td>
                   </tr>

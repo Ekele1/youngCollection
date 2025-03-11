@@ -78,7 +78,7 @@ const ProductList = () => {
 
     try {
       await axios.delete(
-        `http://localhost:5000/admin/deleteProduct/${selectedProduct._id}`,
+        `https://youngcollection-server.onrender.com/admin/deleteProduct/${selectedProduct._id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
@@ -97,7 +97,7 @@ const ProductList = () => {
   };
 
   return (
-    <div className="w-full h-full overflow-auto">
+    <div className="w-full lg:mt-7 h-full overflow-auto">
       <div className="w-full font-bold text-[25px] h-[70px] flex items-center dark:text-gray-500">
         <p>Product List</p>
       </div>

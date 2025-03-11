@@ -28,7 +28,7 @@ const NewCategory = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/admin/addCategory",
+        "https://youngcollection-server.onrender.com/admin/addCategory",
         { name: category, sale: sale },
         {
           headers: { Authorization: `Bearer ${token}` },
