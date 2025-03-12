@@ -43,10 +43,9 @@ const Cart = () => {
           data: { userId: user._id, itemId }, // Pass data in the `data` property
         }
       );
-
+      toast.success("Product removed successfully.");
       if (response.data.cart) {
         setCart(response.data.cart); // Update the cart state
-        toast.success("Product removed successfully.");
       }
     } catch (error) {
       console.error("Error removing product:", error);

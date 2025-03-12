@@ -16,7 +16,7 @@ const WomenCollections = () => {
         try {
             const response = await axios.get(`https://youngcollection-server.onrender.com/product/category/women`);
             setWomen(response.data?.products);
-            console.log(response);
+            // console.log(response);
         } catch (error) {
             console.error("Error fetching products:", error);
         }

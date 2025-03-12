@@ -49,7 +49,7 @@ const DetailPage = () => {
         };
 
         try {
-            const response = await axios.post("http://localhost:5000/cart/addToCart", data, {
+            const response = await axios.post("https://youngcollection-server.onrender.com/cart/addToCart", data, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             toast.success("Product added to cart successfully");
