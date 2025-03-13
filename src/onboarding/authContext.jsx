@@ -26,11 +26,8 @@ export const AuthProvider = ({ children }) => {
     try {
       await fetchUser();
       await fetchAllUsers();
-      await getProductByCategoryMen();
-      await getProductByCategoryWomen();
       await fetchAdmin();
       await getCategories();
-      await getAllProducts();
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
@@ -39,6 +36,9 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
+    getAllProducts();
+    getProductByCategoryMen();
+    getProductByCategoryWomen();
     fetchData();
   }, [fetchData]);
 
@@ -64,14 +64,14 @@ export const AuthProvider = ({ children }) => {
         setUser(response.data.user);
       }
     } catch (error) {
-      console.error("Error fetching user:", error);
+      // console.error("Error fetching user:", error);
       if (error.response && error.response.status === 401) {
         logout();
       }
     }
   }, [user]);
 
-  
+
   const fetchAllUsers = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -85,7 +85,7 @@ export const AuthProvider = ({ children }) => {
       });
       setAllUsers(response.data.users);
     } catch (error) {
-      console.error("Error fetching users:", error);
+      // console.error("Error fetching users:", error);
       if (error.response && error.response.status === 401) {
         logout();
       }
@@ -105,7 +105,7 @@ export const AuthProvider = ({ children }) => {
       });
       setAdmin(response.data.admin);
     } catch (error) {
-      console.error("Error fetching admin profile:", error);
+      // console.error("Error fetching admin profile:", error);
       if (error.response && error.response.status === 401) {
         toast.error("Session expired. Please log in again.");
         adminLogout(navigate);
@@ -118,7 +118,7 @@ export const AuthProvider = ({ children }) => {
       const response = await axios.get("https://youngcollection-server.onrender.com/get-all-categories");
       setCategories(response.data.categories);
     } catch (error) {
-      console.error("Error fetching categories:", error);
+      // console.error("Error fetching categories:", error);
     }
   };
 
@@ -141,7 +141,7 @@ export const AuthProvider = ({ children }) => {
       setCart(response.data.data.cart.items);
       // console.log(response);
     } catch (error) {
-      console.error("Error fetching cart:", error);
+      // console.error("Error fetching cart:", error);
     }
   };
 
@@ -152,7 +152,7 @@ export const AuthProvider = ({ children }) => {
       const response = await axios.get("https://youngcollection-server.onrender.com/getAllProducts");
       setProducts(response.data.products);
     } catch (error) {
-      console.error("Error fetching products:", error);
+      // console.error("Error fetching products:", error);
     }
   };
 
@@ -162,7 +162,7 @@ export const AuthProvider = ({ children }) => {
           setMenCat(response.data?.products);
           // console.log(response);
       } catch (error) {
-          console.error("Error fetching products:", error);
+          // console.error("Error fetching products:", error);
       }
   };
   const getProductByCategoryWomen = async () => {
@@ -171,7 +171,7 @@ export const AuthProvider = ({ children }) => {
           setWomenCat(response.data?.products);
           // console.log(response);
       } catch (error) {
-          console.error("Error fetching products:", error);
+          // console.error("Error fetching products:", error);
       }
   };
 
@@ -183,7 +183,7 @@ export const AuthProvider = ({ children }) => {
       setAdmin(admin);
       await fetchAdmin();
     } catch (error) {
-      console.error("Admin login error:", error);
+      // console.error("Admin login error:", error);
       throw new Error(error.response?.data?.message || "Admin login failed");
     }
   };
@@ -196,7 +196,7 @@ export const AuthProvider = ({ children }) => {
       setUser(user);
       await fetchUser();
     } catch (error) {
-      console.error("login error:", error);
+      // console.error("login error:", error);
       throw new Error(error.response?.data?.message || "user login failed");
     }
   };
