@@ -3,7 +3,6 @@ import Home from "../pages/homepage";
 import Header from "../components/header";
 import Footercomp from "../components/footer";
 import ContactUs from "../pages/contact";
-import Collection from "../components/collection";
 import DetailPage from "../components/detail";
 import Cart from "../components/cartPage";
 import StartOrderPage from "../components/startOrder";
@@ -35,10 +34,12 @@ import ProductDetailPage from "../pages/productdetailPage";
 import NotificationPage from "../admin/adminPage/notificationPage";
 import ChatPagess from "../admin/adminPage/chat";
 import UserNotification from "../components/userNotification";
+import ScrollToTop from "../components/scrollTop";
 // import MenCollectionHome from "../components/menHome";
 
 const Onboarding = () => (
   <div>
+    <ScrollToTop />
     <main>
       <Outlet />
     </main>
@@ -50,6 +51,7 @@ const AppLayout = () => {
 
   return (
     <div>
+      <ScrollToTop />
       <Header />
       <main>
         <Outlet />
@@ -61,6 +63,7 @@ const AppLayout = () => {
 
 const AdminLayout = () => (
   <div>
+    <ScrollToTop />
     <main>
       <Outlet />
     </main>
