@@ -4,27 +4,12 @@ import { AuthContext } from "../onboarding/authContext";
 import axios from 'axios';
 
 const WomenCollections = () => {
-    const { products } = useContext(AuthContext);
-    const [women, setWomen] = useState([]);
+    const { womenCat } = useContext(AuthContext);
     const [videoUrl, setVideoUrl] = useState([
         "./006.mp4", "./004.mp4",
     ]);
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
     const videoRef = useRef(null); // Reference to the video element
-
-    const getProductByCategory = async () => {
-        try {
-            const response = await axios.get(`https://youngcollection-server.onrender.com/product/category/women`);
-            setWomen(response.data?.products);
-            // console.log(response);
-        } catch (error) {
-            console.error("Error fetching products:", error);
-        }
-    };
-
-    useEffect(() => {
-        getProductByCategory();
-    }, [products]);
 
     // Handle video end event
     useEffect(() => {
@@ -73,7 +58,7 @@ const WomenCollections = () => {
                     </div>
                 </div>
             </div>
-        <Collections name="WOMEN'S COLLECTION" items={women} />
+        <Collections name="WOMEN'S COLLECTION" items={womenCat} />
     </>
   )
 }

@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
@@ -12,31 +12,35 @@ export const AuthProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
   const [cart, setCart] = useState([]);
+  const [menCat, setMenCat] = useState([]);
+  const [womenCat, setWomenCat] = useState([]);
 
   // Fetch initial data
-  useEffect((navigate) => {
-    const fetchData = async () => {
-      const token = localStorage.getItem("token");
-      if (!token) {
-        setLoading(false);
-        return;
-      }
+  const fetchData = useCallback(async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      setLoading(false);
+      return;
+    }
 
-      try {
-        await fetchUser(); // Fetch user first
-        await fetchAllUsers();
-        await fetchAdmin(navigate);
-        await getCategories();
-        await getAllProducts();
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
+    try {
+      await fetchUser();
+      await fetchAllUsers();
+      await getProductByCategoryMen();
+      await getProductByCategoryWomen();
+      await fetchAdmin();
+      await getCategories();
+      await getAllProducts();
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
+    }
   }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   // Fetch cart when user is updated
   useEffect(() => {
@@ -45,7 +49,7 @@ export const AuthProvider = ({ children }) => {
     }
   }, [user]); // Dependency on user
 
-  const fetchUser = async () => {
+  const fetchUser = useCallback(async () => {
     const token = localStorage.getItem("token");
     if (!token) {
       setLoading(false);
@@ -57,7 +61,7 @@ export const AuthProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (response.data.user && response.data.user._id !== user?._id) {
-        setUser(response.data.user); // Update user state
+        setUser(response.data.user);
       }
     } catch (error) {
       console.error("Error fetching user:", error);
@@ -65,8 +69,9 @@ export const AuthProvider = ({ children }) => {
         logout();
       }
     }
-  };
+  }, [user]);
 
+  
   const fetchAllUsers = async () => {
     const token = localStorage.getItem("token");
     if (!token) {
@@ -151,6 +156,25 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const getProductByCategoryMen = async () => {
+      try {
+          const response = await axios.get(`https://youngcollection-server.onrender.com/product/category/men`);
+          setMenCat(response.data?.products);
+          // console.log(response);
+      } catch (error) {
+          console.error("Error fetching products:", error);
+      }
+  };
+  const getProductByCategoryWomen = async () => {
+      try {
+          const response = await axios.get(`https://youngcollection-server.onrender.com/product/category/women`);
+          setWomenCat(response.data?.products);
+          // console.log(response);
+      } catch (error) {
+          console.error("Error fetching products:", error);
+      }
+  };
+
   const adminLogin = async (email, password) => {
     try {
       const response = await axios.post("https://youngcollection-server.onrender.com/auth/adminLogin", { email, password });
@@ -203,9 +227,12 @@ export const AuthProvider = ({ children }) => {
         adminLogin,
         userLogin,
         products,
+        womenCat,
+        menCat,
         allUsers,
         cart,
-        setCart
+        setCart,
+        getAllProducts
       }}
     >
       {children}
