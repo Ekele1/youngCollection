@@ -22,15 +22,6 @@ const AdminBoard = ({ prop }) => {
     setShow(data);
   };
 
-  // useEffect(()=>{
-  //   if (!admin){
-  //     toast.error("Session expired. Please log in again.");
-  //     setTimeout(()=>{
-  //       adminLogout(navigate)
-  //     },7000)
-  //   }
-  // },[admin])
-
   useEffect(() => {
     if (localStorage.theme === "dark") {
       document.documentElement.classList.add("dark");

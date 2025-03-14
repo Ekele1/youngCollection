@@ -54,8 +54,10 @@ const Category = () => {
       return;
     }
 
+    const apiBaseUrl = import.meta.env.VITE_BASE_URL;
+
     try {
-      await axios.delete(`https://youngcollection-server.onrender.com/admin/delete-category/${id}`, {
+      await axios.delete(`${apiBaseUrl}/admin/delete-category/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setListDetail((prev) => prev.filter((category) => category._id !== id));

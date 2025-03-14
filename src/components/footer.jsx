@@ -1,5 +1,6 @@
 import React from "react";
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import { IoLogoTiktok } from "react-icons/io5";
 
 const Footercomp = () => {
     return (
@@ -9,7 +10,7 @@ const Footercomp = () => {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                     {/* About Us */}
                     <div className="mb-8">
-                        <h3 className="text-xl text-gray-500 font-bold mb-4">Elegance</h3>
+                        <h3 className="text-xl text-gray-500 font-bold mb-4">Young Collections</h3>
                         <p className="text-gray-500">
                             Discover timeless fashion and elevate your style with our curated collections. We bring you the finest clothing for every occasion.
                         </p>
@@ -61,12 +62,12 @@ const Footercomp = () => {
                                 <FaFacebook className="w-6 h-6" />
                             </a>
                             <a
-                                href="https://twitter.com"
+                                href="https://tiktok.com"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="text-gray-400 hover:text-white transition-colors"
                             >
-                                <FaTwitter className="w-6 h-6" />
+                                <IoLogoTiktok className="w-6 h-6" />
                             </a>
                             <a
                                 href="https://instagram.com"
@@ -75,14 +76,6 @@ const Footercomp = () => {
                                 className="text-gray-400 hover:text-white transition-colors"
                             >
                                 <FaInstagram className="w-6 h-6" />
-                            </a>
-                            <a
-                                href="https://linkedin.com"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-gray-400 hover:text-white transition-colors"
-                            >
-                                <FaLinkedin className="w-6 h-6" />
                             </a>
                         </div>
                     </div>

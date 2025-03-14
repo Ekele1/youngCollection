@@ -63,8 +63,10 @@ const AllUsers = () => {
       return;
     }
 
+    const apiBaseUrl = import.meta.env.VITE_BASE_URL;
+
     try {
-      const response = await fetch(`https://youngcollection-server.onrender.com/admin/blockUser/${userId}`, {
+      const response = await fetch(`${apiBaseUrl}/admin/blockUser/${userId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

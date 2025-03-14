@@ -2,7 +2,9 @@ import { createContext, useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
+
 export const AuthContext = createContext();
+// console.log("url",apiBaseUrl)
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null); // Initialize as null
@@ -50,6 +52,7 @@ export const AuthProvider = ({ children }) => {
   }, [user]); // Dependency on user
 
   const fetchUser = useCallback(async () => {
+    const apiBaseUrl = import.meta.env.VITE_BASE_URL;
     const token = localStorage.getItem("token");
     if (!token) {
       setLoading(false);
@@ -57,7 +60,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     try {
-      const response = await axios.get("https://youngcollection-server.onrender.com/auth/me", {
+      const response = await axios.get(`${apiBaseUrl}/auth/me`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (response.data.user && response.data.user._id !== user?._id) {
@@ -73,6 +76,7 @@ export const AuthProvider = ({ children }) => {
 
 
   const fetchAllUsers = async () => {
+    const apiBaseUrl = import.meta.env.VITE_BASE_URL;
     const token = localStorage.getItem("token");
     if (!token) {
       setLoading(false);
@@ -80,7 +84,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     try {
-      const response = await axios.get("https://youngcollection-server.onrender.com/auth/getAllUsers", {
+      const response = await axios.get(`${apiBaseUrl}/auth/getAllUsers`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAllUsers(response.data.users);
@@ -93,6 +97,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const fetchAdmin = async (navigate) => {
+    const apiBaseUrl = import.meta.env.VITE_BASE_URL;
     const token = localStorage.getItem("token");
     if (!token) {
       setLoading(false);
@@ -100,7 +105,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     try {
-      const response = await axios.get("https://youngcollection-server.onrender.com/auth/adminProfile", {
+      const response = await axios.get(`${apiBaseUrl}/auth/adminProfile`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setAdmin(response.data.admin);
@@ -114,8 +119,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   const getCategories = async () => {
+    const apiBaseUrl = import.meta.env.VITE_BASE_URL;
     try {
-      const response = await axios.get("https://youngcollection-server.onrender.com/get-all-categories");
+      const response = await axios.get(`${apiBaseUrl}/get-all-categories`);
       setCategories(response.data.categories);
     } catch (error) {
       // console.error("Error fetching categories:", error);
@@ -123,6 +129,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   const getCart = async () => {
+    const apiBaseUrl = import.meta.env.VITE_BASE_URL;
     const token = localStorage.getItem("token");
     if (!token) {
       setLoading(false);
@@ -135,7 +142,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     try {
-      const response = await axios.get(`https://youngcollection-server.onrender.com/cart/viewCart/${user._id}`, {
+      const response = await axios.get(`${apiBaseUrl}/cart/viewCart/${user._id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCart(response.data.data.cart.items);
@@ -148,8 +155,11 @@ export const AuthProvider = ({ children }) => {
   // console.log("all cart",cart)
 
   const getAllProducts = async () => {
+    const apiBaseUrl = import.meta.env.VITE_BASE_URL;
+    // console.log("url",apiBaseUrl)
     try {
-      const response = await axios.get("https://youngcollection-server.onrender.com/getAllProducts");
+      const response = await axios.get(`${apiBaseUrl}/getAllProducts`);
+      // const response = await axios.get(apiBaseUrl);
       setProducts(response.data.products);
     } catch (error) {
       // console.error("Error fetching products:", error);
@@ -157,8 +167,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   const getProductByCategoryMen = async () => {
+    const apiBaseUrl = import.meta.env.VITE_BASE_URL;
       try {
-          const response = await axios.get(`https://youngcollection-server.onrender.com/product/category/men`);
+          const response = await axios.get(`${apiBaseUrl}/product/category/men`);
           setMenCat(response.data?.products);
           // console.log(response);
       } catch (error) {
@@ -166,8 +177,9 @@ export const AuthProvider = ({ children }) => {
       }
   };
   const getProductByCategoryWomen = async () => {
+    const apiBaseUrl = import.meta.env.VITE_BASE_URL;
       try {
-          const response = await axios.get(`https://youngcollection-server.onrender.com/product/category/women`);
+          const response = await axios.get(`${apiBaseUrl}/product/category/women`);
           setWomenCat(response.data?.products);
           // console.log(response);
       } catch (error) {
@@ -176,8 +188,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   const adminLogin = async (email, password) => {
+    const apiBaseUrl = import.meta.env.VITE_BASE_URL;
     try {
-      const response = await axios.post("https://youngcollection-server.onrender.com/auth/adminLogin", { email, password });
+      const response = await axios.post(`${apiBaseUrl}/auth/adminLogin`, { email, password });
       const { token, admin } = response.data;
       localStorage.setItem("token", token);
       setAdmin(admin);
@@ -189,8 +202,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   const userLogin = async (email, password) => {
+    const apiBaseUrl = import.meta.env.VITE_BASE_URL;
     try {
-      const response = await axios.post("https://youngcollection-server.onrender.com/auth/userLogin", { email, password });
+      const response = await axios.post(`${apiBaseUrl}/auth/userLogin`, { email, password });
       const { token, user } = response.data;
       localStorage.setItem("token", token);
       setUser(user);

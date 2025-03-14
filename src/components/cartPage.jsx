@@ -35,9 +35,11 @@ const Cart = () => {
       return;
     }
 
+    const apiBaseUrl = import.meta.env.VITE_BASE_URL;
+
     try {
       const response = await axios.delete(
-        `https://youngcollection-server.onrender.com/cart/removeProduct`,
+        `${apiBaseUrl}/cart/removeProduct`,
         {
           headers: { Authorization: `Bearer ${token}` },
           data: { userId: user._id, itemId }, // Pass data in the `data` property

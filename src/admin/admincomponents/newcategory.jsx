@@ -26,9 +26,11 @@ const NewCategory = () => {
       return;
     }
 
+    const apiBaseUrl = import.meta.env.VITE_BASE_URL;
+
     try {
       const response = await axios.post(
-        "https://youngcollection-server.onrender.com/admin/addCategory",
+        `${apiBaseUrl}/admin/addCategory`,
         { name: category, sale: sale },
         {
           headers: { Authorization: `Bearer ${token}` },

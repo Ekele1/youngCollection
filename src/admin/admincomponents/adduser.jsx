@@ -45,6 +45,7 @@ const AddUser = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
+    const apiBaseUrl = import.meta.env.VITE_BASE_URL;
 
     const token = localStorage.getItem("token");
     if (!token) {
@@ -56,7 +57,7 @@ const AddUser = () => {
 
     try {
       const response = await axios.post(
-        "https://youngcollection-server.onrender.com/admin/addNewUser",
+        `${apiBaseUrl}/admin/addNewUser`,
         formData,
         {
           headers: {

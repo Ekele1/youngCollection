@@ -44,9 +44,11 @@ const EditProduct = () => {
       return;
     }
 
+    const apiBaseUrl = import.meta.env.VITE_BASE_URL;
+
     try {
       const response = await axios.put(
-        `https://youngcollection-server.onrender.com/admin/editProduct/${product._id}`,
+        `${apiBaseUrl}/admin/editProduct/${product._id}`,
         productDetails,
         {
           headers: {

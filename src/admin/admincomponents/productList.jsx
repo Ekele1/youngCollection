@@ -76,9 +76,11 @@ const ProductList = () => {
       return;
     }
 
+    const apiBaseUrl = import.meta.env.VITE_BASE_URL;
+
     try {
       await axios.delete(
-        `https://youngcollection-server.onrender.com/admin/deleteProduct/${selectedProduct._id}`,
+        `${apiBaseUrl}/admin/deleteProduct/${selectedProduct._id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
         }

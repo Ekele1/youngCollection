@@ -58,6 +58,8 @@ const AddProduct = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+
+    const apiBaseUrl = import.meta.env.VITE_BASE_URL;
   
     const token = localStorage.getItem("token");
     if (!token) {
@@ -78,7 +80,7 @@ const AddProduct = () => {
       });
   
       const response = await axios.post(
-        "https://youngcollection-server.onrender.com/admin/createNewProduct",
+        `${apiBaseUrl}/admin/createNewProduct`,
         formData,
         {
           headers: {

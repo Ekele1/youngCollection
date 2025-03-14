@@ -8,9 +8,6 @@ import RecentOrder from './recentorder'
 import axios from 'axios'
 
 const Home = () => {
-    useEffect(() => {
-        window.scrollTo(0, 0); // Scroll to the top when the component loads
-      }, []);
   return (
     <div className='w-full h-full pb-10'>
         <div className='w-full h-[50px] flex items-center font-bold text-[25px]'>
