@@ -13,10 +13,12 @@ const Home = () => {
     <>
      <HeroPage />
      <Collections name="Our Latest Collection" items={products}/>
+     <Collections name="Trending" items={products}/>
+     <HeroCarousel slides={Slides} />
      <Collections name="Men's Collection" items={menCat}/>
      <Collections name="Women's Collection" items={womenCat}/>
      <HeroCarousel slides={Slides} />
-     <Collections name="Trending" items={products}/>
+
      {/* <MenCollection prop={"WOMEN'S COLLECTION"}/> */}
      
     </>

@@ -5,20 +5,22 @@ import HerorPage from './heropage';
 
 const HeroCarousel = ({ slides }) => {
   return (
-    <Carousel 
-      showThumbs={false} 
-      showStatus={false} 
-      autoPlay 
-      infiniteLoop 
-      interval={3000}
+    <div className='mt-10 mb-10'>
+      <Carousel 
+        showThumbs={false} 
+        showStatus={false} 
+        autoPlay 
+        infiniteLoop 
+        interval={3000}
 
-    >
-      {slides.map((slide, index) => (
-        <div key={index} className='w-full dark:bg-[#111828] flex items-center justify-center'>
-          <HerorPage title={slide.title} subtitle={slide.subtitle} image={slide.image} bg={slide.bg} color={slide.color}/>
-        </div>
-      ))}
-    </Carousel>
+      >
+        {slides.map((slide, index) => (
+          <div key={index} className='w-full dark:bg-[#111828] mt-10 flex items-center justify-center'>
+            <HerorPage title={slide.title} subtitle={slide.subtitle} image={slide.image} bg={slide.bg} color={slide.color}/>
+          </div>
+        ))}
+      </Carousel>
+    </div>
   );
 };
 

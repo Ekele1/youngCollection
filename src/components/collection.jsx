@@ -35,7 +35,7 @@ const Collections = ({ name, items }) => {
     );
 
     return (
-        <div className="w-full lg:px-4 lg:py-2 bg-gray-50 dark:bg-[#111828] dark:text-gray-500">
+        <div className="w-full lg:px-4 lg:py-2 mb-5 bg-gray-50 dark:bg-[#111828] dark:text-gray-500">
             {/* Section Title */}
             <div className="w-full text-center pt-10 pb-5 mb-5">
                 <h1 className="text-3xl dark:text-blue-600 lg:text-4xl font-bold">
@@ -45,7 +45,7 @@ const Collections = ({ name, items }) => {
             </div>
 
             {/* Items Grid */}
-            <div className="w-full p-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 lg:gap-4 gap-2">
+            <div className="w-full p-2 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 lg:gap-4 gap-2">
                 {items?.slice(0, visibleItems).map((item, i) => (
                     <motion.div
                         key={i}
@@ -70,7 +70,7 @@ const Collections = ({ name, items }) => {
 
                         {/* Item Details */}
                         <div className="lg:p-4 flex flex-col gap-1">
-                            <div className="flex items-center gap-1 text-lg font-semibold text-gray-500">
+                            <div className="flex items-center gap-1 text-[15px] font-semibold text-gray-500">
                                 <FaNairaSign />
                                 <p>{item.price.toLocaleString()}</p>
                             </div>
