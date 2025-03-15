@@ -37,7 +37,7 @@ const Collections = ({ name, items }) => {
     return (
         <div className="w-full lg:px-4 lg:py-2 bg-gray-50 dark:bg-[#111828] dark:text-gray-500">
             {/* Section Title */}
-            <div className="w-full text-center lg:mb-10 mb-5">
+            <div className="w-full text-center pt-10 pb-5 mb-5">
                 <h1 className="text-3xl dark:text-blue-600 lg:text-4xl font-bold">
                     {name}
                 </h1>
@@ -45,7 +45,7 @@ const Collections = ({ name, items }) => {
             </div>
 
             {/* Items Grid */}
-            <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 lg:gap-4 gap-1">
+            <div className="w-full p-4 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 lg:gap-4 gap-2">
                 {items?.slice(0, visibleItems).map((item, i) => (
                     <motion.div
                         key={i}
@@ -58,7 +58,7 @@ const Collections = ({ name, items }) => {
                         <div onClick={()=>nav(`/detail/${item._id}`, {state: item})} className="w-full">
                             <LazyLoad offset={100} once>
                                 <img
-                                    className="w-full lg:h-[200px] h-[150px] object-contain rounded-lg transition-transform duration-300"
+                                    className="w-full lg:h-[200px] h-[150px] lg:object-contain lg:rounded-lg transition-transform duration-300"
                                     src={item?.images[0]}
                                     // srcSet={`${item.image} 1x, ${item.image.replace(".jpg", "@2x.jpg")} 2x, ${item.image.replace(".jpg", "@3x.jpg")} 3x`}
                                     alt={`Image of ${item.name}`}

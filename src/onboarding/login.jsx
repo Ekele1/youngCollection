@@ -3,6 +3,7 @@ import { FaLock, FaUser, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../onboarding/authContext";
 import { toast } from "react-toastify";
+import { TfiHome } from "react-icons/tfi";
 
 const LoginPage = () => {
   const { userLogin } = useContext(AuthContext);
@@ -30,11 +31,14 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="min-h-screen pt-4 pb-4 flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600">
-      <div className="bg-white rounded-lg shadow-lg w-[90%] max-w-md p-8">
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-4">
-          Welcome Back
-        </h2>
+    <div className="lg:h-screen min-h-screen flex items-center justify-center lg:bg-gradient-to-r from-blue-500 to-purple-600">
+      <div className="bg-white rounded-lg lg:shadow-lg w-[100%] h-full lg:h-[90%] max-w-md p-4 lg:p-8">
+        <div className="flex items-center gap-[20%]">
+          <TfiHome className="cursor-pointer" onClick={navigate("/")} color="blue" size={30} />
+          <h2 className="text-2xl font-bold text-center text-gray-800 mb-4">
+            Welcome Back
+          </h2>
+        </div>
         <p className="text-center text-gray-600 mb-8">
           Log in to access your account
         </p>
@@ -42,7 +46,7 @@ const LoginPage = () => {
         {/* Form */}
         <form onSubmit={handleSubmit}>
           {/* Email */}
-          <div className="mb-4">
+          <div className="mb-2">
             <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
               Email Address
             </label>
@@ -63,7 +67,7 @@ const LoginPage = () => {
           </div>
 
           {/* Password */}
-          <div className="mb-4">
+          <div className="mb-2">
             <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
               Password
             </label>
@@ -91,7 +95,7 @@ const LoginPage = () => {
           </div>
 
           {/* Remember Me & Forgot Password */}
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center justify-between mb-4">
             <label className="flex items-center text-sm text-gray-600">
               <input type="checkbox" className="form-checkbox h-4 w-4 text-blue-500" />
               <span className="ml-2">Remember me</span>
@@ -117,19 +121,19 @@ const LoginPage = () => {
         </form>
 
         {/* Divider */}
-        <div className="my-6 flex items-center justify-center">
+        <div className="my-4 flex items-center justify-center">
           <div className="w-full h-[1px] bg-gray-300"></div>
           <span className="text-sm text-gray-400 px-4">OR</span>
           <div className="w-full h-[1px] bg-gray-300"></div>
         </div>
 
         {/* Social Buttons */}
-        <div className="flex flex-col gap-4">
-          <button className="w-full flex items-center justify-center gap-2 py-2 border border-gray-300 rounded-lg hover:bg-gray-100 transition duration-200">
+        <div className="flex lg:flex-row flex-col gap-4">
+          <button className="w-full lg:w-[48%] flex items-center lg:text-[14px] justify-center gap-[4px] lg:py-1 py-2 border border-gray-300 rounded-lg hover:bg-gray-100 transition duration-200">
             <img src="https://img.icons8.com/color/48/null/google-logo.png" alt="Google Logo" className="w-5 h-5" />
             Log in with Google
           </button>
-          <button className="w-full flex items-center justify-center gap-2 py-2 border border-gray-300 rounded-lg hover:bg-gray-100 transition duration-200">
+          <button className="w-full lg:w-[48%] flex items-center lg:text-[14px] justify-center gap-[4px] lg:py-2 py-2 border border-gray-300 rounded-lg hover:bg-gray-100 transition duration-200">
             <img src="https://img.icons8.com/ios-filled/50/null/facebook-new.png" alt="Facebook Logo" className="w-5 h-5 text-blue-600" />
             Log in with Facebook
           </button>

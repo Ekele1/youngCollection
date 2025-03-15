@@ -57,9 +57,9 @@ const SignupPage = () => {
     };
 
     return (
-        <div className="min-h-screen pt-5 pb-5 flex items-center justify-center bg-gradient-to-r from-green-400 to-blue-500 px-4">
-            <div className="bg-white rounded-lg shadow-lg w-full max-w-md p-6 md:p-8">
-                <h2 className="text-xl md:text-2xl font-bold text-center text-gray-800 mb-4">
+        <div className="min-h-screen pt-5 pb-5 flex items-center justify-center lg:bg-gradient-to-r from-green-400 to-blue-500 lg:px-4">
+            <div className="bg-white rounded-lg lg:shadow-lg w-full max-w-md p-6 md:p-4 ">
+                <h2 className="text-xl md:text-2xl font-bold text-center text-gray-800 mb-2">
                     Create an Account
                 </h2>
                 <p className="text-center text-gray-600 mb-6">

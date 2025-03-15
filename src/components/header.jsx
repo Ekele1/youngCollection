@@ -75,17 +75,17 @@ const Header = () => {
                     ) : (
                         <>
                             <p
-                                className="cursor-pointer hover:underline"
+                                className="cursor-pointer hover:underline hover:text-blue-500"
                                 onClick={() => navigate("/onboarding/login")}
                             >
                                 Sign in
                             </p>
-                            <p
+                            {/* <p
                                 className="cursor-pointer hover:underline"
                                 onClick={() => navigate("/onboarding/signup")}
                             >
                                 Create an account
-                            </p>
+                            </p> */}
                         </>
                     )}
                 </div>
@@ -107,9 +107,7 @@ const Header = () => {
                         >
                             <FiMenu size={25} color="white" />
                         </button>
-                        <button aria-label="Search" className="lg:hidden">
-                            <FiSearch size={25} color="white" />
-                        </button>
+                    
                     </div>
 
                     {/* Center Section (Desktop Links) */}
@@ -118,44 +116,44 @@ const Header = () => {
                             className="cursor-pointer hover:underline"
                             onClick={() => navigate("/")}
                         >
-                            LATEST
+                            Latest
                         </p>
                         <p
                             className="cursor-pointer hover:underline"
                             onClick={() => navigate("/men")}
                         >
-                            MEN
+                            Men
                         </p>
                         <p
                             className="cursor-pointer hover:underline"
                             onClick={() => navigate("/women")}
                         >
-                            WOMEN
+                            Women
                         </p>
                         <p
                             className="cursor-pointer hover:underline"
                             // onClick={() => navigate("/trending")}
                         >
-                            TRENDING
+                            Trending
                         </p>
                     </div>
 
                     {/* Right Section (Search, Help, Cart) */}
                     <div className="flex items-center gap-5 text-white">
-                        <p className="hidden lg:block cursor-pointer hover:underline">Search</p>
+                        {/* <p className="hidden lg:block cursor-pointer hover:underline">Search</p> */}
                         <p className="hidden lg:block cursor-pointer hover:underline">Help</p>
                         <div
                             onClick={() => navigate("/cart")}
-                            className="flex items-center gap-1 bg-blue-500 p-2 rounded-lg cursor-pointer"
+                            className="flex items-center gap-1 p-2 rounded-lg cursor-pointer"
                         >
-                            <p>cart</p>
+                            {/* <p>cart</p> */}
                             <BsCart4 size={25} />
                             <p className="text-orange-300">{cartCount}</p>
                         </div>
-                        <div onClick={toggleTheme} className="w-[40px] cursor-pointer h-[40px] bg-gray-500 rounded-[50px] flex items-center justify-center">
+                        <div onClick={toggleTheme} className="w-[30px] cursor-pointer h-[30px] bg-gray-500 rounded-[50px] flex items-center justify-center">
                             {isDarkMode ? <MdOutlineLightMode size={25} /> : <MdOutlineNightlight size={25} />}
                         </div>
-                        <div onClick={() => navigate("/usernotification")} className="w-[40px] cursor-pointer h-[40px] bg-gray-500 rounded-[50px] flex items-center justify-center">
+                        <div onClick={() => navigate("/usernotification")} className="w-[30px] cursor-pointer h-[30px] bg-gray-500 rounded-[50px] flex items-center justify-center">
                             <IoMdNotificationsOutline size={25} />
                         </div>
                     </div>

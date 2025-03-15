@@ -125,24 +125,24 @@ const DetailPage = () => {
   }, []);
 
   return (
-    <div className="w-full min-h-screen bg-gray-100 flex dark:bg-[#111828] dark:text-gray-500 justify-center items-center py-5">
-      <div className="w-[95%] lg:w-[80%] dark:bg-[#111828] rounded-lg shadow-lg lg:p-6">
+    <div className="w-full min-h-screen lg:bg-gray-100 flex dark:bg-[#111828] dark:text-gray-500 justify-center items-center py-5">
+      <div className="w-[95%] lg:w-[90%] dark:bg-[#111828] rounded-lg lg:shadow-lg lg:p-6">
         {/* Product Details Header */}
         <h1 className="text-3xl font-bold text-gray-500 mb-6">Product Details</h1>
 
         {/* Image Gallery and Details */}
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Image Carousel */}
-          <div className="w-full lg:w-[60%]">
-            <div className="w-full h-[400px] bg-gray-100 dark:bg-[#111828] rounded-lg overflow-hidden">
+          <div className="w-full lg:w-[60%] md:bg-gray-400">
+            <div className="w-full h-[400px] lg:bg-gray-100 dark:bg-[#111828] rounded-lg overflow-hidden">
               <img
-                className="w-full h-full object-contain"
+                className="w-full h-full lg:object-contain md:object-contain"
                 src={fullImg}
                 alt={product.name}
               />
             </div>
             {/* Scrollable Thumbnails Container */}
-            <div className="mt-4 relative">
+            <div className="mt-4 relative bg-white">
               <div
                 ref={thumbnailContainerRef}
                 className="w-full overflow-x-auto scrollbar-hide"
