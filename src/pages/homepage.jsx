@@ -10,7 +10,7 @@ const Home = () => {
   const { products, womenCat, menCat, getAllProducts } = useContext(AuthContext);
 
   return (
-    <>
+    <div style={{ backgroundImage: "url('./city.jpg')" }}>
      <HeroPage />
      <Collections name="Our Latest Collection" items={products}/>
      <Collections name="Trending" items={products}/>
@@ -18,10 +18,8 @@ const Home = () => {
      <Collections name="Men's Collection" items={menCat}/>
      <Collections name="Women's Collection" items={womenCat}/>
      <HeroCarousel slides={Slides} />
-
-     {/* <MenCollection prop={"WOMEN'S COLLECTION"}/> */}
      
-    </>
+    </div>
   )
 }
 

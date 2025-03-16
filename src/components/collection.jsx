@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaNairaSign,} from "react-icons/fa6";
+import { FaNairaSign } from "react-icons/fa6";
 import { BsFillCartPlusFill } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
@@ -8,16 +8,19 @@ import LazyLoad from "react-lazyload";
 
 const Collections = ({ name, items }) => {
     const nav = useNavigate();
-    const [visibleItems, setVisibleItems] = useState(8);
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 8;
+    const itemsPerPage = 9;
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
-        setVisibleItems(page * itemsPerPage);
     };
 
-    const totalPages = Math.ceil([items].length / itemsPerPage);
+    const totalPages = Math.ceil(items.length / itemsPerPage);
+
+    // Calculate the range of items to display
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const visibleItems = items.slice(startIndex, endIndex);
 
     // Skeleton Loading Component
     const SkeletonLoader = () => (
@@ -35,7 +38,7 @@ const Collections = ({ name, items }) => {
     );
 
     return (
-        <div className="w-full lg:px-4 lg:py-2 mb-5 bg-gray-50 dark:bg-[#111828] dark:text-gray-500">
+        <div className="w-full lg:px-4 lg:py-2 pb-5 bg-gray-50 dark:bg-[#111828] dark:text-gray-500">
             {/* Section Title */}
             <div className="w-full text-center pt-10 pb-5 mb-5">
                 <h1 className="text-3xl dark:text-blue-600 lg:text-4xl font-bold">
@@ -45,22 +48,21 @@ const Collections = ({ name, items }) => {
             </div>
 
             {/* Items Grid */}
-            <div className="w-full p-2 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 lg:gap-4 gap-2">
-                {items?.slice(0, visibleItems).map((item, i) => (
+            <div className="w-full p-2 grid grid-cols-3 md:grid-cols-3 lg:grid-cols-5 lg:gap-4 gap-2">
+                {visibleItems.map((item, i) => (
                     <motion.div
                         key={i}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: i * 0.1 }}
-                        className="group bg-white dark:bg-[#1d283a] rounded-lg p-3 shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden"
+                        className="group bg-white dark:bg-[#1d283a] rounded-lg p-3 hover:shadow-lg transition-shadow duration-300 overflow-hidden"
                     >
                         {/* Image Container */}
-                        <div onClick={()=>nav(`/detail/${item._id}`, {state: item})} className="w-full">
+                        <div onClick={() => nav(`/detail/${item._id}`, { state: item })} className="w-full">
                             <LazyLoad offset={100} once>
                                 <img
-                                    className="w-full lg:h-[200px] h-[150px] lg:object-contain lg:rounded-lg transition-transform duration-300"
+                                    className="w-full lg:h-[200px] lg:object-contain rounded-sm lg:rounded-lg transition-transform duration-300"
                                     src={item?.images[0]}
-                                    // srcSet={`${item.image} 1x, ${item.image.replace(".jpg", "@2x.jpg")} 2x, ${item.image.replace(".jpg", "@3x.jpg")} 3x`}
                                     alt={`Image of ${item.name}`}
                                     loading="lazy"
                                     aria-hidden="true"
@@ -77,27 +79,24 @@ const Collections = ({ name, items }) => {
                             <p className="text-sm text-gray-600">
                                 {item.name}
                             </p>
-                            {/* <div className="text-xs text-gray-500">
-                                {item.description}
-                            </div> */}
 
                             {/* Add to Cart Button */}
-                            <button
-                                onClick={()=>nav(`/detail/${item._id}`, {state: item})}
+                            {/* <button
+                                onClick={() => nav(`/detail/${item._id}`, { state: item })}
                                 className="w-full mt-2 flex items-center justify-center lg:gap-2 lg:px-4 lg:py-2 py-1 bg-blue-600 text-white lg:rounded-lg rounded-sm hover:bg-blue-700 transition-colors duration-300"
                                 aria-label={`Add ${item.name} to cart`}
                             >
-                                {/* <BsFillCartPlusFill aria-hidden="true" /> */}
                                 See detail
-                            </button>
+                            </button> */}
                         </div>
                     </motion.div>
                 ))}
 
                 {/* Skeleton Loading for Remaining Items */}
-                {Array.from({ length: visibleItems - items.slice(0, visibleItems).length }).map((_, i) => (
-                    <SkeletonLoader key={`skeleton-${i}`} />
-                ))}
+                {visibleItems.length < itemsPerPage &&
+                    Array.from({ length: itemsPerPage - visibleItems.length }).map((_, i) => (
+                        <SkeletonLoader key={`skeleton-${i}`} />
+                    ))}
             </div>
 
             {/* Pagination */}

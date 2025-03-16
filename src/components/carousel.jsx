@@ -5,14 +5,15 @@ import HerorPage from './heropage';
 
 const HeroCarousel = ({ slides }) => {
   return (
-    <div className='mt-10 mb-10'>
+    <div className='mt-10 pb-10'>
       <Carousel 
         showThumbs={false} 
         showStatus={false} 
         autoPlay 
         infiniteLoop 
         interval={3000}
-
+        swipeable
+        emulateTouch
       >
         {slides.map((slide, index) => (
           <div key={index} className='w-full dark:bg-[#111828] mt-10 flex items-center justify-center'>

@@ -38,14 +38,14 @@ const DetailPage = () => {
   }
 
   // Handle quantity input change
-  const handleQuantityChange = (e) => {
-    const value = e.target.value;
-    if (/^\d+$/.test(value) && parseInt(value) >= 1) {
-      setQuantity(value);
-    } else {
-      toast.error("Quantity must be a positive integer.");
-    }
-  };
+  // const handleQuantityChange = (e) => {
+  //   const value = e.target.value;
+  //   if (/^\d+$/.test(value)) {
+  //     setQuantity(value);
+  //   } else {
+  //     toast.error("Quantity must be a positive integer.");
+  //   }
+  // };
 
   // Debounced add to cart function
   const debouncedAddToCart = debounce(async (data, token) => {
@@ -133,8 +133,8 @@ const DetailPage = () => {
         {/* Image Gallery and Details */}
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Image Carousel */}
-          <div className="w-full lg:w-[60%] md:bg-gray-400">
-            <div className="w-full h-[400px] lg:bg-gray-100 dark:bg-[#111828] rounded-lg overflow-hidden">
+          <div className="w-full lg:w-[60%]">
+            <div className="w-full h-[400px] dark:bg-[#111828] rounded-lg overflow-hidden">
               <img
                 className="w-full h-full lg:object-contain md:object-contain"
                 src={fullImg}
@@ -142,7 +142,7 @@ const DetailPage = () => {
               />
             </div>
             {/* Scrollable Thumbnails Container */}
-            <div className="mt-4 relative bg-white">
+            <div className="mt-4 relative">
               <div
                 ref={thumbnailContainerRef}
                 className="w-full overflow-x-auto scrollbar-hide"
@@ -267,7 +267,7 @@ const DetailPage = () => {
               </span>
               <input
                 value={quantity}
-                onChange={handleQuantityChange}
+                onChange={(e)=>setQuantity(e.target.value)}
                 className="w-full lg:w-48 p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
                 type="number"
               />

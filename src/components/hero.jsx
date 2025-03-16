@@ -5,15 +5,17 @@ const HeroPage = () => {
   return (
     <div className="relative h-screen overflow-hidden">
       {/* Video Background */}
-      <iframe
-      // src='./hoodies.mp4'
-        src="https://www.youtube.com/embed/c1JKmJ8PQj4?autoplay=1&mute=1&loop=1&playlist=c1JKmJ8PQj4&controls=0&modestbranding=1&showinfo=0"
-        className="absolute top-0 left-0 w-full h-full object-cover z-0"
-        frameBorder="0"
-        allow="autoplay; encrypted-media"
-        allowFullScreen
-        title="YouTube Background"
-      ></iframe>
+      <video
+          src="hoodies.mp4"
+          className="absolute top-0 left-0 w-full h-full object-contain z-0"
+          frameBorder="0"
+          allow="autoplay; encrypted-media"
+          allowFullScreen
+          title="video Background"
+          muted
+          loop
+          autoPlay // Automatically start playing the video
+      ></video>
 
       {/* Overlay */}
       <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center text-white">
