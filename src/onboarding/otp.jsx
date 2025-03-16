@@ -41,7 +41,8 @@ const OTPVerification = () => {
 
     try {
       const data = {otp: enteredOtp, email: user.email}
-      const url = "https://youngcollection-server.onrender.com/auth/verifyOtp";
+      const apiBaseUrl = import.meta.env.VITE_BASE_URL;
+      const url = `${apiBaseUrl}/auth/verifyOtp`;
       const response = await axios.post(url, data);
     //   console.log(response);
 
@@ -77,8 +78,8 @@ const OTPVerification = () => {
         setLoading(false);
         return;
       }
-
-      const url = "http://localhost:5000/auth/resendOtp";
+      const apiBaseUrl = import.meta.env.VITE_BASE_URL;
+      const url = `${apiBaseUrl}/auth/resendOtp`;
       const response = await axios.post(url, data);
     //   console.log(response);
       toast.success("OTP resent successfully!");

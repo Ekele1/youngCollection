@@ -22,7 +22,8 @@ const ForgetPasswordPage = () => {
 
     setLoading(true);
     try {
-      const url = "https://youngcollection-server.onrender.com/forgot-password/request-otp";
+      const apiBaseUrl = import.meta.env.VITE_BASE_URL;
+      const url = `${apiBaseUrl}/forgot-password/request-otp`;
       await axios.post(url, { email });
       toast.success("OTP sent to your email!");
       setStep(2); // Move to OTP verification step
@@ -43,7 +44,8 @@ const ForgetPasswordPage = () => {
 
     setLoading(true);
     try {
-      const url = "http://localhost:5000/forgot-password/verify-otp";
+      const apiBaseUrl = import.meta.env.VITE_BASE_URL;
+      const url = `${apiBaseUrl}/forgot-password/verify-otp`;
       await axios.post(url, { email, otp, newPassword });
       toast.success("Password reset successful!");
       navigate("/onboarding/login"); // Redirect to login
@@ -56,7 +58,7 @@ const ForgetPasswordPage = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-500 to-indigo-500">
-      <div className="bg-white rounded-lg shadow-lg w-[90%] max-w-md p-8">
+      <div className="bg-white rounded-lg shadow-lg w-[95%] max-w-md p-8">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-4">
           {step === 1 ? "Forgot Your Password?" : "Enter OTP & New Password"}
         </h2>

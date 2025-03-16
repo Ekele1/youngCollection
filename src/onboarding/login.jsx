@@ -33,7 +33,7 @@ const LoginPage = () => {
   return (
     <div className="lg:h-screen min-h-screen flex items-center justify-center lg:bg-gradient-to-r from-blue-500 to-purple-600">
       <div className="bg-white rounded-lg lg:shadow-lg w-[100%] h-full lg:h-[90%] max-w-md p-4 lg:p-8">
-        <div className="flex items-center gap-[20%]">
+        <div className="flex items-center justify-center">
           {/* <TfiHome className="cursor-pointer" color="blue" size={30} /> */}
           <h2 className="text-2xl font-bold text-center text-gray-800 mb-4">
             Welcome Back

@@ -37,15 +37,6 @@ const DetailPage = () => {
     );
   }
 
-  // Handle quantity input change
-  // const handleQuantityChange = (e) => {
-  //   const value = e.target.value;
-  //   if (/^\d+$/.test(value)) {
-  //     setQuantity(value);
-  //   } else {
-  //     toast.error("Quantity must be a positive integer.");
-  //   }
-  // };
 
   // Debounced add to cart function
   const debouncedAddToCart = debounce(async (data, token) => {

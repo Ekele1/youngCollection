@@ -21,7 +21,8 @@ const ResetPasswordPage = () => {
     }
 
     try {
-      await axios.post(`https://youngcollection-server.onrender.com/reset-password/${token}`, { password });
+      const apiBaseUrl = import.meta.env.VITE_BASE_URL;
+      await axios.post(`${apiBaseUrl}/reset-password/${token}`, { password });
       toast.success("Password reset successfully!");
       navigate("/onboarding/login");
     } catch (error) {

@@ -22,7 +22,8 @@ const ResendOTP = ({ email }) => {
     setTimer(30);
 
     try {
-      const url = "https://youngcollection-server.onrender.com/auth/resendOtp";
+      const apiBaseUrl = import.meta.env.VITE_BASE_URL;
+      const url = `${apiBaseUrl}/auth/resendOtp`;
       await axios.post(url, { email });
       toast.success("New OTP sent successfully!");
     } catch (error) {

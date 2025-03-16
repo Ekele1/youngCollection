@@ -28,7 +28,7 @@ const Collections = ({ name, items }) => {
             className="bg-white rounded-lg shadow-md overflow-hidden"
             aria-label="Loading item"
         >
-            <div className="w-full h-48 lg:h-64 bg-gray-200 animate-pulse"></div>
+            <div className="w-full bg-gray-200 animate-pulse"></div>
             <div className="p-4">
                 <div className="h-6 bg-gray-200 animate-pulse mb-2"></div>
                 <div className="h-4 bg-gray-200 animate-pulse mb-1"></div>
@@ -48,7 +48,7 @@ const Collections = ({ name, items }) => {
             </div>
 
             {/* Items Grid */}
-            <div className="w-full p-2 grid grid-cols-3 md:grid-cols-3 lg:grid-cols-5 lg:gap-4 gap-2">
+            <div className="w-full p-1 grid grid-cols-3 md:grid-cols-3 lg:grid-cols-5 lg:gap-4 gap-1">
                 {visibleItems.map((item, i) => (
                     <motion.div
                         key={i}
@@ -61,7 +61,7 @@ const Collections = ({ name, items }) => {
                         <div onClick={() => nav(`/detail/${item._id}`, { state: item })} className="w-full">
                             <LazyLoad offset={100} once>
                                 <img
-                                    className="w-full lg:h-[200px] lg:object-contain rounded-sm lg:rounded-lg transition-transform duration-300"
+                                    className="w-full lg:h-[200px] rounded-sm lg:rounded-lg transition-transform duration-300"
                                     src={item?.images[0]}
                                     alt={`Image of ${item.name}`}
                                     loading="lazy"
@@ -76,18 +76,9 @@ const Collections = ({ name, items }) => {
                                 <FaNairaSign />
                                 <p>{item.price.toLocaleString()}</p>
                             </div>
-                            <p className="text-sm text-gray-600">
+                            <p className="text-sm text-gray-600 truncate">
                                 {item.name}
                             </p>
-
-                            {/* Add to Cart Button */}
-                            {/* <button
-                                onClick={() => nav(`/detail/${item._id}`, { state: item })}
-                                className="w-full mt-2 flex items-center justify-center lg:gap-2 lg:px-4 lg:py-2 py-1 bg-blue-600 text-white lg:rounded-lg rounded-sm hover:bg-blue-700 transition-colors duration-300"
-                                aria-label={`Add ${item.name} to cart`}
-                            >
-                                See detail
-                            </button> */}
                         </div>
                     </motion.div>
                 ))}
