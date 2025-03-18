@@ -45,9 +45,13 @@ const DetailPage = () => {
       const response = await axios.post(`${apiBaseUrl}/cart/addToCart`, data, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      toast.success("Product added to cart successfully");
-      // console.log(response);
-      setCart(response.data.data.cart.items);
+      console.log(response)
+      if (response.data.data?.cart) {
+        setCart(response.data.data.cart.items); // Update the cart state with the items array
+        toast.success("Product added successfully.");
+      } else {
+          toast.error("Failed to add product. Please try again.");
+      }
     } catch (error) {
       console.error("Error adding to cart:", error);
       if (error.response && error.response.status === 401) {

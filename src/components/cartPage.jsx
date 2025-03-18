@@ -11,7 +11,8 @@ import { motion } from "framer-motion";
 
 const CartPage = () => {
     const nav = useNavigate();
-    const [loading, setLoading] = useState({}); // Track loading state for each item
+    const [loadingAdd, setLoadingAdd] = useState({}); // For the "+" button
+    const [loadingSubtract, setLoadingSubtract] = useState({}); // For the "-" button
     const { cart, user, setCart } = useContext(AuthContext);
 
     // Calculate subtotal dynamically (with fallback for invalid cart)
@@ -20,19 +21,21 @@ const CartPage = () => {
     const handleDeleteItem = async (itemId) => {
         if (!itemId || !user?._id) return;
 
-        setLoading((prev) => ({ ...prev, [itemId]: true })); // Set loading state for this item
+        setLoadingAdd((prev) => ({ ...prev, [itemId]: true })); // Set loading state for this item
+        setLoadingSubtract((prev) => ({ ...prev, [itemId]: true }));
         const token = localStorage.getItem("token");
 
         if (!token) {
             toast.error("Please log in to manage your cart.");
-            setLoading((prev) => ({ ...prev, [itemId]: false }));
+            setLoadingAdd((prev) => ({ ...prev, [itemId]: false }));
+            setLoadingSubtract((prev) => ({ ...prev, [itemId]: false }));
             return;
         }
 
         const apiBaseUrl = import.meta.env.VITE_BASE_URL;
 
         try {
-            const response = await axios.delete(`${apiBaseUrl}/cart/removeFromCart`, {
+            const response = await axios.delete(`${apiBaseUrl}/cart/removeProduct`, {
                 headers: { Authorization: `Bearer ${token}` },
                 data: { userId: user._id, itemId }, // Pass data in the `data` property
             });
@@ -48,19 +51,32 @@ const CartPage = () => {
             console.error("Error removing product:", error);
             toast.error("Error removing product.");
         } finally {
-            setLoading((prev) => ({ ...prev, [itemId]: false })); // Reset loading state
+            setLoadingAdd((prev) => ({ ...prev, [itemId]: false }));
+            setLoadingSubtract((prev) => ({ ...prev, [itemId]: false }));
         }
     };
 
-    const handleUpdateCart = async (itemId, newQuantity) => {
+    console.log(cart)
+
+    const handleUpdateCart = async (itemId, newQuantity, action) => {
         if (!itemId || !user?._id || newQuantity < 1) return;
 
-        setLoading((prev) => ({ ...prev, [itemId]: true })); // Set loading state for this item
+        // Set loading state based on the action (+ or -)
+        if (action === "add") {
+            setLoadingAdd((prev) => ({ ...prev, [itemId]: true }));
+        } else if (action === "subtract") {
+            setLoadingSubtract((prev) => ({ ...prev, [itemId]: true }));
+        }
+
         const token = localStorage.getItem("token");
 
         if (!token) {
             toast.error("Please log in to manage your cart.");
-            setLoading((prev) => ({ ...prev, [itemId]: false }));
+            if (action === "add") {
+                setLoadingAdd((prev) => ({ ...prev, [itemId]: false }));
+            } else if (action === "subtract") {
+                setLoadingSubtract((prev) => ({ ...prev, [itemId]: false }));
+            }
             return;
         }
 
@@ -75,7 +91,7 @@ const CartPage = () => {
             // Check if the response contains the updated cart
             if (response.data.data?.cart) {
                 setCart(response.data.data.cart.items); // Update the cart state with the items array
-                toast.success("Cart updated successfully.");
+                // toast.success("Cart updated successfully.");
             } else {
                 toast.error("Failed to update cart. Please try again.");
             }
@@ -83,7 +99,12 @@ const CartPage = () => {
             console.error("Error updating cart:", error);
             toast.error("Error updating cart.");
         } finally {
-            setLoading((prev) => ({ ...prev, [itemId]: false })); // Reset loading state
+            // Reset loading state based on the action (+ or -)
+            if (action === "add") {
+                setLoadingAdd((prev) => ({ ...prev, [itemId]: false }));
+            } else if (action === "subtract") {
+                setLoadingSubtract((prev) => ({ ...prev, [itemId]: false }));
+            }
         }
     };
 
@@ -99,7 +120,7 @@ const CartPage = () => {
                         You need to log in to view your cart content.
                     </p>
                     <button
-                        onClick={() => nav("/login")} // Redirect to login page
+                        onClick={() => nav("/onboarding/login")} // Redirect to login page
                         className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors"
                     >
                         Log In
@@ -184,19 +205,19 @@ const CartPage = () => {
                             {/* Quantity Controls */}
                             <div className="flex items-center gap-3">
                                 <button
-                                    onClick={() => handleUpdateCart(e._id, e.quantity - 1)}
-                                    disabled={e.quantity <= 1 || loading[e._id]}
+                                    onClick={() => handleUpdateCart(e._id, e.quantity - 1, "subtract")}
+                                    disabled={e.quantity <= 1 || loadingSubtract[e._id]}
                                     className="w-10 h-10 flex items-center justify-center bg-blue-100 rounded-md hover:bg-blue-200 transition-colors"
                                 >
-                                    {loading[e._id] ? "..." : <FaMinus />}
+                                    {loadingSubtract[e._id] ? "..." : <FaMinus />}
                                 </button>
                                 <span className="text-lg font-semibold">{e.quantity}</span>
                                 <button
-                                    onClick={() => handleUpdateCart(e._id, e.quantity + 1)}
-                                    disabled={loading[e._id]}
+                                    onClick={() => handleUpdateCart(e._id, e.quantity + 1, "add")}
+                                    disabled={loadingAdd[e._id]}
                                     className="w-10 h-10 flex items-center justify-center bg-blue-100 rounded-md hover:bg-blue-200 transition-colors"
                                 >
-                                    {loading[e._id] ? "..." : <GrAdd />}
+                                    {loadingAdd[e._id] ? "..." : <GrAdd />}
                                 </button>
                             </div>
                         </div>
