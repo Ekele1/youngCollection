@@ -20,7 +20,7 @@ const DetailPage = () => {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const thumbnailContainerRef = useRef(null);
-  const { logout, user } = useContext(AuthContext);
+  const { logout, user, setCart } = useContext(AuthContext);
 
   // Redirect if product is not found
   if (!product) {
@@ -46,7 +46,8 @@ const DetailPage = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success("Product added to cart successfully");
-      console.log(response);
+      // console.log(response);
+      setCart(response.data.data.cart.items);
     } catch (error) {
       console.error("Error adding to cart:", error);
       if (error.response && error.response.status === 401) {
