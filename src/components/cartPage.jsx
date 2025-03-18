@@ -14,8 +14,8 @@ const CartPage = () => {
   const [loading, setLoading] = useState({}); // Track loading state for each item
   const { cart, user, setCart } = useContext(AuthContext);
 
-  // Calculate subtotal dynamically
-  const subtotal = cart?.reduce((total, item) => total + item.product?.price * item.quantity, 0) || 0;
+  // Calculate subtotal dynamically (with fallback for invalid cart)
+  const subtotal = Array.isArray(cart) ? cart.reduce((total, item) => total + (item.product?.price || 0) * (item.quantity || 0), 0) : 0;
 
   const handleDeleteItem = async (itemId) => {
     if (!itemId || !user?._id) return;
@@ -48,6 +48,42 @@ const CartPage = () => {
     }
   };
 
+  const handleUpdateCart = async (itemId, newQuantity) => {
+    if (!itemId || !user?._id || newQuantity < 1) return;
+
+    setLoading((prev) => ({ ...prev, [itemId]: true })); // Set loading state for this item
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      toast.error("Please log in to manage your cart.");
+      setLoading((prev) => ({ ...prev, [itemId]: false }));
+      return;
+    }
+
+    try {
+      const apiBaseUrl = import.meta.env.VITE_BASE_URL;
+      const response = await axios.patch(
+        `${apiBaseUrl}/cart/updateCart`,
+        { userId: user._id, itemId, quantity: newQuantity },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      // console.log("API Response:", response.data.data.cart.items); // Debugging: Log the response
+
+      if (response.data.cart) {
+        setCart(response.data.data.cart.items); // Update the cart state
+        toast.success("Cart updated successfully.");
+      }
+    } catch (error) {
+      console.error("Error updating cart:", error);
+      toast.error("Error updating cart.");
+    } finally {
+      setLoading((prev) => ({ ...prev, [itemId]: false })); // Reset loading state
+    }
+  };
+
+  console.log("cartinit",cart)
+
   // If no user is found, display a message to log in
   if (!user) {
     return (
@@ -70,6 +106,28 @@ const CartPage = () => {
     );
   }
 
+  // If cart is empty or not an array, display a message
+  if (!Array.isArray(cart) || cart.length === 0) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="bg-white p-8 rounded-lg shadow-md text-center">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            Your Cart is Empty
+          </h2>
+          <p className="text-gray-600 mb-6">
+            Add items to your cart to proceed.
+          </p>
+          <button
+            onClick={() => nav("/products")} // Redirect to products page
+            className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            Shop Now
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex flex-col lg:flex-row justify-between gap-4 lg:gap-8 bg-gray-100 py-8 lg:px-8 px-4">
       {/* Cart Items Section */}
@@ -85,6 +143,7 @@ const CartPage = () => {
             transition={{ duration: 0.3, delay: i * 0.1 }}
             className="w-full flex flex-col gap-5 p-5 border-b border-gray-200"
           >
+            {/* Product Details */}
             <div className="w-full flex flex-col lg:flex-row gap-4">
               {/* Product Image */}
               <div className="w-20 h-20 flex-shrink-0">
@@ -121,11 +180,19 @@ const CartPage = () => {
 
               {/* Quantity Controls */}
               <div className="flex items-center gap-3">
-                <button className="w-10 h-10 flex items-center justify-center bg-blue-100 rounded-md hover:bg-blue-200 transition-colors">
+                <button
+                  onClick={() => handleUpdateCart(e._id, e.quantity - 1)}
+                  disabled={e.quantity <= 1 || loading[e._id]}
+                  className="w-10 h-10 flex items-center justify-center bg-blue-100 rounded-md hover:bg-blue-200 transition-colors"
+                >
                   <FaMinus />
                 </button>
                 <span className="text-lg font-semibold">{e.quantity}</span>
-                <button className="w-10 h-10 flex items-center justify-center bg-blue-100 rounded-md hover:bg-blue-200 transition-colors">
+                <button
+                  onClick={() => handleUpdateCart(e._id, e.quantity + 1)}
+                  disabled={loading[e._id]}
+                  className="w-10 h-10 flex items-center justify-center bg-blue-100 rounded-md hover:bg-blue-200 transition-colors"
+                >
                   <GrAdd />
                 </button>
               </div>
