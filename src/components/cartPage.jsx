@@ -36,9 +36,10 @@ const CartPage = () => {
         headers: { Authorization: `Bearer ${token}` },
         data: { userId: user._id, itemId }, // Pass data in the `data` property
       });
+      console.log(response)
       toast.success("Product removed successfully.");
-      if (response.data.cart) {
-        setCart(response.data.cart); // Update the cart state
+      if (response.data.data.cart) {
+        setCart(response.data.data.cart.items); // Update the cart state
       }
     } catch (error) {
       console.error("Error removing product:", error);
@@ -70,7 +71,7 @@ const CartPage = () => {
 
       // console.log("API Response:", response.data.data.cart.items); // Debugging: Log the response
 
-      if (response.data.cart) {
+      if (response.data.data.cart) {
         setCart(response.data.data.cart.items); // Update the cart state
         toast.success("Cart updated successfully.");
       }
