@@ -35,7 +35,6 @@ import NotificationPage from "../admin/adminPage/notificationPage";
 import ChatPagess from "../admin/adminPage/chat";
 import UserNotification from "../components/userNotification";
 import ScrollToTop from "../components/scrollTop";
-// import MenCollectionHome from "../components/menHome";
 
 const Onboarding = () => (
   <div>
@@ -47,7 +46,6 @@ const Onboarding = () => (
 );
 
 const AppLayout = () => {
-  // const { Products } = useContext(AuthContext); // ✅ Correct use of useContext inside a component
 
   return (
     <div>
@@ -88,21 +86,9 @@ const route = createHashRouter([
     element: <AppLayout />,
     children: [
       { index: true, element: <Home /> },
-      {
-        path: "men",
-        element: <MenCollections />
-        // loader: ({ context }) => ({ items: context.Products }), // ✅ Correctly passing Products
-      },
-      {
-        path: "women",
-        element: <WomenCollections />
-        // loader: ({ context }) => ({ items: context.Products }),
-      },
-      {
-        path: "detail/:id",
-        element: <DetailPage />,
-        // loader: ({ context }) => ({ items: context.Products }),
-      },
+      { path: "men",element: <MenCollections />},
+      { path: "women", element: <WomenCollections />},
+      { path: "detail/:id",element: <DetailPage />},
       { path: "cart", element: <Cart /> },
       { path: "order", element: <StartOrderPage /> },
       { path: "contact", element: <ContactUs /> },

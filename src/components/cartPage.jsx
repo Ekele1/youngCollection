@@ -56,7 +56,7 @@ const CartPage = () => {
         }
     };
 
-    console.log(cart)
+    // console.log(cart)
 
     const handleUpdateCart = async (itemId, newQuantity, action) => {
         if (!itemId || !user?._id || newQuantity < 1) return;
