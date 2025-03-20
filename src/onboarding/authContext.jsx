@@ -2,9 +2,7 @@ import { createContext, useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-
 export const AuthContext = createContext();
-// console.log("url",apiBaseUrl)
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null); // Initialize as null
@@ -67,13 +65,11 @@ export const AuthProvider = ({ children }) => {
         setUser(response.data.user);
       }
     } catch (error) {
-      // console.error("Error fetching user:", error);
       if (error.response && error.response.status === 401) {
         logout();
       }
     }
   }, [user]);
-
 
   const fetchAllUsers = async () => {
     const apiBaseUrl = import.meta.env.VITE_BASE_URL;
@@ -89,7 +85,6 @@ export const AuthProvider = ({ children }) => {
       });
       setAllUsers(response.data.users);
     } catch (error) {
-      // console.error("Error fetching users:", error);
       if (error.response && error.response.status === 401) {
         logout();
       }
@@ -110,7 +105,6 @@ export const AuthProvider = ({ children }) => {
       });
       setAdmin(response.data.admin);
     } catch (error) {
-      // console.error("Error fetching admin profile:", error);
       if (error.response && error.response.status === 401) {
         toast.error("Session expired. Please log in again.");
         adminLogout(navigate);
@@ -124,7 +118,7 @@ export const AuthProvider = ({ children }) => {
       const response = await axios.get(`${apiBaseUrl}/get-all-categories`);
       setCategories(response.data.categories);
     } catch (error) {
-      // console.error("Error fetching categories:", error);
+      console.error("Error fetching categories:", error);
     }
   };
 
@@ -146,45 +140,39 @@ export const AuthProvider = ({ children }) => {
         headers: { Authorization: `Bearer ${token}` },
       });
       setCart(response.data.data.cart.items);
-      // console.log(response);
     } catch (error) {
-      // console.error("Error fetching cart:", error);
+      console.error("Error fetching cart:", error);
     }
   };
 
-  // console.log("all cart",cart)
-
   const getAllProducts = async () => {
     const apiBaseUrl = import.meta.env.VITE_BASE_URL;
-    // console.log("url",apiBaseUrl)
     try {
       const response = await axios.get(`${apiBaseUrl}/getAllProducts`);
-      // const response = await axios.get(apiBaseUrl);
       setProducts(response.data.products);
     } catch (error) {
-      // console.error("Error fetching products:", error);
+      console.error("Error fetching products:", error);
     }
   };
 
   const getProductByCategoryMen = async () => {
     const apiBaseUrl = import.meta.env.VITE_BASE_URL;
-      try {
-          const response = await axios.get(`${apiBaseUrl}/product/category/men`);
-          setMenCat(response.data?.products);
-          // console.log(response);
-      } catch (error) {
-          // console.error("Error fetching products:", error);
-      }
+    try {
+      const response = await axios.get(`${apiBaseUrl}/product/category/men`);
+      setMenCat(response.data?.products);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
   };
+
   const getProductByCategoryWomen = async () => {
     const apiBaseUrl = import.meta.env.VITE_BASE_URL;
-      try {
-          const response = await axios.get(`${apiBaseUrl}/product/category/women`);
-          setWomenCat(response.data?.products);
-          // console.log(response);
-      } catch (error) {
-          // console.error("Error fetching products:", error);
-      }
+    try {
+      const response = await axios.get(`${apiBaseUrl}/product/category/women`);
+      setWomenCat(response.data?.products);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
   };
 
   const adminLogin = async (email, password) => {
@@ -196,7 +184,6 @@ export const AuthProvider = ({ children }) => {
       setAdmin(admin);
       await fetchAdmin();
     } catch (error) {
-      // console.error("Admin login error:", error);
       throw new Error(error.response?.data?.message || "Admin login failed");
     }
   };
@@ -210,8 +197,20 @@ export const AuthProvider = ({ children }) => {
       setUser(user);
       await fetchUser();
     } catch (error) {
-      // console.error("login error:", error);
-      throw new Error(error.response?.data?.message || "user login failed");
+      throw new Error(error.response?.data?.message || "User login failed");
+    }
+  };
+
+  const googleLogin = async (token) => {
+    const apiBaseUrl = import.meta.env.VITE_BASE_URL;
+    try {
+      const response = await axios.post(`${apiBaseUrl}/auth/google`, { token });
+      const { user, token: authToken } = response.data;
+      localStorage.setItem("token", authToken);
+      setUser(user);
+      await fetchUser();
+    } catch (error) {
+      throw new Error(error.response?.data?.message || "Google login failed");
     }
   };
 
@@ -226,7 +225,7 @@ export const AuthProvider = ({ children }) => {
     if (navigate) {
       navigate("/admin"); // Redirect to /admin
     }
-  }; 
+  };
 
   return (
     <AuthContext.Provider
@@ -240,13 +239,14 @@ export const AuthProvider = ({ children }) => {
         categories,
         adminLogin,
         userLogin,
+        googleLogin, // Add googleLogin to the context
         products,
         womenCat,
         menCat,
         allUsers,
         cart,
         setCart,
-        getAllProducts
+        getAllProducts,
       }}
     >
       {children}
