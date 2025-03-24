@@ -63,7 +63,7 @@ export const AuthProvider = ({ children }) => {
       const response = await axios.get(`${apiBaseUrl}/auth/me`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      if (response.data.user && response.data.user._id !== user?._id) {
+      if (response.data.user && response.data.user._id) {
         setUser(response.data.user);
       }
     } catch (error) {

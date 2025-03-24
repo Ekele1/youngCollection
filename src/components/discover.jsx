@@ -48,7 +48,7 @@ const Discover = () => {
 
         {/* Card 4 */}
         <div className='bg-[#ecf5f4] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300'>
-          <div className='p-6 flex flex-col md:flex-row items-center justify-between h-full'>
+          <div className='p-6 flex flex-col items-center justify-between h-full'>
             <div className='flex-1 flex flex-col gap-3'>
               <p className='text-sm text-gray-600'>Get 40% off</p>
               <p className='text-xl font-semibold text-gray-900'>Latest Sunglass</p>
