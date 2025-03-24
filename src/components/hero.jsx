@@ -3,7 +3,7 @@ import { FaShoppingBag, FaUser } from 'react-icons/fa';
 
 const HeroPage = () => {
   return (
-    <div className="relative min-h-[500px] overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden">
       {/* Video Background */}
       <video
           src="hoodies.mp4"
