@@ -22,6 +22,8 @@ const DetailPage = () => {
   const thumbnailContainerRef = useRef(null);
   const { logout, user, setCart } = useContext(AuthContext);
 
+  // console.log("user",user)
+
   // Redirect if product is not found
   if (!product) {
     return (

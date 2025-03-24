@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }) => {
     }
   }, [user]); // Dependency on user
 
-  console.log(products)
+  // console.log(products)
 
   const fetchUser = useCallback(async () => {
     const apiBaseUrl = import.meta.env.VITE_BASE_URL;
@@ -120,7 +120,7 @@ export const AuthProvider = ({ children }) => {
       const response = await axios.get(`${apiBaseUrl}/get-all-categories`);
       setCategories(response.data.categories);
     } catch (error) {
-      console.error("Error fetching categories:", error);
+      toast.error("Error fetching categories:", error);
     }
   };
 
@@ -133,7 +133,7 @@ export const AuthProvider = ({ children }) => {
     }
 
     if (!user || !user._id) {
-      console.error("User is not defined or does not have an ID.");
+      toast.error("User is not defined or does not have an ID.");
       return;
     }
 
@@ -143,7 +143,7 @@ export const AuthProvider = ({ children }) => {
       });
       setCart(response.data.data.cart.items);
     } catch (error) {
-      console.error("Error fetching cart:", error);
+      toast.error("Error fetching cart:", error);
     }
   };
 
@@ -153,7 +153,7 @@ export const AuthProvider = ({ children }) => {
       const response = await axios.get(`${apiBaseUrl}/getAllProducts`);
       setProducts(response.data.products);
     } catch (error) {
-      console.error("Error fetching products:", error);
+      toast.error("Error fetching products:", error);
     }
   };
 
@@ -163,7 +163,7 @@ export const AuthProvider = ({ children }) => {
       const response = await axios.get(`${apiBaseUrl}/product/category/men`);
       setMenCat(response.data?.products);
     } catch (error) {
-      console.error("Error fetching products:", error);
+      toast.error("Error fetching products:", error);
     }
   };
 
@@ -173,7 +173,7 @@ export const AuthProvider = ({ children }) => {
       const response = await axios.get(`${apiBaseUrl}/product/category/women`);
       setWomenCat(response.data?.products);
     } catch (error) {
-      console.error("Error fetching products:", error);
+      toast.error("Error fetching products:", error);
     }
   };
 
