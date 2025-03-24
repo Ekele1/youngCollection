@@ -2,7 +2,7 @@ import React from 'react';
 
 const SomeCat = () => {
   return (
-    <div className='w-full flex items-center justify-center bg-[#f7f8fa] py-10'>
+    <div className='w-full flex items-center justify-center bg-white py-10'>
       <div className='w-[90%] md:w-[80%] flex flex-col md:flex-row gap-6'>
         {/* Women's Collection Card */}
         <div className='w-full md:w-[50%] flex items-center justify-between rounded-lg bg-[#e3e3e5] p-6 relative overflow-hidden'>

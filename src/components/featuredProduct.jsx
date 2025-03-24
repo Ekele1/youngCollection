@@ -39,7 +39,7 @@ const FeaturedProducts = () => {
           <div className='w-[250px] h-[250px] md:w-[300px] md:h-[300px] bg-[#ddebeb] rounded-full relative overflow-hidden shadow-lg'>
             <img
               className='absolute h-full w-full object-contain transform -translate-y-8'
-              src="./sample.jpeg"
+              src="./download.jpeg"
               alt="Young fashionable jeans"
             />
           </div>
