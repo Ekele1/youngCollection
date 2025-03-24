@@ -116,7 +116,7 @@ const Header = () => {
                             className="cursor-pointer hover:underline"
                             onClick={() => navigate("/")}
                         >
-                            Latest
+                            Home
                         </p>
                         <p
                             className="cursor-pointer hover:underline"

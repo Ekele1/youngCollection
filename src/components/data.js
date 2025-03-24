@@ -29,7 +29,7 @@ export const Slides = [
     {
       title: 'Popular Collection',
       subtitle: 'Discover our latest collection',
-      image: 'https://media.istockphoto.com/id/1179046996/photo/smiling-woman-at-supermarket.webp?a=1&b=1&s=612x612&w=0&k=20&c=-F-EpNLzSfCDfDVO-FeSpGuzMQntyNr-gvZ1gImbd1c=',
+      image: './outfit.jpg',
       bg: '#006BFF',
       color: '#BCF2F6'
     },

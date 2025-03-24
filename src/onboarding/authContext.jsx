@@ -49,6 +49,8 @@ export const AuthProvider = ({ children }) => {
     }
   }, [user]); // Dependency on user
 
+  console.log(products)
+
   const fetchUser = useCallback(async () => {
     const apiBaseUrl = import.meta.env.VITE_BASE_URL;
     const token = localStorage.getItem("token");

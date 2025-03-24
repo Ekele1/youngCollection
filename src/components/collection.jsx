@@ -38,56 +38,58 @@ const Collections = ({ name, items }) => {
     );
 
     return (
-        <div className="w-full lg:px-4 lg:py-2 pb-5 bg-gray-50 dark:bg-[#111828] dark:text-gray-500">
+        <div className="w-full lg:px-4 lg:py-2 pb-5 bg-white dark:bg-[#111828] dark:text-gray-500">
             {/* Section Title */}
             <div className="w-full text-center pt-10 pb-5 mb-5">
-                <h1 className="text-3xl dark:text-blue-600 lg:text-4xl font-bold">
+                <h1 className="text-2xl dark:text-blue-600 lg:text-3xl font-bold">
                     {name}
                 </h1>
                 <p className="text-gray-500 mt-2">Explore our curated collection</p>
             </div>
 
-            {/* Items Grid */}
-            <div className="w-full p-1 grid grid-cols-3 md:grid-cols-3 lg:grid-cols-5 lg:gap-4 gap-1">
-                {visibleItems.map((item, i) => (
-                    <motion.div
-                        key={i}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: i * 0.1 }}
-                        className="group bg-white dark:bg-[#1d283a] rounded-lg p-3 hover:shadow-lg transition-shadow duration-300 overflow-hidden"
-                    >
-                        {/* Image Container */}
-                        <div onClick={() => nav(`/detail/${item._id}`, { state: item })} className="w-full">
-                            <LazyLoad offset={100} once>
-                                <img
-                                    className="w-full lg:h-[200px] rounded-sm lg:rounded-lg transition-transform duration-300"
-                                    src={item?.images[0]}
-                                    alt={`Image of ${item.name}`}
-                                    loading="lazy"
-                                    aria-hidden="true"
-                                />
-                            </LazyLoad>
-                        </div>
-
-                        {/* Item Details */}
-                        <div className="lg:p-4 flex flex-col gap-1">
-                            <div className="flex items-center gap-1 text-[15px] font-semibold text-gray-500">
-                                <FaNairaSign />
-                                <p>{item.price.toLocaleString()}</p>
+            <div className="w-full flex items-center justify-center">
+                {/* Items Grid */}
+                <div className="lg:w-[80%] w-full p-1 grid grid-cols-3 md:grid-cols-3 lg:grid-cols-5 lg:gap-4 gap-1">
+                    {visibleItems.map((item, i) => (
+                        <motion.div
+                            key={i}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: i * 0.1 }}
+                            className="group bg-white dark:bg-[#1d283a] rounded-lg p-3 hover:shadow-lg transition-shadow duration-300 overflow-hidden"
+                        >
+                            {/* Image Container */}
+                            <div onClick={() => nav(`/detail/${item._id}`, { state: item })} className="w-full">
+                                <LazyLoad offset={100} once>
+                                    <img
+                                        className="w-full lg:h-[200px] rounded-sm lg:rounded-lg transition-transform duration-300"
+                                        src={item?.images[0]}
+                                        alt={`Image of ${item.name}`}
+                                        loading="lazy"
+                                        aria-hidden="true"
+                                    />
+                                </LazyLoad>
                             </div>
-                            <p className="text-sm text-gray-600 truncate">
-                                {item.name}
-                            </p>
-                        </div>
-                    </motion.div>
-                ))}
 
-                {/* Skeleton Loading for Remaining Items */}
-                {visibleItems.length < itemsPerPage &&
-                    Array.from({ length: itemsPerPage - visibleItems.length }).map((_, i) => (
-                        <SkeletonLoader key={`skeleton-${i}`} />
+                            {/* Item Details */}
+                            <div className="lg:p-4 flex flex-col gap-1">
+                                <div className="flex items-center gap-1 text-[15px] font-semibold text-gray-500">
+                                    <FaNairaSign />
+                                    <p>{item.price.toLocaleString()}</p>
+                                </div>
+                                <p className="text-sm text-gray-600 truncate">
+                                    {item.name}
+                                </p>
+                            </div>
+                        </motion.div>
                     ))}
+
+                    {/* Skeleton Loading for Remaining Items */}
+                    {visibleItems.length < itemsPerPage &&
+                        Array.from({ length: itemsPerPage - visibleItems.length }).map((_, i) => (
+                            <SkeletonLoader key={`skeleton-${i}`} />
+                        ))}
+                </div>
             </div>
 
             {/* Pagination */}
