@@ -38,8 +38,8 @@ const FeaturedProducts = () => {
         <div className='w-full md:w-[50%] flex items-center justify-center order-1 md:order-2'>
           <div className='w-[250px] h-[250px] md:w-[300px] md:h-[300px] bg-[#ddebeb] rounded-full relative overflow-hidden shadow-lg'>
             <img
-              className='absolute h-full w-full object-contain transform -translate-y-8'
-              src="./download.jpeg"
+              className='absolute h-full w-full object-contain '
+              src="./jeans.png"
               alt="Young fashionable jeans"
             />
           </div>

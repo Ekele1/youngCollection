@@ -13,7 +13,7 @@ const Discover = () => {
               <button className='text-sm text-blue-600 hover:underline'>Shop Now</button>
             </div>
             <div className='flex-1 flex justify-center'>
-              <img className='h-48 object-cover' src="malefash.jpeg" alt="Male Fashion" />
+              <img className='h-48 object-cover' src="malefash-bg.png" alt="Male Fashion" />
             </div>
           </div>
         </div>
@@ -22,7 +22,7 @@ const Discover = () => {
         <div className='bg-[#ecf5f4] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300'>
           <div className='p-6 flex flex-col items-center justify-center h-full'>
             <div className='flex justify-center'>
-              <img className='h-48 object-cover' src="shoe.jpeg" alt="Shoes" />
+              <img className='h-48 object-cover' src="shoe-rb.png" alt="Shoes" />
             </div>
             <div className='mt-6 text-center'>
               <p className='text-sm text-gray-600'>New Arrival</p>
@@ -36,7 +36,7 @@ const Discover = () => {
         <div className='bg-[#ecf5f4] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300'>
           <div className='p-6 flex flex-col items-center justify-center h-full'>
             <div className='flex justify-center'>
-              <img className='h-48 object-cover' src="couple.jpeg" alt="Couple Fashion" />
+              <img className='h-48 object-cover' src="couplebg.png" alt="Couple Fashion" />
             </div>
             <div className='mt-6 text-center'>
               <p className='text-sm text-gray-600'>Couple Fashion</p>
@@ -55,7 +55,7 @@ const Discover = () => {
               <button className='text-sm text-blue-600 hover:underline'>Shop Now</button>
             </div>
             <div className='flex-1 flex justify-center'>
-              <img className='h-48 object-cover' src="sunglass.jpeg" alt="Sunglasses" />
+              <img className='h-48 object-cover' src="sunglassrb.png" alt="Sunglasses" />
             </div>
           </div>
         </div>
@@ -69,7 +69,7 @@ const Discover = () => {
               <button className='text-sm text-blue-600 hover:underline'>Shop Now</button>
             </div>
             <div className='flex-1 flex justify-center'>
-              <img className='h-48 object-cover' src="women.jpeg" alt="Women's Fashion" />
+              <img className='h-48 object-cover' src="womenbg.png" alt="Women's Fashion" />
             </div>
           </div>
         </div>
@@ -78,7 +78,7 @@ const Discover = () => {
         <div className='bg-[#ecf5f4] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300'>
           <div className='p-6 flex flex-col items-center justify-center h-full'>
             <div className='flex justify-center'>
-              <img className='h-48 object-cover' src="bag.jpeg" alt="Bags" />
+              <img className='h-48 object-cover' src="bag-bg.png" alt="Bags" />
             </div>
             <div className='mt-6 text-center'>
               <p className='text-sm text-gray-600'>New in 2025</p>

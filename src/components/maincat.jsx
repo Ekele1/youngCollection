@@ -15,7 +15,7 @@ const SomeCat = () => {
           </div>
           <img
             className='h-[250px] md:h-[300px] object-cover transform -translate-y-4'
-            src="download.jpeg"
+            src="download2.png"
             alt="Women's New Collection"
           />
         </div>
@@ -31,7 +31,7 @@ const SomeCat = () => {
           </div>
           <img
             className='h-[250px] md:h-[300px] object-cover transform -translate-y-4'
-            src="malefash.jpeg"
+            src="malefash2.png"
             alt="Men's Trendy Fashion"
           />
         </div>
