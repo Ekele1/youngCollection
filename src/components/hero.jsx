@@ -3,7 +3,7 @@ import { FaShoppingBag, FaUser } from 'react-icons/fa';
 
 const HeroPage = () => {
   return (
-    <div className="relative h-screen overflow-hidden">
+    <div className="relative min-h-[500px] overflow-hidden">
       {/* Video Background */}
       <video
           src="hoodies.mp4"
@@ -16,7 +16,6 @@ const HeroPage = () => {
           loop
           autoPlay // Automatically start playing the video
       ></video>
-
       {/* Overlay */}
       <div className="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center text-white">
         <div className="text-center">

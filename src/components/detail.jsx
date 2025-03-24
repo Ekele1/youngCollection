@@ -9,6 +9,7 @@ import { debounce } from "lodash";
 import { Skeleton } from "@mui/material";
 
 const DetailPage = () => {
+  const [sample, setSample] = useState([1,2,3,4,5])
   const location = useLocation();
   const navigate = useNavigate();
   const product = location.state;
@@ -23,19 +24,19 @@ const DetailPage = () => {
   const { logout, user, setCart } = useContext(AuthContext);
 
   // Redirect if product is not found
-  if (!product) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <p className="text-center text-red-500 text-2xl">
-          Product not found. Please go back to the{" "}
-          <a href="/" className="text-blue-500 underline">
-            homepage
-          </a>
-          .
-        </p>
-      </div>
-    );
-  }
+  // if (!product) {
+  //   return (
+  //     <div className="flex justify-center items-center h-screen">
+  //       <p className="text-center text-red-500 text-2xl">
+  //         Product not found. Please go back to the{" "}
+  //         <a href="/" className="text-blue-500 underline">
+  //           homepage
+  //         </a>
+  //         .
+  //       </p>
+  //     </div>
+  //   );
+  // }
 
 
   // Debounced add to cart function
@@ -121,164 +122,84 @@ const DetailPage = () => {
   }, []);
 
   return (
-    <div className="w-full min-h-screen lg:bg-gray-100 flex dark:bg-[#111828] dark:text-gray-500 justify-center items-center py-5">
-      <div className="w-[95%] lg:w-[90%] dark:bg-[#111828] rounded-lg lg:shadow-lg lg:p-6">
-        {/* Product Details Header */}
-        <h1 className="text-3xl font-bold text-gray-500 mb-6">Product Details</h1>
-
-        {/* Image Gallery and Details */}
-        <div className="flex flex-col lg:flex-row gap-8">
-          {/* Image Carousel */}
-          <div className="w-full lg:w-[60%]">
-            <div className="w-full h-[400px] dark:bg-[#111828] rounded-lg overflow-hidden">
-              <img
-                className="w-full h-full lg:object-contain md:object-contain"
-                src={fullImg}
-                alt={product.name}
-              />
-            </div>
-            {/* Scrollable Thumbnails Container */}
-            <div className="mt-4 relative">
-              <div
-                ref={thumbnailContainerRef}
-                className="w-full overflow-x-auto scrollbar-hide"
-                style={{ scrollBehavior: "smooth" }}
-              >
-                <div className="flex gap-4" style={{ minWidth: "max-content" }}>
-                  {product.images.map((img, i) => (
-                    <LazyLoad
-                      key={i}
-                      height={96}
-                      offset={100}
-                      once
-                      placeholder={<Skeleton variant="rectangular" width={96} height={96} />}
-                    >
-                      <div
-                        onClick={() => setFullImg(img)}
-                        className="w-24 h-24 cursor-pointer rounded-lg overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all flex-shrink-0 group"
-                      >
-                        <img
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                          src={img}
-                          alt={`Product Variant ${i + 1}`}
-                        />
-                      </div>
-                    </LazyLoad>
-                  ))}
+    <div className="w-full">
+      <div className="w-full h-[400px] flex items-center justify-center bg-[#ecf5f4]">
+        <p className="text-4xl font-semibold">Product Details</p>
+      </div>
+      <div className="w-full flex justify-center">
+        <div className="w-[80%] flex flex-col gap-6 pt-[70px] pb-[100px]">
+          <div className="w-full flex gap-5">
+            <div className="w-[50%] flex flex-col gap-3">
+              <div className="w-full h-[400px] bg-[#f7f8fa] p-4 rounded-md">
+                <img className="w-full h-full object-contain" src="./womenbg.png" alt="" />
+              </div>
+              <div className="w-full h-[100px] bg-white flex gap-2 overflow-x-scroll items-center">
+                <FaChevronLeft />
+                {
+                  sample.map((e,i)=>(
+                <div className="w-[100px] h-full bg-[#f7f8fa] p-2 rounded-md" key={i}>
+                  <img className="w-full h-full object-contain" src="./womenbg.png" alt="" />
                 </div>
-              </div>
-              {/* Navigation Arrows */}
-              {canScrollLeft && (
-                <button
-                  onClick={() => scrollThumbnails("left")}
-                  className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors"
-                >
-                  <FaChevronLeft className="text-gray-700" />
-                </button>
-              )}
-              {canScrollRight && (
-                <button
-                  onClick={() => scrollThumbnails("right")}
-                  className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition-colors"
-                >
-                  <FaChevronRight className="text-gray-700" />
-                </button>
-              )}
-            </div>
-          </div>
-
-          {/* Product Attributes */}
-          <div className="w-full lg:w-[40%]">
-            <h2 className="text-2xl font-bold text-gray-500 mb-4">Key Attributes</h2>
-            <div className="space-y-4">
-              <div className="flex justify-between items-center dark:bg-[#1e2b47] p-4 dark:text-gray-500 bg-gray-50 rounded-lg">
-                <span className="text-lg font-semibold text-gray-500 dark:text-gray-300">Name</span>
-                <span className="text-lg">{product.name}</span>
-              </div>
-              <div className="flex flex-col justify-between p-4 dark:bg-[#1e2b47] dark:text-gray-500 bg-gray-50 rounded-lg">
-                <span className="text-lg font-semibold text-gray-500 dark:text-gray-300">Description</span>
-                <span className="text-lg">{product.description}</span>
-              </div>
-              <div className="flex justify-between items-center dark:bg-[#1e2b47] p-4 bg-gray-50 rounded-lg">
-                <span className="text-lg font-semibold text-gray-700 dark:text-gray-300">Material</span>
-                <span className="text-lg text-gray-900 dark:text-gray-400">{product.material}</span>
-              </div>
-              <div className="flex justify-between items-center p-4 dark:bg-[#1e2b47] bg-gray-50 rounded-lg">
-                <span className="text-lg font-semibold text-gray-700 dark:text-gray-300">Price</span>
-                <span className="text-lg text-gray-900 dark:text-gray-400 flex items-center">
-                  <FaNairaSign className="mr-1" />
-                  {product.price.toLocaleString()}
-                </span>
+                  ))
+                }
+                <FaChevronRight />
               </div>
             </div>
-          </div>
-        </div>
+            <div className="w-[50%] pl-5">
+              <div className="w-full">
+                <p className="text-xl font-semibold">Female luxurious Jacket</p>
+                <div className="flex items-center gap-5 pt-3 pb-3">
+                  <p className="flex items-center text-[#0f3d38]"><FaNairaSign />80,000</p>
+                  <p className="flex items-center line-through"><FaNairaSign />120,000</p>
+                </div>
+                <p className="text-sm mb-3">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                  Laudantium harum optio perferendis iste eligendi accusantium iure eaque ducimus 
+                  fugit voluptas voluptate nostrum dolor quae, repellat error illum blanditiis quia commodi.
+                </p>
+                <div className="flex items-center gap-4 pb-5 pt-5">
+                  <p className="text-xs">size</p>
+                  <select className="w-[170px] outline-none border-[1px] border-[#0f3d38]" name="size" id="size">
+                    <option value="">select size</option>
+                    <option value="small">SM</option>
+                    <option value="medium">MD</option>
+                    <option value="large">L</option>
+                    <option value="x-large">Xl</option>
+                    <option value="2x-large">2XL</option>
+                    <option value="3x-large">3XL</option>
+                  </select>
+                </div>
+                <div className="flex pt-3 items-center gap-6">
+                  <input className="outline-none w-[180px] h-[40px] border-[1px] border-[#0f3d38] rounded-md text-sm pl-2" 
+                  placeholder="quantity" type="number" />
 
-        {/* Order Section */}
-        <div className="mt-10">
-          <h2 className="text-2xl font-bold text-gray-500 mb-6">Place Your Order</h2>
-          <div className="space-y-6">
-            {/* Scrollable Variation Selection Container */}
-            <div className="p-3 bg-gray-50 dark:bg-[#111828] dark:border-[1px] rounded-lg">
-              <span className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-1 block">
-                Select Variation from above
-              </span>
-              <div>
-                <div className="flex">
-                  <LazyLoad height={96} offset={100} once placeholder={<Skeleton variant="rectangular" width={96} height={96} />}>
-                    <div className="w-24 h-24 cursor-pointer rounded-lg overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all flex-shrink-0 group">
-                      <img
-                        className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
-                        src={fullImg}
-                        alt={`Product Variant`}
-                      />
-                    </div>
-                  </LazyLoad>
+                  <button className="bg-[#9fbbbe] pl-5 pr-5 pt-2 pb-2 rounded-lg text-white">Add to Cart</button>
                 </div>
               </div>
             </div>
-
-            {/* Size Selection */}
-            <div className="flex flex-col lg:flex-row items-center justify-between p-6 bg-gray-50 dark:bg-[#111828] dark:border-[1px] rounded-lg">
-              <span className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-4 lg:mb-0">
-                Select Size
-              </span>
-              <select
-                value={selectedSize}
-                onChange={(e) => setSelectedSize(e.target.value)}
-                className="w-full lg:w-48 p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-              >
-                <option value="small">Small</option>
-                <option value="medium">Medium</option>
-                <option value="large">Large</option>
-                <option value="x-large">X-Large</option>
-                <option value="2x-large">2X-Large</option>
-                <option value="3x-large">3X-Large</option>
-                <option value="4x-large">4X-Large</option>
-              </select>
+          </div>
+          <div className="w-full">
+            <div className="w-full h-[80px] flex items-center justify-between">
+              <p className="text-xl font-semibold">More Products Like This</p>
+              <div className="flex items-center gap-5">
+                <FaChevronLeft />
+                <FaChevronRight />
+              </div>
             </div>
-            <div className="flex flex-col lg:flex-row items-center justify-between p-6 bg-gray-50 dark:bg-[#111828] dark:border-[1px] rounded-lg">
-              <span className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-4 lg:mb-0">
-                Quantity
-              </span>
-              <input
-                value={quantity}
-                onChange={(e)=>setQuantity(e.target.value)}
-                className="w-full lg:w-48 p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
-                type="number"
-              />
-            </div>
-
-            {/* Add to Cart Button */}
-            <div className="flex justify-center">
-              <button
-                disabled={loading}
-                onClick={handleAddToCart}
-                className="w-full lg:w-48 flex items-center justify-center gap-2 px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
-              >
-                <FaCartPlus className="text-xl" />
-                {loading ? "Adding to..." : "Add to Cart"}
-              </button>
+            <div className="w-full flex items-center gap-4">
+              {
+                sample.map((e,i)=>(
+              <div className="w-[18%] h-[300px] bg-white hover:shadow-md cursor-pointer">
+                <div className="w-full h-[70%] bg-[#f7f8fa] p-3">
+                  <img className="w-full h-full object-contain" src="./shoe-rb.png" alt="" />
+                </div>
+                <div className="p-3">
+                  <p>Men's shoe</p>
+                  <p className="flex items-center"><FaNairaSign />40,000</p>
+                </div>
+              </div>
+                ))
+              }
             </div>
           </div>
         </div>
